@@ -27,22 +27,40 @@ public class BBSFragment extends Fragment {
 		radioGroup = (RadioGroup)rootView.findViewById(R.id.bbs_tab);
 		radioGroup.check(R.id.bbs_tab_choose);
 		changeFragment(0);
-		
+		radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+				switch(checkedId){
+				case R.id.bbs_tab_choose: 
+					changeFragment(0); 
+					break;
+				case R.id.bbs_tab_join:
+					changeFragment(1);
+					break;
+				//TODO ADD OTHER FRAGMENT
+				}
+               
+			}} );
 		
 		return rootView;
 	}
 	
 	private void changeFragment(int index){
-		/*FragmentTransaction transaction = fragmentManager.beginTransaction();
+		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		Fragment tempfragment = null;
 		switch(index){
-		case 0: tempfragment = new EMRTabAllFragment();break;
-		default: break;
+		case 0:
+			tempfragment = new BBSTabChooseFragment();
+			break;
+		case 1:
+			tempfragment = new BBSTabJoinFragment();
 		}
-		if(tempfragment != null){
-        	transaction.replace(R.id.bbs_tab_content, tempfragment);
-        	transaction.commit();
-        }*/
+		if (tempfragment != null) {
+			transaction.replace(R.id.bbs_tab_content, tempfragment);
+    	transaction.commit();
+        }
 	}
 
 }
