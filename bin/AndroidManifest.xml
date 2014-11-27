@@ -18,9 +18,13 @@
             android:name="com.edu.thss.smartdental.MainActivity"
             android:label="@string/title_activity_home"
             android:launchMode="standard" >
+        </activity>
+        <activity
+            android:name="com.edu.thss.smartdental.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:launchMode="standard" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
