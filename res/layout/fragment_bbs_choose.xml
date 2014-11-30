@@ -3,18 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/bbs_choose_button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="Button" />
-
     <ListView
         android:id="@+id/circle_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bbs_choose_button1"
         android:divider="@color/app_grey"
         android:dividerHeight="1dp" >
 

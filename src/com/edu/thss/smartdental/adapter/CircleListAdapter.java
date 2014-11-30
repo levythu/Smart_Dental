@@ -2,10 +2,13 @@ package com.edu.thss.smartdental.adapter;
 
 import java.util.ArrayList;
 
+import com.edu.thss.smartdental.BBSInFragment;
 import com.edu.thss.smartdental.R;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +20,12 @@ public class CircleListAdapter extends BaseAdapter {
 
 	private ArrayList<String> list;
 	private Context context;
+	private FragmentManager fragmentManager;
 	
-	public CircleListAdapter(ArrayList<String> list, Context context) {
+	public CircleListAdapter(ArrayList<String> list, Context context, FragmentManager fragmentManager) {
 		this.list = list;
 		this.context = context;
+		this.fragmentManager = fragmentManager;
 	}
 	
 	@Override
@@ -46,6 +51,14 @@ public class CircleListAdapter extends BaseAdapter {
 		String docName = list.get(position);
 		TextView name =(TextView)convertView.findViewById(R.id.circle_list_item_title);
 		name.setText(docName);
+		name.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Fragment fragment= new BBSInFragment();
+				fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
+			}
+		});
 		
 		return convertView;
 	}
