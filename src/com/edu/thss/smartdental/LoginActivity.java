@@ -9,13 +9,15 @@ import android.widget.Button;
 
 public class LoginActivity extends Activity {
 
-	Button login;
+	Button login_btn, register_btn;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		login = (Button)findViewById(R.id.login_btn);
-		login.setOnClickListener(loginListener);
+		login_btn = (Button)findViewById(R.id.login_btn);
+		login_btn.setOnClickListener(loginListener);
+		register_btn = (Button)findViewById(R.id.register_btn);
+		register_btn.setOnClickListener(registerListener);
 	}
 	
 	private OnClickListener loginListener = new OnClickListener() {
@@ -24,6 +26,13 @@ public class LoginActivity extends Activity {
 			intent.setClass(LoginActivity.this, MainActivity.class);
 			startActivity(intent);
 			finish();
+		}
+	};
+	private OnClickListener registerListener = new OnClickListener() {
+		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(LoginActivity.this, RegisterActivity.class);
+			startActivity(intent);
 		}
 	};
 }
