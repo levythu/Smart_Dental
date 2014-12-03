@@ -1,6 +1,4 @@
-bin/*
-gen/*
-libs/*
+bin/
+gen/
+libs/
 project.properties
-
-
