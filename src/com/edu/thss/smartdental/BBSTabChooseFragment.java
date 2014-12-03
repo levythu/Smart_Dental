@@ -18,10 +18,6 @@ public class BBSTabChooseFragment extends Fragment {
 	private ArrayList<String> circles;
 	private CircleListAdapter listAdapter;
 	
-	public BBSTabChooseFragment() {
-		
-	}
-	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_bbs_choose, container, false);

@@ -21,5 +21,6 @@
     <string name="title_activity_my_test">MyTestActivity</string>
     <string name="choose_circle">选择圈子</string>
     <string name="join_circle">加入圈子</string>
+    <string name="join_circle_search_hint">输入要搜索的医生名字</string>
 
 </resources>

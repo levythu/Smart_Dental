@@ -3,9 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
     
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/circle_searchbox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="加入圈子" />
+        android:layout_alignParentTop="true"
+        android:hint="@string/join_circle_search_hint"
+        android:drawablePadding="5dp"
+        android:singleLine="true"
+        android:ems="10">
+    </EditText>
+    
+    <ListView
+        android:id="@+id/join_circle_list"
+        android:layout_below="@id/circle_searchbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/app_grey"
+        android:dividerHeight="1dp" >
+
+    </ListView>
 
 </RelativeLayout>
