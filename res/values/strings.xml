@@ -18,6 +18,7 @@
     <string name="title_activity_oneday_appoint">个人预约查看</string>
     <string name="title_activity_login">SmartDental</string>
     <string name="title_activity_register">注册</string>
+    <string name="title_activity_admin">管理员</string>
     <string name="title_activity_my_test">MyTestActivity</string>
     <string name="choose_circle">选择圈子</string>
     <string name="join_circle">加入圈子</string>

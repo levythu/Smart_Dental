@@ -34,6 +34,11 @@
             android:launchMode="standard" >
         </activity>
         <activity
+            android:name="com.edu.thss.smartdental.AdminActivity"
+            android:label="@string/title_activity_admin"
+            android:launchMode="standard" >
+        </activity>
+        <activity
             android:name="com.edu.thss.smartdental.OneEMRActivity"
             android:label="@string/title_activity_one_emr" >
         </activity>
