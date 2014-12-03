@@ -3,9 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
     
-    <TextView
-        android:layout_width="wrap_content"
+      <!-- 搜索框 -->
+    <EditText
+        android:id="@+id/bbs_searchbox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="发帖" />
+        android:layout_alignParentTop="true"
+        android:hint="输入要搜索的帖子"
+        android:drawablePadding="5dp"
+        android:singleLine="true"
+        android:ems="10">
+        <requestFocus/>
+    </EditText>
+    
+    <!-- 病历列表 -->
+    <!-- 最好改成多种情况，比如未读、隐藏、标记…… -->
+    <ListView 
+        android:id="@+id/bbs_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bbs_searchbox"
+        android:divider="@color/app_grey"
+        android:dividerHeight="1dp"
+        >
+    </ListView>
 
 </RelativeLayout>
