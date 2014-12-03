@@ -7,11 +7,13 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
 
 public class RegisterActivity extends Activity {
 
 	Button register_btn, login_btn;
 	EditText username_edit, password_edit, repeat_password_edit;
+	DBUtil db;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class RegisterActivity extends Activity {
 				Toast.makeText(RegisterActivity.this, "两次密码输入不一致", Toast.LENGTH_LONG).show();
 				return;
 			}
+			db.insertUser(username, password, "patient", "");
 			Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_LONG).show();
 			finish();
 		}
