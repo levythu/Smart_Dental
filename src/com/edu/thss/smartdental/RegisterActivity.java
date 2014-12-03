@@ -13,7 +13,7 @@ public class RegisterActivity extends Activity {
 
 	Button register_btn, login_btn;
 	EditText username_edit, password_edit, repeat_password_edit;
-	DBUtil db;
+	DBUtil db = new DBUtil();
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
