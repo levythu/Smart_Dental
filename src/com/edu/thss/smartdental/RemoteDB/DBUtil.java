@@ -45,6 +45,7 @@ public class DBUtil {
 			}
 			}
 		}.start();
+		//crrayList = Soap.GetWebServre("selectAllCargoInfor", arrayList, brrayList);
 
 		HashMap<String, String> tempHash = new HashMap<String, String>();
 		tempHash.put("Cno", "Cno");
@@ -68,19 +69,15 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public void insertUser(String username, String password,String identity, String followdoctor) {
+	public void insertCargoInfo(String Cname, String Cnum) {
 
 		arrayList.clear();
 		brrayList.clear();
 		
-		arrayList.add("username");
-		arrayList.add("password");
-		arrayList.add("ident");
-		arrayList.add("FollowDoctor");
-		brrayList.add(username);
-		brrayList.add(password);
-		brrayList.add(identity);
-		brrayList.add(followdoctor);
+		arrayList.add("Cname");
+		arrayList.add("Cnum");
+		brrayList.add(Cname);
+		brrayList.add(Cnum);
 		new Thread(){
 			public void run()
 			{
@@ -99,13 +96,13 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public void deleteUser(String username) {
+	public void deleteCargoInfo(String Cno) {
 
 		arrayList.clear();
 		brrayList.clear();
 		
-		arrayList.add("username");
-		brrayList.add(username);
+		arrayList.add("Cno");
+		brrayList.add(Cno);
 		new Thread(){
 			public void run()
 			{

@@ -84,7 +84,7 @@ public class HttpConnSoap {
         }  
 	}
 
-	public ArrayList<String> inputStreamtovaluelist(InputStream in, String MethodName) throws IOException {
+	public ArrayList<String> inputStreamtovaluelist(InputStream in, String MonthsName) throws IOException {
 		StringBuffer out = new StringBuffer();
 		String s1 = "";
 		byte[] b = new byte[4096];
@@ -99,7 +99,7 @@ public class HttpConnSoap {
 		System.out.println(out);
 		String[] s13 = s1.split("><");
 		//String[] s13 = out.toString().split("><");
-		String ifString = MethodName + "Result";
+		String ifString = MonthsName + "Result";
 		String TS = "";
 		String vs = "";
 
