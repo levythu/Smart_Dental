@@ -7,6 +7,9 @@ import com.edu.thss.smartdental.adapter.ImgListAdapter;
 import com.edu.thss.smartdental.model.BBSElement;
 import com.edu.thss.smartdental.model.ImageElement;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -14,6 +17,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -22,6 +27,8 @@ public class BBSInTabViewFragment extends Fragment {
 	private EditText editText;
 	private ListView list;
 	private ArrayList<BBSElement> posts;
+	private Context context;
+	
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -29,12 +36,51 @@ public class BBSInTabViewFragment extends Fragment {
 		editText = (EditText)rootView.findViewById(R.id.bbs_searchbox);
 		editText.addTextChangedListener(filterTextWatcher);
 		list = (ListView)rootView.findViewById(R.id.bbs_list);
-		initImages();
+		initPosts();
+		context = this.getActivity().getApplicationContext();
 		bbsAdapter = new BBSListAdapter(posts,this.getActivity().getApplicationContext());
 		list.setAdapter(bbsAdapter);
+		
+		
+		
+		
+        
+        
+		list.setOnItemClickListener(new sss(context));
+				
+
+	
+			
 		return rootView;
 	}
 	
+	private class sss implements OnItemClickListener{
+		Context c;
+		public sss(Context cc){
+			c=cc;
+		}
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                 long arg3) {
+			
+			/*new AlertDialog.Builder(c)  
+			
+			                .setTitle("标题")
+			
+			                .setMessage("简单消息框")
+			
+			                .setPositiveButton("确定", null)
+			
+			                .show();
+			                */
+             
+            // if(list.get(position).equals("LinearLayout"))
+                 Intent intent = new Intent();
+                 intent.setClass(c,LoginActivity.class);
+                // Intent.setClass(MainActivity.this, LoginActivity.class);
+                 startActivity(intent);       
+                 
+         }
+	};
 	
 	private TextWatcher filterTextWatcher = new TextWatcher(){
 
@@ -56,7 +102,7 @@ public class BBSInTabViewFragment extends Fragment {
 		}
 	};
 
-	private void initImages(){
+	private void initPosts(){
 		posts = new ArrayList<BBSElement>();
 		BBSElement i = new BBSElement("天气不错","今天风速74km/h，吹得我牙痛","2011-1-15","张三");
 		posts.add(i);
