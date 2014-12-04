@@ -18,7 +18,7 @@
     <string name="title_activity_oneday_appoint">个人预约查看</string>
     <string name="title_activity_login">SmartDental</string>
     <string name="title_activity_register">注册</string>
-    <string name="title_activity_admin">管理员</string>
+    <string name="title_activity_admin">超级管理员</string>
     <string name="title_activity_my_test">MyTestActivity</string>
     <string name="admin_username">admin</string>
     <string name="admin_password">admin123</string>
