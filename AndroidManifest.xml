@@ -74,10 +74,11 @@
             android:name="com.edu.thss.smartdental.OnedayAppointActivity"
             android:label="@string/title_activity_oneday_appoint" >
         </activity>
-        <activity
+        <activity android:label="bbs_detail_activity" android:name="BBSDetailActivity"></activity><activity
             android:name="com.edu.thss.smartdental.MyTestActivity"
             android:label="@string/title_activity_my_test" >
         </activity>
+        
     </application>
 
 </manifest>

@@ -66,7 +66,7 @@ public class BBSInTabViewFragment extends Fragment {
                  long arg3) {
             // if(list.get(position).equals("LinearLayout"))
                  Intent intent = new Intent();
-                 intent.setClass(context,LoginActivity.class);
+                 intent.setClass(context,BBSDetailActivity.class);
                  startActivity(intent);       
                  
          }
@@ -93,12 +93,12 @@ public class BBSInTabViewFragment extends Fragment {
 	};
 
 	private void initPosts(){
-		DBUtil db = new DBUtil();
-		List<HashMap<String, String>> PostList  = db.getAllPostInfo(12);
+		//DBUtil db = new DBUtil();
+		//List<HashMap<String, String>> PostList  = db.getAllPostInfo(12);
 		posts = new ArrayList<BBSElement>();
 		BBSElement i;
-		i = new BBSElement(PostList.get(1).get("postname"),PostList.get(1).get("postcontent"),PostList.get(1).get("time"),"zhangsan",true,true);
-		posts.add(i);
+		//i = new BBSElement(PostList.get(1).get("postname"),PostList.get(1).get("postcontent"),PostList.get(1).get("time"),"zhangsan",true,true);
+		//posts.add(i);
 		i = new BBSElement("天气不错","今天风速74km/h，吹得我牙痛","2011-1-15","张三",true,true);
 		posts.add(i);
 		i = new BBSElement("啦啦啦","我喜欢这个医生","2011-1-15","李四",true,false);
