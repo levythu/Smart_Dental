@@ -46,7 +46,7 @@ public class BBSInTabViewFragment extends Fragment {
 		
         
         
-		list.setOnItemClickListener(new sss(context));
+		list.setOnItemClickListener(new OnPostItemClickListener(context));
 				
 
 	
@@ -54,29 +54,16 @@ public class BBSInTabViewFragment extends Fragment {
 		return rootView;
 	}
 	
-	private class sss implements OnItemClickListener{
-		Context c;
-		public sss(Context cc){
-			c=cc;
+	private class OnPostItemClickListener implements OnItemClickListener{
+		Context context;
+		public OnPostItemClickListener(Context c){
+			context = c;
 		}
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                  long arg3) {
-			
-			/*new AlertDialog.Builder(c)  
-			
-			                .setTitle("标题")
-			
-			                .setMessage("简单消息框")
-			
-			                .setPositiveButton("确定", null)
-			
-			                .show();
-			                */
-             
             // if(list.get(position).equals("LinearLayout"))
                  Intent intent = new Intent();
-                 intent.setClass(c,LoginActivity.class);
-                // Intent.setClass(MainActivity.this, LoginActivity.class);
+                 intent.setClass(context,LoginActivity.class);
                  startActivity(intent);       
                  
          }
@@ -104,13 +91,17 @@ public class BBSInTabViewFragment extends Fragment {
 
 	private void initPosts(){
 		posts = new ArrayList<BBSElement>();
-		BBSElement i = new BBSElement("天气不错","今天风速74km/h，吹得我牙痛","2011-1-15","张三");
+		BBSElement i = new BBSElement("天气不错","今天风速74km/h，吹得我牙痛","2011-1-15","张三",true,true);
 		posts.add(i);
-		i = new BBSElement("啦啦啦","我喜欢这个医生","2011-1-15","李四");
+		i = new BBSElement("啦啦啦","我喜欢这个医生","2011-1-15","李四",true,false);
 		posts.add(i);
-		i = new BBSElement("花花花","拔牙愉快啦啦","2012-1-25","二娃");
+		i = new BBSElement("花花花","拔牙愉快啦啦","2012-1-25","二娃",false,true);
 		posts.add(i);
-		i = new BBSElement("呵呵呵","我牙齿很白","2013-1-25","奥千");
+		i = new BBSElement("呵呵呵","我牙齿很白","2013-1-25","奥千",false,false);
+		posts.add(i);
+		i = new BBSElement("呵呵呵","我牙齿很白","2013-1-25","奥千",false,false);
+		posts.add(i);
+		i = new BBSElement("呵呵呵","我牙齿很白","2013-1-25","奥千",false,false);
 		posts.add(i);
 	}
 }

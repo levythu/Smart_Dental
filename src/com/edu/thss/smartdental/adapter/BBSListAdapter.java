@@ -72,19 +72,16 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 		author.setText(post.author);
 		
 		holder = new buttonViewHolder();
-		//holder.read = (Button)convertView.findViewById(R.id.bbs_list_item_read);
 		holder.delete = (Button)convertView.findViewById(R.id.bbs_list_item_delete);
-		//holder.hide = (Button)convertView.findViewById(R.id.bbs_list_item_hide);
+		if(!post.isDeletable){
+			holder.delete.setVisibility(View.INVISIBLE);
+		}else{
+			holder.delete.setVisibility(View.VISIBLE);
+		}
 		holder.collect = (Button)convertView.findViewById(R.id.bbs_list_item_collect);
-		
-		//holder.hide.setText(post.isHidden?"不隐藏":"隐藏");
 		holder.collect.setText(post.isCollected?"取消收藏":"收藏");
-		//holder.read.setText(post.isRead?"已读":"未读");
-		
-		//holder.read.setOnClickListener(new ButtonListner(position));
 		holder.delete.setOnClickListener(new ButtonListner(position));
 		holder.collect.setOnClickListener(new ButtonListner(position));
-		//holder.hide.setOnClickListener(new ButtonListner(position));
 		return convertView;
 	}
 

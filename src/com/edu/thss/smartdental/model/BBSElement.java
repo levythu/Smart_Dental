@@ -7,17 +7,15 @@ public class BBSElement {
 	public String tab;
 	public String author;
 	public boolean isCollected;
-	//public boolean isHidden;
 	public boolean isDeletable;
 	
-	public BBSElement(String title,String preview,String time, String author){
+	public BBSElement(String title,String preview,String time, String author, boolean isCollected, boolean isDeletable){
 		this.title = title;
 		this.preview = preview;
 		this.time =time;
 		this.tab = "";
 		this.author = author;
-		//this.isHidden = false;
-		this.isCollected =false;
-		this.isDeletable = false;
+		this.isCollected = isCollected;
+		this.isDeletable = isDeletable;
 	}
 }
