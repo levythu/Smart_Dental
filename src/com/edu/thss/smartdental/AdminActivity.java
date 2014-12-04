@@ -1,12 +1,16 @@
 package com.edu.thss.smartdental;
 
+import android.content.Intent;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.util.Log;
+import android.database.Cursor;
 
 public class AdminActivity extends FragmentActivity {
 
@@ -52,4 +56,31 @@ public class AdminActivity extends FragmentActivity {
 			Log.e("AdminActivity", "Error in creating fragment");
 		}
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)  {
+		switch (resultCode) {
+		case RESULT_OK:      
+			Uri uri = data.getData();
+			String path = getPath(this, uri);
+			Toast.makeText(AdminActivity.this, path, Toast.LENGTH_LONG).show();
+			break;
+	    }
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	private static String getPath(Context context, Uri uri) {		 
+		if ("content".equalsIgnoreCase(uri.getScheme())) {
+			String[] projection = { "_data" };
+			Cursor cursor = null;
+			cursor = context.getContentResolver().query(uri, projection,null, null, null);
+			int column_index = cursor.getColumnIndexOrThrow("_data");
+			if (cursor.moveToFirst())
+				return cursor.getString(column_index);
+		}
+		else
+			if ("file".equalsIgnoreCase(uri.getScheme()))
+				return uri.getPath();
+		return null;
+	    }
 }
