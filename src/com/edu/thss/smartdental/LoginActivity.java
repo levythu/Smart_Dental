@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
@@ -37,8 +38,13 @@ public class LoginActivity extends Activity {
 	private OnClickListener loginListener = new OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent();
-			if (username.getText().toString().equals("admin"))
-				intent.setClass(LoginActivity.this, AdminActivity.class);
+			if (username.getText().toString().equals(getString(R.string.admin_username)))
+				if (password.getText().toString().equals(getString(R.string.admin_password)))
+					intent.setClass(LoginActivity.this, AdminActivity.class);
+				else {
+					Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_LONG).show();
+					return;
+				}
 			else
 				intent.setClass(LoginActivity.this, MainActivity.class);
 			startActivity(intent);

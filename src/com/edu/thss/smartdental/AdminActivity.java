@@ -36,10 +36,10 @@ public class AdminActivity extends FragmentActivity {
 		Fragment fragment  = null;
 		switch (position){
 		case 0: 
-			fragment = new InfoFragment();
+			fragment = new AddOneFragment();
 			break;
 		case 1: 
-			fragment = new EMRFragment();
+			fragment = new AddManyFragment();
 			break;
 		default:
 			break;

@@ -20,6 +20,8 @@
     <string name="title_activity_register">注册</string>
     <string name="title_activity_admin">管理员</string>
     <string name="title_activity_my_test">MyTestActivity</string>
+    <string name="admin_username">admin</string>
+    <string name="admin_password">admin123</string>
     <string name="choose_circle">选择圈子</string>
     <string name="join_circle">加入圈子</string>
     <string name="join_circle_search_hint">输入要搜索的医生名字</string>

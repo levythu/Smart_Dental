@@ -42,6 +42,10 @@ public class RegisterActivity extends Activity {
 				Toast.makeText(RegisterActivity.this, "两次密码输入不一致", Toast.LENGTH_LONG).show();
 				return;
 			}
+			if (username.equals(getString(R.string.admin_username))) {
+				Toast.makeText(RegisterActivity.this, "用户名已存在", Toast.LENGTH_LONG).show();
+				return;
+			}
 			db.insertUser(username, password, "patient", "");
 			Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_LONG).show();
 			finish();
