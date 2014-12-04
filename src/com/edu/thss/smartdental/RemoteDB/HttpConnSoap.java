@@ -14,7 +14,7 @@ public class HttpConnSoap {
 		
 		//指定URL地址，我这里使用的是常量。  
         //如：String ServerUrl = "http://10.0.2.2:11125/Service1.asmx";  
-        String ServerUrl = "http://101.5.97.88/Service1.asmx";  
+        String ServerUrl = "http://192.168.1.112/Service1.asmx";  
   
         //soapAction = 命名空间 + 方法名  
         String soapAction = "http://tempuri.org/" + methodName;  
