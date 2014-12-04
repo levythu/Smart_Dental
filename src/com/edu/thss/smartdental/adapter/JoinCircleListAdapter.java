@@ -2,10 +2,14 @@ package com.edu.thss.smartdental.adapter;
 
 import java.util.ArrayList;
 
+import com.edu.thss.smartdental.BBSInFragment;
 import com.edu.thss.smartdental.R;
+import com.edu.thss.smartdental.model.CircleElement;
+import com.edu.thss.smartdental.ui.dialog.JoinCircleDialog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +21,12 @@ import android.widget.TextView;
 
 public class JoinCircleListAdapter extends BaseAdapter implements Filterable{
 
-	private ArrayList<String> list;
+	private ArrayList<CircleElement> list;
 	private Context context;
 	private FragmentManager fragmentManager;
 	private CircleFilter filter;
 	
-	public JoinCircleListAdapter(ArrayList<String> list, Context context, FragmentManager fragmentManager) {
+	public JoinCircleListAdapter(ArrayList<CircleElement> list, Context context, FragmentManager fragmentManager) {
 		this.list = list;
 		this.context = context;
 		this.fragmentManager = fragmentManager;
@@ -49,9 +53,19 @@ public class JoinCircleListAdapter extends BaseAdapter implements Filterable{
 		if(convertView == null){
 			convertView = LayoutInflater.from(context).inflate(R.layout.circle_list_item, null);
 		}
-		String docName = list.get(position);
+		final String docName = list.get(position).docName;
 		TextView name =(TextView)convertView.findViewById(R.id.circle_list_item_title);
 		name.setText(docName);
+		
+		name.setOnClickListener(new View.OnClickListener() {
+			
+				@Override
+				public void onClick(View v) {
+					JoinCircleDialog dialog = new JoinCircleDialog();
+					dialog.setDocName(docName);
+					dialog.show(fragmentManager, "JoinCircle");
+				}
+			});
 		
 		return convertView;
 	}
@@ -66,9 +80,9 @@ public class JoinCircleListAdapter extends BaseAdapter implements Filterable{
 	
 	class CircleFilter extends Filter {
 
-		private ArrayList<String> original;
+		private ArrayList<CircleElement> original;
 		
-		public CircleFilter(ArrayList<String> list){
+		public CircleFilter(ArrayList<CircleElement> list){
 			this.original = list;
 		}
 		
@@ -82,10 +96,10 @@ public class JoinCircleListAdapter extends BaseAdapter implements Filterable{
 				results.count = this.original.size();
 			} else {
 				
-				ArrayList<String> mList = new ArrayList<String>();
-				for(String name: original){
-					if (name.toUpperCase().contains(searchword.toString().toUpperCase())) {
-						mList.add(name);
+				ArrayList<CircleElement> mList = new ArrayList<CircleElement>();
+				for (CircleElement element: original){
+					if (element.docName.toUpperCase().contains(searchword.toString().toUpperCase())) {
+						mList.add(element);
 					}
 				}
 				results.values = mList;
@@ -97,7 +111,7 @@ public class JoinCircleListAdapter extends BaseAdapter implements Filterable{
 		@SuppressWarnings("unchecked")
 		@Override
 		protected void publishResults(CharSequence constraint, FilterResults results) {
-			list = (ArrayList<String>)results.values;
+			list = (ArrayList<CircleElement>)results.values;
 			notifyDataSetChanged();
 		}
 		

@@ -1,8 +1,12 @@
 package com.edu.thss.smartdental;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
 import com.edu.thss.smartdental.adapter.JoinCircleListAdapter;
+import com.edu.thss.smartdental.model.CircleElement;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,7 +23,7 @@ public class BBSTabJoinFragment extends Fragment {
 	
 	private FragmentManager fragmentManager;
 	private ListView list;
-	private ArrayList<String> circles;
+	private ArrayList<CircleElement> circles;
 	private JoinCircleListAdapter listAdapter;
 	private EditText editText;
 	
@@ -38,9 +42,15 @@ public class BBSTabJoinFragment extends Fragment {
 	}
 	
 	private void initCircles() {
-		circles = new ArrayList<String>();
-		circles.add("老司机");
-		circles.add("陈鸣海医生");
+		circles = new ArrayList<CircleElement>();
+		/*DBUtil db = new DBUtil();
+		List<HashMap<String, String>> docList = db.getAllDoctors();
+		for (HashMap<String, String> element: docList) {
+			CircleElement circleElement = new CircleElement(element.get("CName"), Integer.parseInt(element.get("CNo")));
+			circles.add(circleElement);
+		}*/
+		CircleElement circleElement = new CircleElement("张三医生", 1);
+		circles.add(circleElement);
 	}
 	
 	private TextWatcher filterTextWatcher = new TextWatcher() {
