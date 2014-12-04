@@ -8,6 +8,7 @@ import com.edu.thss.smartdental.R;
 import com.edu.thss.smartdental.model.BBSElement;
 import com.edu.thss.smartdental.model.ImageElement;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -134,8 +135,10 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
     }
     class ButtonListner implements OnClickListener{
 		private int itemPosition;
+		//private Context context;
 		public ButtonListner(int pos){
 			this.itemPosition = pos;
+			//context = c;
 		}
 
 		@Override
@@ -143,6 +146,14 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 			int vid = v.getId();
 			if(vid == holder.delete.getId()){
 			 //删除
+				/*new AlertDialog.Builder(context.getApplicationContext())  
+		        .setTitle("标题")
+		        .setMessage("简单消息框")
+		        //.setPositiveButton("确定", null)
+		        .show();
+		        */
+				
+				
 				list.remove(itemPosition);
 				notifyDataSetChanged();
 			}
