@@ -14,18 +14,12 @@ public class DBUtil {
 	private HttpConnSoap Soap = new HttpConnSoap();
 
 	public static Connection getConnection() {
-		Connection con = null;
-		try {
-			//Class.forName("org.gjt.mm.mysql.Driver");
-			//con=DriverManager.getConnection("jdbc:mysql://192.168.0.106:3306/test?useUnicode=true&characterEncoding=UTF-8","root","initial");  		    
-		} catch (Exception e) {
-			//e.printStackTrace();
-		}
+		Connection con = null;		
 		return con;
 	}
 
 	/**
-	 * 获取所有货物的信息
+	 * 获取所有用户的信息
 	 * 
 	 * @return
 	 */
@@ -64,7 +58,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * 增加一条货物信息
+	 * 增加一个用户
 	 * 
 	 * @return
 	 */
@@ -76,7 +70,7 @@ public class DBUtil {
 		arrayList.add("username");
 		arrayList.add("password");
 		arrayList.add("ident");
-		arrayList.add("FollowDoctor");
+		arrayList.add("followdoctor");
 		brrayList.add(username);
 		brrayList.add(password);
 		brrayList.add(identity);
@@ -95,7 +89,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 删除一条货物信息
+	 * 删除一个用户
 	 * 
 	 * @return
 	 */
@@ -111,6 +105,101 @@ public class DBUtil {
 			{
 			try{
 				Soap.GetWebService("deleteUser", arrayList, brrayList);
+			}
+			catch(Exception e) {
+			}
+			}
+		}.start();
+		//Soap.GetWebServre("deleteCargoInfo", arrayList, brrayList);
+	}
+	
+	/**
+	 * 获取所有帖子的信息
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> getAllPostInfo() {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		new Thread(){
+			public void run()
+			{
+			try{
+				crrayList = Soap.GetWebService("selectAllPostByDoctor", arrayList, brrayList);
+			}
+			catch(Exception e) {
+			}
+			}
+		}.start();
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("Cno", "Cno");
+		tempHash.put("Cname", "Cname");
+		tempHash.put("Cnum", "Cnum");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 3) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("Cno", crrayList.get(j));
+			hashMap.put("Cname", crrayList.get(j + 1));
+			hashMap.put("Cnum", crrayList.get(j + 2));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+
+	/**
+	 * 新建帖子
+	 * 
+	 * @return
+	 */
+	public void insertPost(String PostName, String postContent,String username, String doctorname) {
+
+		arrayList.clear();
+		brrayList.clear();
+		
+		arrayList.add("PostName");
+		arrayList.add("postContent");
+		arrayList.add("username");
+		arrayList.add("doctorname");
+		brrayList.add(PostName);
+		brrayList.add(postContent);
+		brrayList.add(username);
+		brrayList.add(doctorname);
+		new Thread(){
+			public void run()
+			{
+			try{
+				Soap.GetWebService("insertPost", arrayList, brrayList);
+			}
+			catch(Exception e) {
+			}
+			}
+		}.start();
+		//Soap.GetWebServre("insertCargoInfo", arrayList, brrayList);
+	}
+	
+	/**
+	 * 删除帖子
+	 * 
+	 * @return
+	 */
+	public void deletePost(String postname) {
+
+		arrayList.clear();
+		brrayList.clear();
+		
+		arrayList.add("postname");
+		brrayList.add(postname);
+		new Thread(){
+			public void run()
+			{
+			try{
+				Soap.GetWebService("deletePost", arrayList, brrayList);
 			}
 			catch(Exception e) {
 			}
