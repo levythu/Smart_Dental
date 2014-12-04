@@ -23,10 +23,10 @@
             android:drawableBottom="@drawable/emr_tab_bottom"
             android:text="筛选" />
         <RadioButton
-            android:id="@+id/bbs_in_tab_search"
+            android:id="@+id/bbs_in_tab_group"
             style="@style/emr_tab"
             android:drawableBottom="@drawable/emr_tab_bottom"
-            android:text="搜索" />
+            android:text="圈子" />
         <RadioButton
             android:id="@+id/bbs_in_tab_news"
             style="@style/emr_tab"

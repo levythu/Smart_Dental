@@ -39,7 +39,7 @@ public class BBSInFragment extends Fragment {
 				case R.id.bbs_in_tab_select:
 					changeFragment(1);
 					break;
-				case R.id.bbs_in_tab_search:
+				case R.id.bbs_in_tab_group:
 					changeFragment(2);
 					break;
 				case R.id.bbs_in_tab_news:
@@ -67,7 +67,8 @@ public class BBSInFragment extends Fragment {
 			tempfragment = new BBSInTabSelectFragment();
 			break;
 		case 2:
-			tempfragment = new BBSInTabSearchFragment();
+			//tempfragment = new BBSInTabSearchFragment();
+			tempfragment = new BBSFragment();
 			break;
 		case 3:
 			tempfragment = new BBSInTabNewsFragment();

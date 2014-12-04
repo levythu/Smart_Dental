@@ -143,7 +143,7 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 			fragment = new SettingFragment();
 			break;
 		case 8:
-			fragment = new BBSFragment();
+			fragment = new BBSInFragment();
 			break;
 		default: break;
 		}
