@@ -31,23 +31,24 @@ public class RegisterActivity extends Activity {
 		public void onClick(View v) {
 			String username = username_edit.getText().toString(), password = password_edit.getText().toString(), repeat_password = repeat_password_edit.getText().toString();
 			if (username.equals("")) {
-				Toast.makeText(RegisterActivity.this, "用户名不能为空", Toast.LENGTH_LONG).show();
+				Toast.makeText(RegisterActivity.this, "鐢ㄦ埛鍚嶄笉鑳戒负绌�", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (password.equals("")) {
-				Toast.makeText(RegisterActivity.this, "密码不能为空", Toast.LENGTH_LONG).show();
+				Toast.makeText(RegisterActivity.this, "瀵嗙爜涓嶈兘涓虹┖", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (!repeat_password.equals(password)) {
-				Toast.makeText(RegisterActivity.this, "两次密码输入不一致", Toast.LENGTH_LONG).show();
+				Toast.makeText(RegisterActivity.this, "涓ゆ瀵嗙爜杈撳叆涓嶄竴鑷�", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (username.equals(getString(R.string.admin_username))) {
-				Toast.makeText(RegisterActivity.this, "用户名已存在", Toast.LENGTH_LONG).show();
+				Toast.makeText(RegisterActivity.this, "鐢ㄦ埛鍚嶅凡瀛樺湪", Toast.LENGTH_LONG).show();
 				return;
 			}
+			db.getAllPostInfo(12);
 			db.insertUser(username, password, "patient", "");
-			Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_LONG).show();
+			Toast.makeText(RegisterActivity.this, "娉ㄥ唽鎴愬姛锛岃鐧诲綍", Toast.LENGTH_LONG).show();
 			finish();
 		}
 	};
