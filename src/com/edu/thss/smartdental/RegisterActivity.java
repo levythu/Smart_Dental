@@ -48,8 +48,10 @@ public class RegisterActivity extends Activity {
 			}
 			if (db.insertUser(username, password, "patient", "").equals("true"))
 				Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_LONG).show();
-			else
+			else {
 				Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_LONG).show();
+				return;
+			}
 			finish();
 		}
 	};
