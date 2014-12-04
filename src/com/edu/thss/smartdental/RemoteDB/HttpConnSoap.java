@@ -68,7 +68,6 @@ public class HttpConnSoap {
             //获取数据  
             InputStream inputStream = con.getInputStream();  
             Values = inputStreamtovaluelist(inputStream,methodName);
-            
             return Values;  
   
             /** 
@@ -76,11 +75,10 @@ public class HttpConnSoap {
              * 而原来的类是将数据解析成了ArrayList 
              * <String>格式返回。显然，这样无法解决我们上面的需求（返回值是复杂类型的List） 
              */  
-        }  
-        catch (Exception e)  
+        }catch (Exception e)  
         {  
             e.printStackTrace();  
-            return null;  
+            return Values;  
         }  
 	}
 

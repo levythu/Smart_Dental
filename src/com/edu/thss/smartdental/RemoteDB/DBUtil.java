@@ -62,10 +62,11 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public void insertUser(String username, String password,String identity, String followdoctor) {
+	public String insertUser(String username, String password,String identity, String followdoctor) {
 
 		arrayList.clear();
 		brrayList.clear();
+		crrayList.clear();
 		
 		arrayList.add("username");
 		arrayList.add("password");
@@ -75,17 +76,12 @@ public class DBUtil {
 		brrayList.add(password);
 		brrayList.add(identity);
 		brrayList.add(followdoctor);
-		new Thread(){
-			public void run()
-			{
-			try{
-				Soap.GetWebService("insertUser", arrayList, brrayList);
-			}
-			catch(Exception e) {
-			}
-			}
-		}.start();
-		//Soap.GetWebServre("insertCargoInfo", arrayList, brrayList);
+		try{
+			crrayList = Soap.GetWebService("insertUser", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		return crrayList.get(0);
 	}
 	
 	/**
@@ -93,24 +89,20 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public void deleteUser(String username) {
+	public String deleteUser(String username) {
 
 		arrayList.clear();
 		brrayList.clear();
+		crrayList.clear();
 		
 		arrayList.add("username");
 		brrayList.add(username);
-		new Thread(){
-			public void run()
-			{
-			try{
-				Soap.GetWebService("deleteUser", arrayList, brrayList);
-			}
-			catch(Exception e) {
-			}
-			}
-		}.start();
-		//Soap.GetWebServre("deleteCargoInfo", arrayList, brrayList);
+		try{
+			crrayList = Soap.GetWebService("deleteUser", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		return crrayList.get(0);
 	}
 	
 	/**
