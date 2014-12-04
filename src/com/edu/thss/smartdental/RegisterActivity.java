@@ -46,9 +46,10 @@ public class RegisterActivity extends Activity {
 				Toast.makeText(RegisterActivity.this, "鐢ㄦ埛鍚嶅凡瀛樺湪", Toast.LENGTH_LONG).show();
 				return;
 			}
-			db.getAllPostInfo(12);
-			db.insertUser(username, password, "patient", "");
-			Toast.makeText(RegisterActivity.this, "娉ㄥ唽鎴愬姛锛岃鐧诲綍", Toast.LENGTH_LONG).show();
+			if (db.insertUser(username, password, "patient", "").equals("true"))
+				Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_LONG).show();
+			else
+				Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_LONG).show();
 			finish();
 		}
 	};
