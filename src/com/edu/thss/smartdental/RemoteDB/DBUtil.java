@@ -146,7 +146,7 @@ public class DBUtil {
 		arrayList.clear();
 		brrayList.clear();
 		crrayList.clear();
-		arrayList.add("doctorid");
+		arrayList.add("id");
 		brrayList.add(Integer.toString(id));
 		try{
 			
@@ -159,13 +159,15 @@ public class DBUtil {
 		tempHash.put("postname", "postname");
 		tempHash.put("postcontent", "postcontent");
 		tempHash.put("time", "time");
+		tempHash.put("author", "author");
 		list.add(tempHash);
 		
-		for (int j = 0; j < crrayList.size(); j += 3) {
+		for (int j = 0; j < crrayList.size(); j += 4) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("postname", crrayList.get(j));
 			hashMap.put("postcontent", crrayList.get(j + 1));
 			hashMap.put("time", crrayList.get(j + 2));
+			hashMap.put("author", crrayList.get(j + 3));
 			list.add(hashMap);
 		}
 
