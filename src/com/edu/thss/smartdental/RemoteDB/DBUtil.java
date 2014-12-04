@@ -23,7 +23,7 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public List<HashMap<String, String>> getAllInfo() {
+	public List<HashMap<String, String>> getAllpatients(String DoctorName) {
 		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 
 		arrayList.clear();
@@ -57,6 +57,36 @@ public class DBUtil {
 		return list;
 	}
 
+	public List<HashMap<String, String>> getAllDoctors() {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+			
+		try{
+			crrayList = Soap.GetWebService("selectAllDoctors", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+			
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("Cno", "Cno");
+		tempHash.put("Cname", "Cname");
+		tempHash.put("Cnum", "Cnum");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 3) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("Cno", crrayList.get(j));
+			hashMap.put("Cname", crrayList.get(j + 1));
+			hashMap.put("Cnum", crrayList.get(j + 2));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
 	/**
 	 * 增加一个用户
 	 * 
@@ -110,34 +140,32 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public List<HashMap<String, String>> getAllPostInfo() {
+	public List<HashMap<String, String>> getAllPostInfo(int id) {
 		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 
 		arrayList.clear();
 		brrayList.clear();
 		crrayList.clear();
-		new Thread(){
-			public void run()
-			{
-			try{
-				crrayList = Soap.GetWebService("selectAllPostByDoctor", arrayList, brrayList);
-			}
-			catch(Exception e) {
-			}
-			}
-		}.start();
+		arrayList.add("doctorid");
+		brrayList.add(Integer.toString(id));
+		try{
+			
+			crrayList = Soap.GetWebService("selectAllPostByDoctor", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
 
 		HashMap<String, String> tempHash = new HashMap<String, String>();
-		tempHash.put("Cno", "Cno");
-		tempHash.put("Cname", "Cname");
-		tempHash.put("Cnum", "Cnum");
+		tempHash.put("postname", "postname");
+		tempHash.put("postcontent", "postcontent");
+		tempHash.put("time", "time");
 		list.add(tempHash);
 		
 		for (int j = 0; j < crrayList.size(); j += 3) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
-			hashMap.put("Cno", crrayList.get(j));
-			hashMap.put("Cname", crrayList.get(j + 1));
-			hashMap.put("Cnum", crrayList.get(j + 2));
+			hashMap.put("postname", crrayList.get(j));
+			hashMap.put("postcontent", crrayList.get(j + 1));
+			hashMap.put("time", crrayList.get(j + 2));
 			list.add(hashMap);
 		}
 
