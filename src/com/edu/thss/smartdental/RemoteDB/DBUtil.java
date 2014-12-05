@@ -29,6 +29,8 @@ public class DBUtil {
 		arrayList.clear();
 		brrayList.clear();
 		crrayList.clear();
+		arrayList.add("doctorname");
+		brrayList.add(DoctorName);
 		new Thread(){
 			public void run()
 			{
@@ -41,22 +43,24 @@ public class DBUtil {
 		}.start();
 
 		HashMap<String, String> tempHash = new HashMap<String, String>();
-		tempHash.put("Cno", "Cno");
-		tempHash.put("Cname", "Cname");
-		tempHash.put("Cnum", "Cnum");
+		tempHash.put("userid", "userid");
+		tempHash.put("username", "username");
 		list.add(tempHash);
 		
-		for (int j = 0; j < crrayList.size(); j += 3) {
+		for (int j = 0; j < crrayList.size(); j += 2) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
-			hashMap.put("Cno", crrayList.get(j));
-			hashMap.put("Cname", crrayList.get(j + 1));
-			hashMap.put("Cnum", crrayList.get(j + 2));
+			hashMap.put("userid", crrayList.get(j));
+			hashMap.put("username", crrayList.get(j + 1));
 			list.add(hashMap);
 		}
 
 		return list;
 	}
-
+	/**
+	 * 获取所有用户的信息
+	 * 
+	 * @return
+	 */
 	public List<HashMap<String, String>> getAllDoctors() {
 		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 
@@ -72,16 +76,14 @@ public class DBUtil {
 			
 
 		HashMap<String, String> tempHash = new HashMap<String, String>();
-		tempHash.put("Cno", "Cno");
-		tempHash.put("Cname", "Cname");
-		tempHash.put("Cnum", "Cnum");
+		tempHash.put("doctorid", "doctorid");
+		tempHash.put("doctorname", "doctorname");
 		list.add(tempHash);
 		
-		for (int j = 0; j < crrayList.size(); j += 3) {
+		for (int j = 0; j < crrayList.size(); j += 2) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
-			hashMap.put("Cno", crrayList.get(j));
-			hashMap.put("Cname", crrayList.get(j + 1));
-			hashMap.put("Cnum", crrayList.get(j + 2));
+			hashMap.put("doctorid", crrayList.get(j));
+			hashMap.put("doctorname", crrayList.get(j + 1));
 			list.add(hashMap);
 		}
 
@@ -134,6 +136,28 @@ public class DBUtil {
 		}
 		return crrayList.get(0);
 	}
+	/**
+	 * 加入圈子
+	 * 
+	 * @return
+	 */
+	public String joinCircle(String username,String circlepassword,String doctorname){
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("username");
+		arrayList.add("doctorpassword");
+		arrayList.add("doctorname");
+		brrayList.add(username);
+		brrayList.add(circlepassword);
+		brrayList.add(doctorname);
+		try{
+			crrayList = Soap.GetWebService("joinDoctor", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		return crrayList.get(0);
+	}
 	
 	/**
 	 * 获取所有帖子的信息
@@ -179,7 +203,7 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public void insertPost(String PostName, String postContent,String username, String doctorname) {
+	public String insertPost(String PostName, String postContent,String username, String doctorname) {
 
 		arrayList.clear();
 		brrayList.clear();
