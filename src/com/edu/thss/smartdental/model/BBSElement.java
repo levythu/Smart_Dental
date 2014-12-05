@@ -9,7 +9,7 @@ public class BBSElement {
 	public boolean isCollected;
 	public boolean isDeletable;
 	
-	public BBSElement(String title,String preview,String time, String author, boolean isCollected, boolean isDeletable){
+	public BBSElement(String title,String preview, String time, String author, boolean isCollected, boolean isDeletable){
 		this.title = title;
 		this.preview = preview;
 		this.time =time;
