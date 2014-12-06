@@ -28,5 +28,8 @@
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="enter_circle_password">请输入认证密码</string>
+    <string name="title_activity_join_circle">加入圈子</string>
+    <string name="action_search">搜索</string>
+    
 
 </resources>

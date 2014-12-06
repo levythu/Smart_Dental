@@ -2,15 +2,11 @@ package com.edu.thss.smartdental.adapter;
 
 import java.util.ArrayList;
 
-import com.edu.thss.smartdental.BBSInFragment;
 import com.edu.thss.smartdental.R;
 import com.edu.thss.smartdental.model.CircleElement;
-import com.edu.thss.smartdental.ui.dialog.JoinCircleDialog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +19,11 @@ public class JoinCircleListAdapter extends BaseAdapter implements Filterable{
 
 	private ArrayList<CircleElement> list;
 	private Context context;
-	private FragmentManager fragmentManager;
 	private CircleFilter filter;
 	
-	public JoinCircleListAdapter(ArrayList<CircleElement> list, Context context, FragmentManager fragmentManager) {
+	public JoinCircleListAdapter(ArrayList<CircleElement> list, Context context) {
 		this.list = list;
 		this.context = context;
-		this.fragmentManager = fragmentManager;
 	}
 
 	@Override
@@ -56,16 +50,6 @@ public class JoinCircleListAdapter extends BaseAdapter implements Filterable{
 		final String docName = list.get(position).docName;
 		TextView name =(TextView)convertView.findViewById(R.id.circle_list_item_title);
 		name.setText(docName);
-		
-		name.setOnClickListener(new View.OnClickListener() {
-			
-				@Override
-				public void onClick(View v) {
-					JoinCircleDialog dialog = new JoinCircleDialog();
-					dialog.setDocName(docName);
-					dialog.show(fragmentManager, "JoinCircle");
-				}
-			});
 		
 		return convertView;
 	}
