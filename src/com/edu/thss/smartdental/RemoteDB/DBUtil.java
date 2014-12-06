@@ -184,14 +184,16 @@ public class DBUtil {
 		tempHash.put("postcontent", "postcontent");
 		tempHash.put("time", "time");
 		tempHash.put("author", "author");
+		tempHash.put("PostId", "PostId");
 		list.add(tempHash);
 		
-		for (int j = 0; j < crrayList.size(); j += 4) {
+		for (int j = 0; j < crrayList.size(); j += 5) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("postname", crrayList.get(j));
 			hashMap.put("postcontent", crrayList.get(j + 1));
 			hashMap.put("time", crrayList.get(j + 2));
 			hashMap.put("author", crrayList.get(j + 3));
+			hashMap.put("PostId", crrayList.get(j + 4));
 			list.add(hashMap);
 		}
 
@@ -207,6 +209,7 @@ public class DBUtil {
 
 		arrayList.clear();
 		brrayList.clear();
+		crrayList.clear();
 		
 		arrayList.add("PostName");
 		arrayList.add("postContent");
@@ -215,18 +218,13 @@ public class DBUtil {
 		brrayList.add(PostName);
 		brrayList.add(postContent);
 		brrayList.add(username);
-		brrayList.add(doctorname);
-		new Thread(){
-			public void run()
-			{
-			try{
-				Soap.GetWebService("insertPost", arrayList, brrayList);
-			}
-			catch(Exception e) {
-			}
-			}
-		}.start();
-		//Soap.GetWebServre("insertCargoInfo", arrayList, brrayList);
+		brrayList.add(doctorname);		
+		try{
+			crrayList = Soap.GetWebService("insertPost", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}			
+		return crrayList.get(0);
 	}
 	
 	/**
@@ -234,23 +232,111 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public void deletePost(String postname) {
+	public String deletePost(String postname) {
 
 		arrayList.clear();
 		brrayList.clear();
+		crrayList.clear();
 		
 		arrayList.add("postname");
 		brrayList.add(postname);
-		new Thread(){
-			public void run()
-			{
-			try{
-				Soap.GetWebService("deletePost", arrayList, brrayList);
-			}
-			catch(Exception e) {
-			}
-			}
-		}.start();
-		//Soap.GetWebServre("deleteCargoInfo", arrayList, brrayList);
+		try{
+			crrayList = Soap.GetWebService("deletePost", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		return crrayList.get(0);
+	}
+	
+	/**
+	 * 获取帖子内评论
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> getAllComments(int PostId) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("PostId");
+		brrayList.add(Integer.toString(PostId));
+			
+		try{
+			crrayList = Soap.GetWebService("selectAllCommentsByPostId", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+			
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("commentusername", "commentusername");
+		tempHash.put("commenttype", "commenttype");
+		tempHash.put("commenttitle", "commenttitle");
+		tempHash.put("commentcontent", "commentcontent");
+		tempHash.put("replytouser", "replytouser");
+		tempHash.put("time","time");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 6) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("commentusername", crrayList.get(j));
+			hashMap.put("commenttype", crrayList.get(j + 1));
+			hashMap.put("commenttitle", crrayList.get(j + 2));
+			hashMap.put("commentcontent", crrayList.get(j + 3));
+			hashMap.put("replytouser", crrayList.get(j + 4));
+			hashMap.put("time", crrayList.get(j + 4));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	/**
+	 * 新增评论
+	 * 
+	 * @return
+	 */
+	public String insertComment(String CommentName, String commentContent, String username, String CommentType, String ReplyUserName) {
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("CommentName");
+		arrayList.add("commentContent");
+		arrayList.add("username");
+		arrayList.add("CommentType");
+		arrayList.add("ReplyUserName");
+		brrayList.add(CommentName);
+		brrayList.add(commentContent);
+		brrayList.add(username);
+		brrayList.add(CommentType);	
+		brrayList.add(ReplyUserName);
+		try{
+			crrayList = Soap.GetWebService("insertComment", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}			
+		return crrayList.get(0);
+	}
+	/**
+	 * 删除评论
+	 * 
+	 * @return
+	 */
+	public String deleteComment(String commentId) {
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("id");
+		brrayList.add(commentId);
+		try{
+			crrayList = Soap.GetWebService("deleteComment", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		return crrayList.get(0);
 	}
 }
