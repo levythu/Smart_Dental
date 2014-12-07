@@ -52,6 +52,7 @@ public class LoginActivity extends Activity {
 					intent.setClass(LoginActivity.this, MainActivity.class);
 				else {
 					Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_LONG).show();
+					intent.setClass(LoginActivity.this, MainActivity.class);
 					//return;
 				}
 			startActivity(intent);
