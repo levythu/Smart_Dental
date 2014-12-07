@@ -1,3 +1,7 @@
+/*
+ * Author: Zhang Kai
+*/
+
 package com.edu.thss.smartdental;
 
 import android.content.Intent;
