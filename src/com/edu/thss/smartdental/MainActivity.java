@@ -44,7 +44,7 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 		findView();
 		
 		if(savedInstanceState == null){
-			selectItem(0);
+			selectItem(8);
 		}
 	}
 	
