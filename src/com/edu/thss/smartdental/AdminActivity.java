@@ -11,6 +11,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.util.Log;
 import android.database.Cursor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class AdminActivity extends FragmentActivity {
 
@@ -63,7 +65,11 @@ public class AdminActivity extends FragmentActivity {
 		case RESULT_OK:      
 			Uri uri = data.getData();
 			String path = getPath(this, uri);
-			Toast.makeText(AdminActivity.this, path, Toast.LENGTH_LONG).show();
+			try {
+				FileInputStream fis = openFileInput(path);
+			} catch (FileNotFoundException e) {
+				Toast.makeText(this, "文件不存在", Toast.LENGTH_LONG);
+			}
 			break;
 	    }
 		super.onActivityResult(requestCode, resultCode, data);
