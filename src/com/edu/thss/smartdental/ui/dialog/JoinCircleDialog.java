@@ -1,6 +1,7 @@
 package com.edu.thss.smartdental.ui.dialog;
 
 import com.edu.thss.smartdental.R;
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,10 +28,11 @@ public class JoinCircleDialog extends DialogFragment {
 		builder.setTitle(R.string.enter_circle_password)
           .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
         	  	public void onClick(DialogInterface dialog, int id) {
+        	  		DBUtil db = new DBUtil();
         	  		EditText text = (EditText) dialogView.findViewById(R.id.circle_password);
         	  		String password = text.getText().toString();
         			
-        	  		Toast.makeText(getActivity(), docName + " " + password, Toast.LENGTH_LONG).show();
+        	  		Toast.makeText(getActivity(), db.joinCircle("t", password, docName), Toast.LENGTH_LONG).show();
         	  					}
           					})
           .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -41,6 +43,6 @@ public class JoinCircleDialog extends DialogFragment {
     }
 	
 	public void setDocName(String name) {
-		docName = name;
+		docName = name.trim();
 	}
 }
