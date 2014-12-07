@@ -13,9 +13,10 @@ public class BBSInFragment extends Fragment {
 	
 	private RadioGroup radioGroup;
 	private FragmentManager fragmentManager;
+	private int UserId;
 	
-	public BBSInFragment() {
-		
+	public BBSInFragment(int id) {
+		UserId = id;
 	}
 	
 	@Override
@@ -61,7 +62,7 @@ public class BBSInFragment extends Fragment {
 		Fragment tempfragment = null;
 		switch(index){
 		case 0:
-			tempfragment = new BBSInTabViewFragment();
+			tempfragment = new BBSInTabViewFragment(this.UserId);
 			break;
 		case 1:
 			tempfragment = new BBSInTabSelectFragment();

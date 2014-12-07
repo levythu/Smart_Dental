@@ -46,8 +46,8 @@ public class BBSFragment extends Fragment {
 	
 	private void initCircles(){
 		circles = new ArrayList<String>();
-		circles.add("老司机");
-		circles.add("陈鸣海医生");
+		circles.add("鑰佸徃鏈�");
+		circles.add("闄堥福娴峰尰鐢�");
 	}
 	
 	private class OnJoinButtonClickListener implements OnClickListener {
@@ -72,7 +72,7 @@ public class BBSFragment extends Fragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-				Fragment fragment= new BBSInFragment();
+				Fragment fragment= new BBSInFragment(12);
 				fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
 		}
 		

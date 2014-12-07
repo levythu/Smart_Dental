@@ -31,7 +31,11 @@ public class BBSInTabViewFragment extends Fragment {
 	private ListView list;
 	private ArrayList<BBSElement> posts;
 	private Context context;
+	private int UserId;
 	
+	public BBSInTabViewFragment(int id) {
+		UserId = id;
+	}
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -44,11 +48,7 @@ public class BBSInTabViewFragment extends Fragment {
 		bbsAdapter = new BBSListAdapter(posts,this.getActivity().getApplicationContext());
 		list.setAdapter(bbsAdapter);
 		
-		
-		
-		
-        
-        
+		      
 		list.setOnItemClickListener(new OnPostItemClickListener(context));
 				
 
@@ -93,12 +93,13 @@ public class BBSInTabViewFragment extends Fragment {
 	};
 
 	private void initPosts(){
-		//DBUtil db = new DBUtil();
-		//List<HashMap<String, String>> PostList  = db.getAllPostInfo(12);
+		DBUtil db = new DBUtil();
+		List<HashMap<String, String>> PostList  = db.getAllPostInfo(UserId);
 		posts = new ArrayList<BBSElement>();
 		BBSElement i;
-		//i = new BBSElement(PostList.get(1).get("postname"),PostList.get(1).get("postcontent"),PostList.get(1).get("time"),"zhangsan",true,true);
-		//posts.add(i);
+		i = new BBSElement(PostList.get(1).get("postname"),PostList.get(1).get("postcontent"),PostList.get(1).get("time"),"zhangsan",true,true);
+		posts.add(i);
+		
 		i = new BBSElement("天气不错","今天风速74km/h，吹得我牙痛","2011-1-15","张三",true,true);
 		posts.add(i);
 		i = new BBSElement("啦啦啦","我喜欢这个医生","2011-1-15","李四",true,false);
