@@ -2,6 +2,8 @@ package com.edu.thss.smartdental;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.edu.thss.smartdental.RemoteDB.DBUtil;
 
 public class LoginActivity extends Activity {
@@ -16,6 +19,8 @@ public class LoginActivity extends Activity {
 	Button login_btn, register_btn;
 	EditText username, password;
 	DBUtil db = new DBUtil();
+	SharedPreferences preferences = null;
+	Editor editor = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		if(true){
@@ -29,8 +34,12 @@ public class LoginActivity extends Activity {
 			}
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		preferences = getSharedPreferences("setting", MODE_PRIVATE);
+		editor = preferences.edit();
 		username = (EditText)findViewById(R.id.username_edit);
 		password = (EditText)findViewById(R.id.password_edit);
+		username.setText(preferences.getString("username", ""));
+		password.setText(preferences.getString("password", ""));
 		login_btn = (Button)findViewById(R.id.login_btn);
 		login_btn.setOnClickListener(loginListener);
 		register_btn = (Button)findViewById(R.id.register_btn);
@@ -40,6 +49,9 @@ public class LoginActivity extends Activity {
 	private OnClickListener loginListener = new OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent();
+			editor.putString("username", username.getText().toString());
+			editor.putString("password", password.getText().toString());
+			editor.commit();
 			if (username.getText().toString().equals(getString(R.string.admin_username)))
 				if (password.getText().toString().equals(getString(R.string.admin_password)))
 					intent.setClass(LoginActivity.this, AdminActivity.class);
