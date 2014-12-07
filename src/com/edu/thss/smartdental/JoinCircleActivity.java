@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 public class JoinCircleActivity extends FragmentActivity {
@@ -51,7 +52,9 @@ public class JoinCircleActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.join_circle, menu);
-		return true;
+		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		searchView.setIconifiedByDefault(false);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -60,8 +63,9 @@ public class JoinCircleActivity extends FragmentActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_search) {
-			return true;
+		switch (id) {
+		case R.id.action_search:
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
