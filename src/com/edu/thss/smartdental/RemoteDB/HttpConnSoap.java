@@ -82,20 +82,25 @@ public class HttpConnSoap {
         }  
 	}
 
-	public ArrayList<String> inputStreamtovaluelist(InputStream in, String MonthsName) throws IOException {
+	public ArrayList<String> inputStreamtovaluelist(InputStream in, String MonthsName){
 		StringBuffer out = new StringBuffer();
 		String s1 = "";
 		byte[] b = new byte[4096];
 		ArrayList<String> Values = new ArrayList<String>();
 		Values.clear();
 
-		for (int n; (n = in.read(b)) != -1;) {
-			s1 = new String(b, 0, n);
-			out.append(s1);
+		try {
+			for (int n; (n = in.read(b)) != -1;) {
+				s1 = new String(b, 0, n);
+				out.append(s1);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		System.out.println(out);
-		String[] s13 = s1.split("><");
+		String[] s13 = out.toString().split("><");
 		//String[] s13 = out.toString().split("><");
 		String ifString = MonthsName + "Result";
 		String TS = "";
