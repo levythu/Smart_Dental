@@ -13,14 +13,11 @@ import com.edu.thss.smartdental.ui.dialog.JoinCircleDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -30,7 +27,6 @@ public class JoinCircleActivity extends FragmentActivity {
 	private ListView list;
 	private ArrayList<CircleElement> circles;
 	private JoinCircleListAdapter listAdapter;
-	private EditText editText;
 	private FragmentManager fragmentManager;
 
 	@Override
@@ -39,8 +35,6 @@ public class JoinCircleActivity extends FragmentActivity {
 		setContentView(R.layout.activity_join_circle);
 		fragmentManager = getSupportFragmentManager();
 		
-		editText = (EditText) findViewById(R.id.circle_searchbox);
-		editText.addTextChangedListener(filterTextWatcher);
 		list = (ListView) findViewById(R.id.join_circle_list);
 		initCircles();
 		listAdapter = new JoinCircleListAdapter(circles, getApplicationContext());
@@ -52,8 +46,10 @@ public class JoinCircleActivity extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.join_circle, menu);
-		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		SearchView searchView = (SearchView) menu.findItem(R.id.join_circle_action_search).getActionView();
 		searchView.setIconifiedByDefault(false);
+		searchView.setQueryHint(getResources().getString(R.string.join_circle_search_hint));
+		searchView.setOnQueryTextListener(filterQueryTextListener);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -64,7 +60,7 @@ public class JoinCircleActivity extends FragmentActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		switch (id) {
-		case R.id.action_search:
+		case R.id.join_circle_action_search:
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -85,25 +81,18 @@ public class JoinCircleActivity extends FragmentActivity {
 		//circles.add(circleElement);
 	}
 	
-	private TextWatcher filterTextWatcher = new TextWatcher() {
+	private SearchView.OnQueryTextListener filterQueryTextListener = new SearchView.OnQueryTextListener() {
 
 		@Override
-		public void afterTextChanged(Editable s) {
-			
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-			
-		}
-
-		@Override
-		public void onTextChanged(CharSequence s, int star, int count,
-				int after) {
+		public boolean onQueryTextChange(String s) {
 			listAdapter.getFilter().filter(s);	
+			return false;
 		}
-		
+
+		@Override
+		public boolean onQueryTextSubmit(String arg0) {
+			return false;
+		}
 	};
 	
 	private class OnJoinCircleItemClickListener implements OnItemClickListener {
