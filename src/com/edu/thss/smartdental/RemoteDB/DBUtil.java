@@ -2,7 +2,6 @@ package com.edu.thss.smartdental.RemoteDB;
 
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,16 +30,11 @@ public class DBUtil {
 		crrayList.clear();
 		arrayList.add("doctorname");
 		brrayList.add(DoctorName);
-		new Thread(){
-			public void run()
-			{
-			try{
-				crrayList = Soap.GetWebService("selectAllUserByDoctor", arrayList, brrayList);
-			}
-			catch(Exception e) {
-			}
-			}
-		}.start();
+		try{
+			crrayList = Soap.GetWebService("selectAllUserByDoctor", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
 
 		HashMap<String, String> tempHash = new HashMap<String, String>();
 		tempHash.put("userid", "userid");
