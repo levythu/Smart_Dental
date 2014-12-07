@@ -271,7 +271,7 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public String insertPost(String PostName, String postContent,String username, String doctorname) {
+	public String insertPost(String PostName, String postContent,String username, String doctorname, String tag) {
 
 		arrayList.clear();
 		brrayList.clear();
@@ -281,10 +281,12 @@ public class DBUtil {
 		arrayList.add("postContent");
 		arrayList.add("username");
 		arrayList.add("doctorname");
+		arrayList.add("tag");
 		brrayList.add(PostName);
 		brrayList.add(postContent);
 		brrayList.add(username);
-		brrayList.add(doctorname);		
+		brrayList.add(doctorname);
+		brrayList.add(tag);
 		try{
 			crrayList = Soap.GetWebService("insertPost", arrayList, brrayList);
 		}
