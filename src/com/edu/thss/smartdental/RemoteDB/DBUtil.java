@@ -146,6 +146,28 @@ public class DBUtil {
 	}
 	
 	/**
+	 * 登陆
+	 * 
+	 * @return
+	 */
+	public String login(String username, String password)
+	{
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("username");
+		arrayList.add("password");
+		brrayList.add(username);
+		brrayList.add(password);
+		try{
+			crrayList = Soap.GetWebService("login", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		return crrayList.get(0);
+	}
+	/**
 	 * 删除一个用户
 	 * 
 	 * @return
