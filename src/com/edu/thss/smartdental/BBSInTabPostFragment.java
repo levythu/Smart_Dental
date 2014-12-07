@@ -14,18 +14,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class BBSInTabPostFragment extends Fragment {
 	private Button post_bbs_btn;
 	private EditText edit_bbs_content;
 	private EditText edit_bbs_title;
+	private Spinner edit_tab_spinner;
+	private ArrayAdapter adapter; 
+//	private static final String[] TABS_STRINGS = {"灌水", "求助", "知识", "公告"};
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_bbs_in_post, container, false);
 		edit_bbs_title = (EditText)rootView.findViewById(R.id.edit_bbs_title);
 		edit_bbs_content = (EditText)rootView.findViewById(R.id.edit_bbs_content);
+		edit_tab_spinner = (Spinner)rootView.findViewById(R.id.edit_tab_spinner);
+		adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.tab_names, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		edit_tab_spinner.setAdapter(adapter);
+		edit_tab_spinner.setVisibility(View.VISIBLE);
 		post_bbs_btn = (Button)rootView.findViewById(R.id.post_bbs_btn);
 		post_bbs_btn.setOnClickListener(postBBSListener);
 		return rootView;

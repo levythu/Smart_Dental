@@ -28,4 +28,10 @@
    	    <item>住院</item>
    	    <item>其他</item>
    	</string-array>
+   	<string-array name="tab_names">
+   	    <item>灌水</item>
+   	    <item>求助</item>
+   	    <item>知识</item>
+   	    <item>公告</item>
+   	</string-array>
 </resources>

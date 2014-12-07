@@ -9,17 +9,30 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
-
-    <EditText
-        android:id="@+id/edit_bbs_title"
-        android:layout_width="match_parent"
+	<LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="请输入帖子标题"
-        android:inputType="text" >
+        android:orientation="horizontal" >
 
-        <requestFocus />
-    </EditText>
+		<Spinner 
+	        android:id="@+id/edit_tab_spinner"
+	        android:layout_alignParentTop="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        />
+	    <EditText
+	        android:id="@+id/edit_bbs_title"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:hint="请输入帖子标题"
+	        android:drawablePadding="5dp"
+	        android:singleLine="true"
+	        android:ems="10">
+	        <requestFocus/>
+	    </EditText>
+    </LinearLayout>
+    
     
     <EditText
         android:id="@+id/edit_bbs_content"
@@ -31,6 +44,8 @@
 
         <requestFocus />
     </EditText>
+    
+
 
     <Button
         android:id="@+id/post_bbs_btn"
