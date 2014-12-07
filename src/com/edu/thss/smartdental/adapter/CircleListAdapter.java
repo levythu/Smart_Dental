@@ -3,6 +3,7 @@ package com.edu.thss.smartdental.adapter;
 import java.util.ArrayList;
 
 import com.edu.thss.smartdental.R;
+import com.edu.thss.smartdental.model.CircleElement;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,10 +16,10 @@ import android.widget.TextView;
 @SuppressLint("DefaultLocale")
 public class CircleListAdapter extends BaseAdapter {
 
-	private ArrayList<String> list;
+	private ArrayList<CircleElement> list;
 	private Context context;
 	
-	public CircleListAdapter(ArrayList<String> list, Context context) {
+	public CircleListAdapter(ArrayList<CircleElement> list, Context context) {
 		this.list = list;
 		this.context = context;
 	}
@@ -43,7 +44,8 @@ public class CircleListAdapter extends BaseAdapter {
 		if(convertView == null){
 			convertView = LayoutInflater.from(context).inflate(R.layout.circle_list_item, null);
 		}
-		String docName = list.get(position);
+		CircleElement element = list.get(position);
+		String docName = element.docName;
 		TextView name =(TextView)convertView.findViewById(R.id.circle_list_item_title);
 		name.setText(docName);
 		

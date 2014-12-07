@@ -27,7 +27,6 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 	private class buttonViewHolder{
 		//Button read; //ÔÄ¶Á
 		Button delete; //É¾³ý
-		//Button hide; //Òþ²Ø
 		Button collect;//ÊÕ²Ø
 	}
 	private ArrayList<BBSElement> list;
@@ -111,12 +110,13 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 			else{
 				
 				ArrayList<BBSElement> mList = new ArrayList<BBSElement>();
-				for(BBSElement image: original){
-					if(image.title.toUpperCase().contains(constraint.toString().toUpperCase())
-					   ||image.preview.toUpperCase().contains(constraint.toString().toUpperCase())
-					   ||image.time.contains(constraint)){
+				for(BBSElement post: original){
+					if(post.title.toUpperCase().contains(constraint.toString().toUpperCase())
+					   ||post.preview.toUpperCase().contains(constraint.toString().toUpperCase())
+					   ||post.time.contains(constraint)
+					   ||post.author.contains(constraint)){
 						
-						mList.add(image);
+						mList.add(post);
 					}
 				}
 				results.values = mList;
@@ -135,10 +135,8 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
     }
     class ButtonListner implements OnClickListener{
 		private int itemPosition;
-		//private Context context;
 		public ButtonListner(int pos){
 			this.itemPosition = pos;
-			//context = c;
 		}
 
 		@Override

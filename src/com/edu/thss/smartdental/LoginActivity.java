@@ -9,11 +9,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
 
 public class LoginActivity extends Activity {
 
 	Button login_btn, register_btn;
 	EditText username, password;
+	DBUtil db = new DBUtil();
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		if(true){
@@ -46,7 +48,13 @@ public class LoginActivity extends Activity {
 					return;
 				}
 			else
-				intent.setClass(LoginActivity.this, MainActivity.class);
+				if (db.login(username.getText().toString(), password.getText().toString()).equals("true"))
+					intent.setClass(LoginActivity.this, MainActivity.class);
+				else {
+					Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_LONG).show();
+					intent.setClass(LoginActivity.this, MainActivity.class);
+					//return;
+				}
 			startActivity(intent);
 			finish();
 		}

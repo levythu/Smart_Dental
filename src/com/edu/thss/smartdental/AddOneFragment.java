@@ -46,7 +46,7 @@ public class AddOneFragment extends Fragment {
 				Toast.makeText(getActivity(), "用户名已存在", Toast.LENGTH_LONG).show();
 				return;
 			}
-			if (db.insertUser(username, password, "doctor", "").equals("true")) {
+			if (db.insertUser(username, password, "doctor").equals("true")) {
 				Toast.makeText(getActivity(), "添加成功", Toast.LENGTH_LONG).show();
 				username_edit.setText("");
 				password_edit.setText("");
