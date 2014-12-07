@@ -146,7 +146,7 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
-		if(crrayList == null){
+		if(crrayList.size() == 0){
 			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
@@ -175,7 +175,7 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
-		if(crrayList == null){
+		if(crrayList.size() == 0){
 			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
@@ -198,7 +198,7 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
-		if(crrayList == null){
+		if(crrayList.size() == 0){
 			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
@@ -223,7 +223,7 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
-		if(crrayList == null){
+		if(crrayList.size() == 0){
 			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
@@ -296,7 +296,7 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}		
-		if(crrayList == null){
+		if(crrayList.size() == 0){
 			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
@@ -320,7 +320,7 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
-		if(crrayList == null){
+		if(crrayList.size() == 0){
 			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
@@ -394,7 +394,10 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("insertComment", arrayList, brrayList);
 		}
 		catch(Exception e) {
-		}			
+		}	
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
 		return crrayList.get(0);
 	}
 	/**
@@ -415,7 +418,7 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
-		if(crrayList == null){
+		if(crrayList.size() == 0){
 			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
