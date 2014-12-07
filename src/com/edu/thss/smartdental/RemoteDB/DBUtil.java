@@ -147,7 +147,10 @@ public class DBUtil {
 	
 	/**
 	 * µÇÂ½
-	 * 
+	 * if log in success return true
+	 * else if user not exist return user does not exist
+	 * else if wrong password return wrong password
+	 * else return inner error
 	 * @return
 	 */
 	public String login(String username, String password)
