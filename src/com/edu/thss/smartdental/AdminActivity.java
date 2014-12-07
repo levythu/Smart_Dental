@@ -1,3 +1,7 @@
+/*
+ * Author: Zhang Kai
+*/
+
 package com.edu.thss.smartdental;
 
 import android.content.Intent;
@@ -11,12 +15,17 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.util.Log;
 import android.database.Cursor;
-import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.FileNotFoundException;
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
 
 public class AdminActivity extends FragmentActivity {
 
 	RadioGroup radioGroup;
+	DBUtil db = new DBUtil();
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,7 +75,25 @@ public class AdminActivity extends FragmentActivity {
 			Uri uri = data.getData();
 			String path = getPath(this, uri);
 			try {
-				FileInputStream fis = openFileInput(path);
+				FileReader fileReader = new FileReader(path);
+				BufferedReader reader = new BufferedReader(fileReader);
+				String buf;
+				int sum = 0, error = 0;
+				while (true) {
+					try {
+						buf = reader.readLine();
+						if (buf == null)
+							break;
+						sum++;
+						String[] doctor = buf.split(",");
+						if (!db.insertUser(doctor[0], doctor[1], "doctor").equals("true"))
+							error++;
+					} catch (IOException e) {
+						Toast.makeText(this, "打开文件失败", Toast.LENGTH_LONG);
+						break;
+					}
+				}
+				Toast.makeText(this, "导入了" + String.valueOf(sum) + "条记录，" + String.valueOf(error) + "个错误", Toast.LENGTH_LONG);
 			} catch (FileNotFoundException e) {
 				Toast.makeText(this, "文件不存在", Toast.LENGTH_LONG);
 			}

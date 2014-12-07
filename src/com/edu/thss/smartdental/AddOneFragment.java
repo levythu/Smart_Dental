@@ -1,3 +1,7 @@
+/*
+ * Author: Zhang Kai
+*/
+
 package com.edu.thss.smartdental;
 
 import com.edu.thss.smartdental.RemoteDB.DBUtil;
