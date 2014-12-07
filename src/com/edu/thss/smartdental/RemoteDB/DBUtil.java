@@ -51,7 +51,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * 获取所有用户的信息
+	 * 获取所有医生的信息
 	 * 
 	 * @return
 	 */
@@ -83,12 +83,49 @@ public class DBUtil {
 
 		return list;
 	}
+	
+	/**
+	 * 获取当前用户的圈子信息
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectDoctorsByname(String userName) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("userName");
+		brrayList.add(userName);
+			
+		try{
+			crrayList = Soap.GetWebService("selectDoctorsByname", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+			
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("doctorid", "doctorid");
+		tempHash.put("doctorname", "doctorname");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 2) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("doctorid", crrayList.get(j));
+			hashMap.put("doctorname", crrayList.get(j + 1));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	
 	/**
 	 * 增加一个用户
 	 * 
 	 * @return
 	 */
-	public String insertUser(String username, String password,String identity, String followdoctor) {
+	public String insertUser(String username, String password,String identity) {
 
 		arrayList.clear();
 		brrayList.clear();
@@ -97,11 +134,9 @@ public class DBUtil {
 		arrayList.add("username");
 		arrayList.add("password");
 		arrayList.add("ident");
-		arrayList.add("followdoctor");
 		brrayList.add(username);
 		brrayList.add(password);
 		brrayList.add(identity);
-		brrayList.add(followdoctor);
 		try{
 			crrayList = Soap.GetWebService("insertUser", arrayList, brrayList);
 		}
