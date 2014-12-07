@@ -142,6 +142,9 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
+		if(crrayList == null){
+			return "fail to connect to Database";
+		}
 		return crrayList.get(0);
 	}
 	
@@ -168,6 +171,9 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
+		if(crrayList == null){
+			return "fail to connect to Database";
+		}
 		return crrayList.get(0);
 	}
 	/**
@@ -187,6 +193,9 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("deleteUser", arrayList, brrayList);
 		}
 		catch(Exception e) {
+		}
+		if(crrayList == null){
+			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
 	}
@@ -209,6 +218,9 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("joinDoctor", arrayList, brrayList);
 		}
 		catch(Exception e) {
+		}
+		if(crrayList == null){
+			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
 	}
@@ -277,7 +289,10 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("insertPost", arrayList, brrayList);
 		}
 		catch(Exception e) {
-		}			
+		}		
+		if(crrayList == null){
+			return "fail to connect to Database";
+		}
 		return crrayList.get(0);
 	}
 	
@@ -298,6 +313,9 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("deletePost", arrayList, brrayList);
 		}
 		catch(Exception e) {
+		}
+		if(crrayList == null){
+			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
 	}
@@ -390,6 +408,9 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("deleteComment", arrayList, brrayList);
 		}
 		catch(Exception e) {
+		}
+		if(crrayList == null){
+			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
 	}
