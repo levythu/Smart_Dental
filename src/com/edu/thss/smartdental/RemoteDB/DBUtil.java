@@ -271,7 +271,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * 新建帖子
+	t * 新建帖子
 	 * 
 	 * @return
 	 */
