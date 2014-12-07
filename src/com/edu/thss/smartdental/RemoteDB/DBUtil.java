@@ -1,3 +1,7 @@
+/*
+ * Author:qiaocy
+ * 
+ */
 package com.edu.thss.smartdental.RemoteDB;
 
 
@@ -142,6 +146,9 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
+		if(crrayList == null){
+			return "fail to connect to Database";
+		}
 		return crrayList.get(0);
 	}
 	
@@ -168,6 +175,9 @@ public class DBUtil {
 		}
 		catch(Exception e) {
 		}
+		if(crrayList == null){
+			return "fail to connect to Database";
+		}
 		return crrayList.get(0);
 	}
 	/**
@@ -187,6 +197,9 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("deleteUser", arrayList, brrayList);
 		}
 		catch(Exception e) {
+		}
+		if(crrayList == null){
+			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
 	}
@@ -209,6 +222,9 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("joinDoctor", arrayList, brrayList);
 		}
 		catch(Exception e) {
+		}
+		if(crrayList == null){
+			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
 	}
@@ -255,11 +271,11 @@ public class DBUtil {
 	}
 
 	/**
-	 * 新建帖子
+	t * 新建帖子
 	 * 
 	 * @return
 	 */
-	public String insertPost(String PostName, String postContent,String username, String doctorname) {
+	public String insertPost(String PostName, String postContent,String username, String doctorname, String tag) {
 
 		arrayList.clear();
 		brrayList.clear();
@@ -269,15 +285,20 @@ public class DBUtil {
 		arrayList.add("postContent");
 		arrayList.add("username");
 		arrayList.add("doctorname");
+		arrayList.add("tag");
 		brrayList.add(PostName);
 		brrayList.add(postContent);
 		brrayList.add(username);
-		brrayList.add(doctorname);		
+		brrayList.add(doctorname);
+		brrayList.add(tag);
 		try{
 			crrayList = Soap.GetWebService("insertPost", arrayList, brrayList);
 		}
 		catch(Exception e) {
-		}			
+		}		
+		if(crrayList == null){
+			return "fail to connect to Database";
+		}
 		return crrayList.get(0);
 	}
 	
@@ -298,6 +319,9 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("deletePost", arrayList, brrayList);
 		}
 		catch(Exception e) {
+		}
+		if(crrayList == null){
+			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
 	}
@@ -390,6 +414,9 @@ public class DBUtil {
 			crrayList = Soap.GetWebService("deleteComment", arrayList, brrayList);
 		}
 		catch(Exception e) {
+		}
+		if(crrayList == null){
+			return "fail to connect to Database";
 		}
 		return crrayList.get(0);
 	}

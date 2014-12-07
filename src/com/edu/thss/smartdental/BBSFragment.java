@@ -1,8 +1,13 @@
 package com.edu.thss.smartdental;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
 import com.edu.thss.smartdental.adapter.CircleListAdapter;
+import com.edu.thss.smartdental.model.CircleElement;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +25,7 @@ public class BBSFragment extends Fragment {
 
 	private FragmentManager fragmentManager;
 	private ListView list;
-	private ArrayList<String> circles;
+	private ArrayList<CircleElement> circles;
 	private CircleListAdapter listAdapter;
 	private View join_circle_button;
 	private Context context;
@@ -45,9 +50,18 @@ public class BBSFragment extends Fragment {
 	}
 	
 	private void initCircles(){
-		circles = new ArrayList<String>();
-		circles.add("鑰佸徃鏈�");
-		circles.add("闄堥福娴峰尰鐢�");
+		circles = new ArrayList<CircleElement>();
+		DBUtil db = new DBUtil();
+		List<HashMap<String, String>> docList = db.selectDoctorsByname("t");
+		Iterator<HashMap<String, String>> iterator = docList.iterator();
+		iterator.next();
+		while (iterator.hasNext()) {
+			HashMap<String, String> element = iterator.next();
+			CircleElement circleElement = new CircleElement(element.get("doctorname"), element.get("doctorid"));
+			circles.add(circleElement);
+		}
+		//circles.add("鑰佸徃鏈�");
+		//circles.add("闄堥福娴峰尰鐢�");
 	}
 	
 	private class OnJoinButtonClickListener implements OnClickListener {
@@ -72,8 +86,8 @@ public class BBSFragment extends Fragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-				Fragment fragment= new BBSInFragment(12);
-				fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
+			Fragment fragment= new BBSInFragment(Integer.parseInt(circles.get(position).docID));
+			fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
 		}
 		
 	}

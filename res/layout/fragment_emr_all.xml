@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
     <!-- 下拉选框 -->
+    
     <Spinner 
         android:id="@+id/emr_all_spinner"
         android:layout_alignParentTop="true"

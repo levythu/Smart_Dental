@@ -96,10 +96,12 @@ public class BBSInTabViewFragment extends Fragment {
 		DBUtil db = new DBUtil();
 		List<HashMap<String, String>> PostList  = db.getAllPostInfo(UserId);
 		posts = new ArrayList<BBSElement>();
-		BBSElement i;
-		i = new BBSElement(PostList.get(1).get("postname"),PostList.get(1).get("postcontent"),PostList.get(1).get("time"),"zhangsan",true,true);
-		posts.add(i);
-		
+		BBSElement post;
+		for (int i = 1; i < PostList.size(); i++){
+			post = new BBSElement(PostList.get(i).get("postname"),PostList.get(i).get("postcontent"),PostList.get(i).get("time"),"zhangsan",true,true);
+			posts.add(post);
+		}
+		/*
 		i = new BBSElement("天气不错","今天风速74km/h，吹得我牙痛","2011-1-15","张三",true,true);
 		posts.add(i);
 		i = new BBSElement("啦啦啦","我喜欢这个医生","2011-1-15","李四",true,false);
@@ -112,5 +114,6 @@ public class BBSInTabViewFragment extends Fragment {
 		posts.add(i);
 		i = new BBSElement("呵呵呵","我牙齿很白","2013-1-25","奥千",false,false);
 		posts.add(i);
+		*/
 	}
 }

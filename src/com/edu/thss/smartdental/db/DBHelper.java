@@ -17,10 +17,9 @@ public class DBHelper extends SQLiteOpenHelper{
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL("CREATE TABLE IF NOT EXIST patient"+
-	               "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-	               "name VARCHAR, age INTEGER, info TEXT)"); 
 		//数据项还需要修改
+		String sql="create table user(id integer primary key autoincrement,username varchar(20),password varchar(20),age integer,sex varchar(2))";
+        db.execSQL(sql);
 	}
 
 	@Override
