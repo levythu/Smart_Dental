@@ -1,7 +1,12 @@
+/*
+ * 作者：王宇炜
+ * 日期：2014年12月7日
+ */
 package com.edu.thss.smartdental;
 
 import java.util.Date;
 
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
 import com.edu.thss.smartdental.model.BBSElement;
 import com.edu.thss.smartdental.model.PostElement;
 
@@ -25,6 +30,7 @@ public class BBSInTabPostFragment extends Fragment {
 	private EditText edit_bbs_title;
 	private Spinner edit_tab_spinner;
 	private ArrayAdapter adapter; 
+	private DBUtil db = new DBUtil();
 //	private static final String[] TABS_STRINGS = {"灌水", "求助", "知识", "公告"};
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -48,9 +54,10 @@ public class BBSInTabPostFragment extends Fragment {
 			// TODO Auto-generated method stub
 			String title = edit_bbs_title.getText().toString();
 			String content = edit_bbs_content.getText().toString();
-			PostElement postElement = new PostElement(title, content, "岳一飞", new Date(), false);
+			String tabName = edit_tab_spinner.getSelectedItem().toString();
+			PostElement postElement = new PostElement(title, content, "岳一飞", tabName, new Date(), false);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("发布成功")
+			builder.setMessage(postElement.insertToDB())
 				   .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					
 					@Override
