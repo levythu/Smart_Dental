@@ -1,7 +1,11 @@
 package com.edu.thss.smartdental;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
 import com.edu.thss.smartdental.adapter.JoinCircleListAdapter;
 import com.edu.thss.smartdental.model.CircleElement;
 import com.edu.thss.smartdental.ui.dialog.JoinCircleDialog;
@@ -64,14 +68,17 @@ public class JoinCircleActivity extends FragmentActivity {
 	
 	private void initCircles() {
 		circles = new ArrayList<CircleElement>();
-		/*DBUtil db = new DBUtil();
+		DBUtil db = new DBUtil();
 		List<HashMap<String, String>> docList = db.getAllDoctors();
-		for (HashMap<String, String> element: docList) {
-			CircleElement circleElement = new CircleElement(element.get("CName"), Integer.parseInt(element.get("CNo")));
+		Iterator<HashMap<String, String>> iterator = docList.iterator();
+		iterator.next();
+		while (iterator.hasNext()) {
+			HashMap<String, String> element = iterator.next();
+			CircleElement circleElement = new CircleElement(element.get("doctorname"), element.get("doctorid"));
 			circles.add(circleElement);
-		}*/
-		CircleElement circleElement = new CircleElement("张三医生", 1);
-		circles.add(circleElement);
+		}
+		//CircleElement circleElement = new CircleElement("张三医生", 1);
+		//circles.add(circleElement);
 	}
 	
 	private TextWatcher filterTextWatcher = new TextWatcher() {
