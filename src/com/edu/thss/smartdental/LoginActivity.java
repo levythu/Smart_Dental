@@ -51,8 +51,8 @@ public class LoginActivity extends Activity {
 				if (db.login(username.getText().toString(), password.getText().toString()).equals("true"))
 					intent.setClass(LoginActivity.this, MainActivity.class);
 				else {
-					Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_LONG).show();
-					return;
+					Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_LONG).show();
+					//return;
 				}
 			startActivity(intent);
 			finish();
