@@ -10,8 +10,11 @@ import com.edu.thss.smartdental.RemoteDB.DBUtil;
 import com.edu.thss.smartdental.model.BBSElement;
 import com.edu.thss.smartdental.model.PostElement;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -31,9 +34,13 @@ public class BBSInTabPostFragment extends Fragment {
 	private Spinner edit_tab_spinner;
 	private ArrayAdapter adapter; 
 	private DBUtil db = new DBUtil();
+	private static SharedPreferences preferences = null;
+	private static Editor editor = null;
 //	private static final String[] TABS_STRINGS = {"灌水", "求助", "知识", "公告"};
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		preferences = preferences == null ? this.getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE) : preferences;
+		editor = editor == null ? preferences.edit() : editor;
 		View rootView = inflater.inflate(R.layout.fragment_bbs_in_post, container, false);
 		edit_bbs_title = (EditText)rootView.findViewById(R.id.edit_bbs_title);
 		edit_bbs_content = (EditText)rootView.findViewById(R.id.edit_bbs_content);
