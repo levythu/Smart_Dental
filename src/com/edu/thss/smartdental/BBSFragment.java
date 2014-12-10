@@ -9,6 +9,7 @@ import com.edu.thss.smartdental.RemoteDB.DBUtil;
 import com.edu.thss.smartdental.adapter.CircleListAdapter;
 import com.edu.thss.smartdental.model.CircleElement;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,7 +53,8 @@ public class BBSFragment extends Fragment {
 	private void initCircles(){
 		circles = new ArrayList<CircleElement>();
 		DBUtil db = new DBUtil();
-		List<HashMap<String, String>> docList = db.selectDoctorsByname("t");
+		String username = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
+		List<HashMap<String, String>> docList = db.selectDoctorsByname(username);
 		Iterator<HashMap<String, String>> iterator = docList.iterator();
 		iterator.next();
 		while (iterator.hasNext()) {
@@ -60,9 +62,14 @@ public class BBSFragment extends Fragment {
 			CircleElement circleElement = new CircleElement(element.get("doctorname"), element.get("doctorid"));
 			circles.add(circleElement);
 		}
-		//circles.add("鑰佸徃鏈�");
-		//circles.add("闄堥福娴峰尰鐢�");
 	}
+	
+	//public void onResume() {
+		//initCircles();
+		//listAdapter = new CircleListAdapter(circles, this.getActivity().getApplicationContext());
+		//list.setAdapter(listAdapter);
+		//list.setOnItemClickListener(new OnCircleItemClickListener());
+	//}
 	
 	private class OnJoinButtonClickListener implements OnClickListener {
 
