@@ -22,8 +22,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 public class BBSInTabViewFragment extends Fragment {
 	private BBSListAdapter bbsAdapter;
@@ -33,6 +36,9 @@ public class BBSInTabViewFragment extends Fragment {
 	private Context context;
 	private int UserId;
 	
+	private Spinner view_spinner;
+	private ArrayAdapter tagAdapter; 
+	
 	public BBSInTabViewFragment(int id) {
 		UserId = id;
 	}
@@ -40,10 +46,30 @@ public class BBSInTabViewFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_bbs_in_view, container, false);
+		
+		
+		view_spinner = (Spinner)rootView.findViewById(R.id.bbs_view_spinner);
+		tagAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.tab_names, android.R.layout.simple_spinner_item);
+		tagAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		view_spinner.setAdapter(tagAdapter);
+		view_spinner.setVisibility(View.VISIBLE);
+		view_spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+		    @Override
+		    public void onItemSelected(AdapterView<?> parent, View view,
+		            int position, long id) {
+		        String str=parent.getItemAtPosition(position).toString();
+		        initPosts(str);
+		    }
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parent) {
+		        // TODO Auto-generated method stub
+		    }
+		});
+		
 		editText = (EditText)rootView.findViewById(R.id.bbs_searchbox);
 		editText.addTextChangedListener(filterTextWatcher);
 		list = (ListView)rootView.findViewById(R.id.bbs_list);
-		initPosts();
+		initPosts("全部");
 		context = this.getActivity().getApplicationContext();
 		bbsAdapter = new BBSListAdapter(posts,this.getActivity().getApplicationContext());
 		list.setAdapter(bbsAdapter);
@@ -92,14 +118,19 @@ public class BBSInTabViewFragment extends Fragment {
 		}
 	};
 
-	private void initPosts(){
+	private void initPosts(String tag){
 		DBUtil db = new DBUtil();
 		List<HashMap<String, String>> PostList  = db.getAllPostInfo(UserId);
 		posts = new ArrayList<BBSElement>();
 		BBSElement post;
 		for (int i = 1; i < PostList.size(); i++){
-			post = new BBSElement(PostList.get(i).get("postname"),PostList.get(i).get("postcontent"),PostList.get(i).get("time"),"zhangsan",true,true);
-			posts.add(post);
+			if (tag == "全部" || tag == PostList.get(i).get("tag")){
+				String s1=PostList.get(i).get("postname");
+				String s2=PostList.get(i).get("postcontent");
+				String s3 = PostList.get(i).get("time");
+				post = new BBSElement(s1,s2,s3,"zhangsan",true,true);
+				posts.add(post);
+			}
 		}
 		/*
 		i = new BBSElement("天气不错","今天风速74km/h，吹得我牙痛","2011-1-15","张三",true,true);
@@ -116,4 +147,5 @@ public class BBSInTabViewFragment extends Fragment {
 		posts.add(i);
 		*/
 	}
+	
 }
