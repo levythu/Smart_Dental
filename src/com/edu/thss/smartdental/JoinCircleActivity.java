@@ -13,6 +13,7 @@ import com.edu.thss.smartdental.ui.dialog.JoinCircleDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +49,7 @@ public class JoinCircleActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.join_circle, menu);
 		SearchView searchView = (SearchView) menu.findItem(R.id.join_circle_action_search).getActionView();
 		searchView.setIconifiedByDefault(false);
-		searchView.setQueryHint(getResources().getString(R.string.join_circle_search_hint));
+		searchView.setQueryHint(Html.fromHtml("<font color=#D0D0D0>" + getResources().getString(R.string.join_circle_search_hint) + "</font>"));
 		searchView.setOnQueryTextListener(filterQueryTextListener);
 		return super.onCreateOptionsMenu(menu);
 	}
