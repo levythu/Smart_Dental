@@ -85,15 +85,20 @@ public class AdminActivity extends FragmentActivity {
 						if (buf == null)
 							break;
 						sum++;
-						String[] doctor = buf.split(",");
-						if (!db.insertUser(doctor[0], doctor[1], "doctor").equals("true"))
-							error++;
+						try {
+							String[] doctor = buf.split(",");
+							if (!db.insertUser(doctor[0], doctor[1], "doctor").equals("true"))
+								error++;
+						} catch (Exception e) {
+							Toast.makeText(this, "文件格式有误", Toast.LENGTH_LONG);
+							break;
+						}
 					} catch (IOException e) {
 						Toast.makeText(this, "打开文件失败", Toast.LENGTH_LONG);
 						break;
 					}
 				}
-				Toast.makeText(this, "导入了" + String.valueOf(sum) + "条记录，" + String.valueOf(error) + "个错误", Toast.LENGTH_LONG);
+				Toast.makeText(getApplicationContext(), "导入了" + String.valueOf(sum) + "条记录，" + String.valueOf(error) + "个错误", Toast.LENGTH_LONG);
 			} catch (FileNotFoundException e) {
 				Toast.makeText(this, "文件不存在", Toast.LENGTH_LONG);
 			}
