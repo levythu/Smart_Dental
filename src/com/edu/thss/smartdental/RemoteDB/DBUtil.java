@@ -255,15 +255,17 @@ public class DBUtil {
 		tempHash.put("time", "time");
 		tempHash.put("author", "author");
 		tempHash.put("PostId", "PostId");
+		tempHash.put("tag", "tag");
 		list.add(tempHash);
 		
-		for (int j = 0; j < crrayList.size(); j += 5) {
+		for (int j = 0; j < crrayList.size(); j += 6) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("postname", crrayList.get(j));
 			hashMap.put("postcontent", crrayList.get(j + 1));
 			hashMap.put("time", crrayList.get(j + 2));
 			hashMap.put("author", crrayList.get(j + 3));
 			hashMap.put("PostId", crrayList.get(j + 4));
+			hashMap.put("tag", crrayList.get(j + 5));
 			list.add(hashMap);
 		}
 
