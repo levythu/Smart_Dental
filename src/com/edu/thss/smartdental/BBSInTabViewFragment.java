@@ -32,7 +32,7 @@ public class BBSInTabViewFragment extends Fragment {
 	private BBSListAdapter bbsAdapter;
 	private EditText editText;
 	private ListView list;
-	private ArrayList<BBSElement> posts;
+	private ArrayList<BBSElement> posts=new ArrayList<BBSElement>();
 	private Context context;
 	private int UserId;
 	
@@ -121,10 +121,10 @@ public class BBSInTabViewFragment extends Fragment {
 	private void initPosts(String tag){
 		DBUtil db = new DBUtil();
 		List<HashMap<String, String>> PostList  = db.getAllPostInfo(UserId);
-		posts = new ArrayList<BBSElement>();
+		posts.clear();
 		BBSElement post;
 		for (int i = 1; i < PostList.size(); i++){
-			if (tag == "全部" || tag == PostList.get(i).get("tag")){
+			if (tag == "全部" || tag.equals(PostList.get(i).get("tag"))){
 				String s1=PostList.get(i).get("postname");
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
