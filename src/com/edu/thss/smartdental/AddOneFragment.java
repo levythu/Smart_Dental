@@ -50,14 +50,21 @@ public class AddOneFragment extends Fragment {
 				Toast.makeText(getActivity(), "用户名已存在", Toast.LENGTH_LONG).show();
 				return;
 			}
-			if (db.insertUser(username, password, "doctor").equals("true")) {
+			String t = db.insertUser(username, password, "doctor");
+			if (t.equals("true")) {
 				Toast.makeText(getActivity(), "添加成功", Toast.LENGTH_LONG).show();
 				username_edit.setText("");
 				password_edit.setText("");
 				repeat_password_edit.setText("");
 			}
 			else
-				Toast.makeText(getActivity(), "添加失败", Toast.LENGTH_LONG).show();
+				if (t.equals("username exists"))
+					Toast.makeText(getActivity(), "用户名已存在", Toast.LENGTH_LONG).show();
+				else
+					if (t.equals("fail to connect to Database"))
+						Toast.makeText(getActivity(), "连不上服务器", Toast.LENGTH_LONG).show();
+					else
+						Toast.makeText(getActivity(), "未知错误", Toast.LENGTH_LONG).show();
 		}
 	};
 }

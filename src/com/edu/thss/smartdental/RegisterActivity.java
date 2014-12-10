@@ -50,10 +50,17 @@ public class RegisterActivity extends Activity {
 				Toast.makeText(RegisterActivity.this, "用户名已存在", Toast.LENGTH_LONG).show();
 				return;
 			}
-			if (db.insertUser(username, password, "patient").equals("true"))
+			String t = db.insertUser(username, password, "patient"); 
+			if (t.equals("true"))
 				Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_LONG).show();
 			else {
-				Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_LONG).show();
+				if (t.equals("username exists"))
+					Toast.makeText(RegisterActivity.this, "用户名已存在", Toast.LENGTH_LONG).show();
+				else
+					if (t.equals("fail to connect to Database"))
+						Toast.makeText(RegisterActivity.this, "连不上服务器", Toast.LENGTH_LONG).show();
+					else
+						Toast.makeText(RegisterActivity.this, "未知错误", Toast.LENGTH_LONG).show();
 				return;
 			}
 			finish();
