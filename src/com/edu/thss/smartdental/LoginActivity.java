@@ -63,14 +63,25 @@ public class LoginActivity extends Activity {
 					Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_LONG).show();
 					return;
 				}
-			else
-				if (db.login(username.getText().toString(), password.getText().toString()).equals("true"))
+			else {
+				String t = db.login(username.getText().toString(), password.getText().toString());
+				if (t.equals("true"))
 					intent.setClass(LoginActivity.this, MainActivity.class);
 				else {
-					Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_LONG).show();
+					if (t.equals("user does not exist"))
+						Toast.makeText(LoginActivity.this, "用户不存在", Toast.LENGTH_LONG).show();
+					else
+						if (t.equals("wrong password"))
+							Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_LONG).show();
+						else
+							if (t.equals("fail to connect to Database"))
+								Toast.makeText(LoginActivity.this, "连不上服务器", Toast.LENGTH_LONG).show();
+							else
+								Toast.makeText(LoginActivity.this, "未知错误", Toast.LENGTH_LONG).show();
 					intent.setClass(LoginActivity.this, MainActivity.class);
 					//return;
 				}
+			}
 			startActivity(intent);
 			finish();
 		}
