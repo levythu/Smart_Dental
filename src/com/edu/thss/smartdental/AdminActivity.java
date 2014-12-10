@@ -4,6 +4,8 @@
 
 package com.edu.thss.smartdental;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.Context;
 import android.net.Uri;
@@ -26,6 +28,9 @@ public class AdminActivity extends FragmentActivity {
 
 	RadioGroup radioGroup;
 	DBUtil db = new DBUtil();
+	private Notification notification;
+	private NotificationManager nManager;
+	private Notification.Builder nBuilder;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +50,12 @@ public class AdminActivity extends FragmentActivity {
 					break;
 				}
 			}} );
+		nManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+		nBuilder = new Notification.Builder(AdminActivity.this);
+		nBuilder.setDefaults(Notification.DEFAULT_LIGHTS);
+		nBuilder.setTicker("来自SmartDental的消息");
+		nBuilder.setContentTitle("SmartDental");
+		nBuilder.setSmallIcon(R.drawable.ic_launcher);
 	}
 	
 	private void changeFragment(int position){
@@ -84,23 +95,31 @@ public class AdminActivity extends FragmentActivity {
 						buf = reader.readLine();
 						if (buf == null)
 							break;
-						sum++;
 						try {
 							String[] doctor = buf.split(",");
 							if (!db.insertUser(doctor[0], doctor[1], "doctor").equals("true"))
 								error++;
+							sum++;
 						} catch (Exception e) {
-							Toast.makeText(this, "文件格式有误", Toast.LENGTH_LONG);
+							nBuilder.setContentText("文件格式有误");
+							notification = nBuilder.build();
+							nManager.notify(0, notification);
 							break;
 						}
 					} catch (IOException e) {
-						Toast.makeText(this, "打开文件失败", Toast.LENGTH_LONG);
+						nBuilder.setContentText("打开文件失败");
+						notification = nBuilder.build();
+						nManager.notify(0, notification);
 						break;
 					}
 				}
-				Toast.makeText(getApplicationContext(), "导入了" + String.valueOf(sum) + "条记录，" + String.valueOf(error) + "个错误", Toast.LENGTH_LONG);
+				nBuilder.setContentText("导入了" + String.valueOf(sum) + "条记录，" + String.valueOf(error) + "个错误");
+				notification = nBuilder.build();
+				nManager.notify(1, notification);
 			} catch (FileNotFoundException e) {
-				Toast.makeText(this, "文件不存在", Toast.LENGTH_LONG);
+				nBuilder.setContentText("文件不存在");
+				notification = nBuilder.build();
+				nManager.notify(1, notification);
 			}
 			break;
 	    }
