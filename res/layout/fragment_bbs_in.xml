@@ -17,11 +17,7 @@
             android:drawableBottom="@drawable/emr_tab_bottom"
             android:text="看帖" />
         
-        <RadioButton
-            android:id="@+id/bbs_in_tab_select"
-            style="@style/emr_tab"
-            android:drawableBottom="@drawable/emr_tab_bottom"
-            android:text="筛选" />
+        
         <RadioButton
             android:id="@+id/bbs_in_tab_group"
             style="@style/emr_tab"

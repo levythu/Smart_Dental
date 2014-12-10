@@ -37,17 +37,14 @@ public class BBSInFragment extends Fragment {
 				case R.id.bbs_in_tab_view: 
 					changeFragment(0); 
 					break;
-				case R.id.bbs_in_tab_select:
+				case R.id.bbs_in_tab_group:
 					changeFragment(1);
 					break;
-				case R.id.bbs_in_tab_group:
+				case R.id.bbs_in_tab_news:
 					changeFragment(2);
 					break;
-				case R.id.bbs_in_tab_news:
-					changeFragment(3);
-					break;
 				case R.id.bbs_in_tab_post:
-					changeFragment(4);
+					changeFragment(3);
 					break;
 				//TODO ADD OTHER FRAGMENT
 				}
@@ -65,16 +62,13 @@ public class BBSInFragment extends Fragment {
 			tempfragment = new BBSInTabViewFragment(this.UserId);
 			break;
 		case 1:
-			tempfragment = new BBSInTabSelectFragment();
-			break;
-		case 2:
 			//tempfragment = new BBSInTabSearchFragment();
 			tempfragment = new BBSFragment();
 			break;
-		case 3:
+		case 2:
 			tempfragment = new BBSInTabNewsFragment();
 			break;
-		case 4:
+		case 3:
 			tempfragment = new BBSInTabPostFragment();
 			break;
 		}
