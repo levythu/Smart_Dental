@@ -63,7 +63,8 @@ public class LoginActivity extends Activity {
 				}
 			else {
 				String t = db.login(username.getText().toString(), password.getText().toString());
-				if (t.equals("true")) {
+				if (t.matches("\\d+")) {
+					editor.putInt("userid", Integer.parseInt(t));
 					editor.putString("username", username.getText().toString());
 					editor.putString("password", password.getText().toString());
 					editor.commit();
