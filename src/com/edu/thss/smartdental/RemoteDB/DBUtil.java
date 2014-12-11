@@ -304,9 +304,10 @@ public class DBUtil {
 		tempHash.put("author", "author");
 		tempHash.put("PostId", "PostId");
 		tempHash.put("tag", "tag");
+		tempHash.put("doctorid", "doctorid");
 		list.add(tempHash);
 		
-		for (int j = 0; j < crrayList.size(); j += 6) {
+		for (int j = 0; j < crrayList.size(); j += 7) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("postname", crrayList.get(j));
 			hashMap.put("postcontent", crrayList.get(j + 1));
@@ -314,6 +315,7 @@ public class DBUtil {
 			hashMap.put("author", crrayList.get(j + 3));
 			hashMap.put("PostId", crrayList.get(j + 4));
 			hashMap.put("tag", crrayList.get(j + 5));
+			hashMap.put("doctorid", crrayList.get(j + 6));
 			list.add(hashMap);
 		}
 
