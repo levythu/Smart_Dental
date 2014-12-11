@@ -59,6 +59,8 @@ public class RegisterActivity extends Activity {
 			}
 			String t = db.insertUser(username, password, "patient"); 
 			if (t.equals("true")) {
+				t = db.login(username, password);
+				editor.putInt("userid", Integer.parseInt(t));
 				editor.putString("username", username);
 				editor.putString("password", password);
 				editor.commit();

@@ -4,7 +4,7 @@
         android:color="@color/app_white"/>
     <stroke
         android:width="2dp"
-        android:color="@color/app_blue"
+        android:color="@color/app_grey"
         android:dashWidth="1dp"
         />
     

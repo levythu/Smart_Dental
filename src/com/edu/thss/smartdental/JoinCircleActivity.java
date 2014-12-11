@@ -143,6 +143,7 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 		if (joinResult.compareTo("true") == 0) {
 			Editor editor = getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
 			editor.putString("current_circle", dialog.getDocName());
+			editor.commit();
 		}
 	}
 
