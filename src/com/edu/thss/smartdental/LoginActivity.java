@@ -27,15 +27,12 @@ public class LoginActivity extends Activity {
 	Editor editor = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
-		if(true){
-
-			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()  
+		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()  
             .detectDiskReads()  
             .detectDiskWrites()  
             .detectNetwork()  
             .penaltyLog()  
             .build());
-			}
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		preferences = getSharedPreferences("setting", MODE_PRIVATE);
@@ -78,8 +75,7 @@ public class LoginActivity extends Activity {
 								Toast.makeText(LoginActivity.this, "连不上服务器", Toast.LENGTH_LONG).show();
 							else
 								Toast.makeText(LoginActivity.this, "未知错误", Toast.LENGTH_LONG).show();
-					intent.setClass(LoginActivity.this, MainActivity.class);
-					//return;
+					return;
 				}
 			}
 			startActivity(intent);
