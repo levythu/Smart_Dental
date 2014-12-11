@@ -73,6 +73,10 @@ public class PostElement {
 		return this.onlyToDoctor;
 	}
 	
+	public String getDoctor() {
+		return this.doctorName;
+	}
+	
 	public BBSElement display() {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return new BBSElement(this.title, this.content.substring(0, 20), simpleDateFormat.format(this.date), author, !this.onlyToDoctor, true);
