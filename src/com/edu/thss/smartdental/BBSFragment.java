@@ -15,6 +15,7 @@ import com.edu.thss.smartdental.model.CircleElement;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -41,7 +42,7 @@ public class BBSFragment extends Fragment {
 		context = this.getActivity().getApplicationContext();
 		
 		join_circle_button = rootView.findViewById(R.id.join_circle_button);
-		join_circle_button.setOnClickListener(new OnJoinButtonClickListener(context));
+		join_circle_button.setOnClickListener(new OnJoinButtonClickListener());
 		
 		fragmentManager = getFragmentManager();
 		list = (ListView) rootView.findViewById(R.id.circle_list);
@@ -67,26 +68,12 @@ public class BBSFragment extends Fragment {
 		}
 	}
 	
-	//public void onResume() {
-		//initCircles();
-		//listAdapter = new CircleListAdapter(circles, this.getActivity().getApplicationContext());
-		//list.setAdapter(listAdapter);
-		//list.setOnItemClickListener(new OnCircleItemClickListener());
-	//}
-	
 	private class OnJoinButtonClickListener implements OnClickListener {
-
-		private Context context;
-		
-		public OnJoinButtonClickListener(Context context) {
-			this.context = context;
-		}
 
 		@Override
 		public void onClick(View arg0) {
-			Intent intent = new Intent();
-			intent.setClass(context,JoinCircleActivity.class);
-			startActivity(intent);
+			Intent intent = new Intent(getActivity(), JoinCircleActivity.class);
+			startActivityForResult(intent, 101);
 		}
 		
 	}
@@ -97,6 +84,9 @@ public class BBSFragment extends Fragment {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Fragment fragment= new BBSInFragment(Integer.parseInt(circles.get(position).docID));
+			Editor editor = getActivity().getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
+			editor.putString("current_circle", circles.get(position).docName);
+			editor.commit();
 			fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
 		}
 		

@@ -9,6 +9,7 @@ import com.edu.thss.smartdental.ui.drawer.NavDrawerListAdapter;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -16,12 +17,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends FragmentActivity implements OnItemClickListener {
@@ -47,6 +46,14 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 			selectItem(8);
 		}
 	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK) {
+			finish();
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
+		}
+    }
 	
 	@SuppressLint("NewApi")
 	private void findView(){
@@ -166,5 +173,4 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
     	mTitle = title;
     	getActionBar().setTitle(mTitle);
     }
-
 }

@@ -41,7 +41,7 @@ public class JoinCircleDialog extends DialogFragment {
           					})
           .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
         	  	public void onClick(DialogInterface dialog, int id) {
-        	  		mListener.onDialogPositiveClick(JoinCircleDialog.this);
+        	  		mListener.onDialogNegativeClick(JoinCircleDialog.this);
         	  					}
                				});
 		return builder.create();

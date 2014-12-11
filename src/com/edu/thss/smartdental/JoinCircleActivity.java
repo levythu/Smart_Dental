@@ -15,6 +15,7 @@ import com.edu.thss.smartdental.ui.dialog.JoinCircleDialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -49,6 +50,7 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 		listAdapter = new JoinCircleListAdapter(circles, getApplicationContext());
 		list.setAdapter(listAdapter);
 		list.setOnItemClickListener(new OnJoinCircleItemClickListener());
+		setResult(Activity.RESULT_CANCELED);
 	}
 
 	@Override
@@ -108,7 +110,6 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 			dialog.setDocName(text.getText().toString());
 			dialog.show(fragmentManager, "JoinCircle");
 		}
-		
 	}
 
 	@SuppressLint("CommitPrefEdits")
@@ -144,6 +145,13 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 			Editor editor = getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
 			editor.putString("current_circle", dialog.getDocName());
 			editor.commit();
+			if (getCallingActivity() != null) {
+				setResult(Activity.RESULT_OK);
+			} else {
+				Intent intent = new Intent(this, MainActivity.class);
+				startActivity(intent);
+			}
+			finish();
 		}
 	}
 

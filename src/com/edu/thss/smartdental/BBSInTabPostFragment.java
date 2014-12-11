@@ -6,8 +6,6 @@ package com.edu.thss.smartdental;
 
 import java.util.Date;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
-import com.edu.thss.smartdental.model.BBSElement;
 import com.edu.thss.smartdental.model.PostElement;
 
 import android.app.Activity;
@@ -17,7 +15,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,10 +31,8 @@ public class BBSInTabPostFragment extends Fragment {
 	private EditText edit_bbs_title;
 	private Spinner edit_tab_spinner;
 	private ArrayAdapter adapter; 
-	private DBUtil db = new DBUtil();
 	private static SharedPreferences preferences = null;
 	private static Editor editor = null;
-//	private static final String[] TABS_STRINGS = {"��ˮ", "����", "֪ʶ", "����"};
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		preferences = preferences == null ? this.getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE) : preferences;
@@ -64,17 +59,17 @@ public class BBSInTabPostFragment extends Fragment {
 			String content = edit_bbs_content.getText().toString();
 			String tabName = edit_tab_spinner.getSelectedItem().toString();
 			if (title.equals("")) {
-				Toast.makeText(getActivity(), "���������", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "请填写帖子标题", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (content.equals("")) {
-				Toast.makeText(getActivity(), "��������������", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "请填写帖子内容", Toast.LENGTH_LONG).show();
 				return;
 			}
 			PostElement postElement = new PostElement(title, content, preferences.getString("username", ""), tabName, preferences.getString("current_circle", ""), new Date(), false);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			postElement.insertToDB();
-			builder.setMessage("�����ɹ�")
+			builder.setMessage("发布成功")
 				   .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					
 					@Override
