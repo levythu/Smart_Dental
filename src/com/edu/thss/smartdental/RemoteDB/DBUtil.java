@@ -1,5 +1,5 @@
 /*
- * Author:qiaocy
+ * AuthorBy:qiaocy
  * 
  */
 package com.edu.thss.smartdental.RemoteDB;
@@ -22,7 +22,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞÓÃ»§µÄĞÅÏ¢
+	 * è·å–æ‰€æœ‰ç”¨æˆ·çš„ä¿¡æ¯
 	 * 
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * »ñÈ¡ËùÓĞÒ½ÉúµÄĞÅÏ¢
+	 * è·å–æ‰€æœ‰åŒ»ç”Ÿçš„ä¿¡æ¯
 	 * 
 	 * @return
 	 */
@@ -89,7 +89,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÓÃ»§µÄÈ¦×ÓĞÅÏ¢
+	 * è·å–å½“å‰ç”¨æˆ·çš„åœˆå­ä¿¡æ¯
 	 * 
 	 * @return
 	 */
@@ -125,7 +125,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * Ôö¼ÓÒ»¸öÓÃ»§
+	 * å¢åŠ ä¸€ä¸ªç”¨æˆ·
 	 * 
 	 * @return
 	 */
@@ -153,7 +153,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * µÇÂ½
+	 * ç™»é™†
 	 * if log in success return true
 	 * else if user not exist return user does not exist
 	 * else if wrong password return wrong password
@@ -181,7 +181,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * É¾³ıÒ»¸öÓÃ»§
+	 * åˆ é™¤ä¸€ä¸ªç”¨æˆ·
 	 * 
 	 * @return
 	 */
@@ -204,7 +204,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * ¼ÓÈëÈ¦×Ó
+	 * åŠ å…¥åœˆå­
 	 * 
 	 * @return
 	 */
@@ -229,7 +229,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * Éè¶¨È¦×ÓÃÜÂë
+	 * è®¾å®šåœˆå­å¯†ç 
 	 * 
 	 * @return
 	 */
@@ -255,7 +255,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * Ìß³öÈ¦×Ó
+	 * è¸¢å‡ºåœˆå­
 	 * 
 	 * @return
 	 */
@@ -278,7 +278,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * »ñÈ¡ËùÓĞÌû×ÓµÄĞÅÏ¢
+	 * è·å–æ‰€æœ‰å¸–å­
 	 * 
 	 * @return
 	 */
@@ -321,7 +321,7 @@ public class DBUtil {
 	}
 
 	/**
-	t * ĞÂ½¨Ìû×Ó
+	 * æ–°å»ºå¸–å­
 	 * 
 	 * @return
 	 */
@@ -353,7 +353,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * É¾³ıÌû×Ó
+	 * åˆ é™¤å¸–å­
 	 * 
 	 * @return
 	 */
@@ -377,7 +377,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * »ñÈ¡Ìû×ÓÄÚÆÀÂÛ
+	 * è·å–å¸–å­å†…è¯„è®º
 	 * 
 	 * @return
 	 */
@@ -420,7 +420,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * ĞÂÔöÆÀÂÛ
+	 * æ–°å¢è¯„è®º
 	 * 
 	 * @return
 	 */
@@ -451,7 +451,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * É¾³ıÆÀÂÛ
+	 * åˆ é™¤è¯„è®º
 	 * 
 	 * @return
 	 */
@@ -474,7 +474,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * »ñÈ¡Î´¶ÁĞÂÏûÏ¢
+	 * è·å–æœªè¯»æ–°æ¶ˆæ¯
 	 * 
 	 * @return
 	 */
@@ -514,7 +514,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * »ñÈ¡ÒÑ¶ÁÏûÏ¢
+	 * è·å–å·²è¯»æ¶ˆæ¯
 	 * 
 	 * @return
 	 */
@@ -555,7 +555,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * ĞÂÔöÏûÏ¢
+	 * æ–°å¢æ¶ˆæ¯
 	 * 
 	 * @return
 	 */
@@ -587,7 +587,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * ¸ü¸ÄÏûÏ¢×´Ì¬ÎªÒÑ¶Á
+	 * æ›´è¯¥æ¶ˆæ¯çŠ¶æ€ä¸ºå·²è¯»
 	 * 
 	 * @return
 	 */
