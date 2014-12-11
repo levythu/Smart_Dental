@@ -1,13 +1,11 @@
 /*
- * ×÷Õß£ºÍõÓîì¿
- * ÈÕÆÚ£º2014Äê12ÔÂ7ÈÕ
+ * ä½œè€…ï¼šç‹å®‡ç‚œ
+ * æ—¥æœŸï¼š2014å¹´12æœˆ7æ—¥
  */
 package com.edu.thss.smartdental;
 
 import java.util.Date;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
-import com.edu.thss.smartdental.model.BBSElement;
 import com.edu.thss.smartdental.model.PostElement;
 
 import android.app.Activity;
@@ -17,7 +15,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,10 +31,8 @@ public class BBSInTabPostFragment extends Fragment {
 	private EditText edit_bbs_title;
 	private Spinner edit_tab_spinner;
 	private ArrayAdapter adapter; 
-	private DBUtil db = new DBUtil();
 	private static SharedPreferences preferences = null;
 	private static Editor editor = null;
-//	private static final String[] TABS_STRINGS = {"¹àË®", "ÇóÖú", "ÖªÊ¶", "¹«¸æ"};
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		preferences = preferences == null ? this.getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE) : preferences;
@@ -64,17 +59,17 @@ public class BBSInTabPostFragment extends Fragment {
 			String content = edit_bbs_content.getText().toString();
 			String tabName = edit_tab_spinner.getSelectedItem().toString();
 			if (title.equals("")) {
-				Toast.makeText(getActivity(), "ÇëÊäÈë±êÌâ", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "è¯·å¡«å†™å¸–å­æ ‡é¢˜", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (content.equals("")) {
-				Toast.makeText(getActivity(), "ÇëÊäÈëÌû×ÓÄÚÈİ", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "è¯·å¡«å†™å¸–å­å†…å®¹", Toast.LENGTH_LONG).show();
 				return;
 			}
 			PostElement postElement = new PostElement(title, content, preferences.getString("username", ""), tabName, preferences.getString("current_circle", ""), new Date(), false);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			postElement.insertToDB();
-			builder.setMessage("·¢²¼³É¹¦")
+			builder.setMessage("å‘å¸ƒæˆåŠŸ")
 				   .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					
 					@Override

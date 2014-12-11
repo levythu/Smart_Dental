@@ -29,7 +29,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class JoinCircleActivity extends FragmentActivity implements JoinCircleDialog.JoinCircleDialogListener{
@@ -106,8 +105,9 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			JoinCircleDialog dialog = new JoinCircleDialog();
-			TextView text = (TextView) view.findViewById(R.id.circle_list_item_title);
-			dialog.setDocName(text.getText().toString());
+			
+			dialog.setDocName(circles.get(position).docName);
+			dialog.setDocID(circles.get(position).docID);
 			dialog.show(fragmentManager, "JoinCircle");
 		}
 	}
@@ -142,10 +142,16 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 		}
 		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 		if (joinResult.compareTo("true") == 0) {
-			Editor editor = getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
+			Editor editor = getSharedPreferences("setting", Activity.MODE_PRIVATE).edit();
 			editor.putString("current_circle", dialog.getDocName());
+			editor.putString("current_circle_id", dialog.getDocID());
 			editor.commit();
-			setResult(Activity.RESULT_OK);
+			if (getCallingActivity() != null) {
+				setResult(Activity.RESULT_OK);
+			} else {
+				Intent intent = new Intent(this, MainActivity.class);
+				startActivity(intent);
+			}
 			finish();
 		}
 	}

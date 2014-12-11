@@ -1,3 +1,6 @@
+/*
+ * author: Chen Minghai
+ */
 package com.edu.thss.smartdental.adapter;
 
 import java.util.ArrayList;
@@ -25,9 +28,9 @@ import android.widget.TextView;
 
 public class BBSListAdapter extends BaseAdapter implements Filterable{
 	private class buttonViewHolder{
-		//Button read; //ÔÄ¶Á
-		Button delete; //É¾³ı
-		Button collect;//ÊÕ²Ø
+		//Button read; //ï¿½Ä¶ï¿½
+		Button delete; //É¾ï¿½ï¿½
+		Button collect;//ï¿½Õ²ï¿½
 	}
 	private ArrayList<BBSElement> list;
 	private Context context;
@@ -79,7 +82,7 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 			holder.delete.setVisibility(View.VISIBLE);
 		}
 		holder.collect = (Button)convertView.findViewById(R.id.bbs_list_item_collect);
-		holder.collect.setText(post.isCollected?"È¡ÏûÊÕ²Ø":"ÊÕ²Ø");
+		holder.collect.setText(post.isCollected?"å–æ¶ˆæ”¶è—":"æ”¶è—");
 		holder.delete.setOnClickListener(new ButtonListner(position));
 		holder.collect.setOnClickListener(new ButtonListner(position));
 		return convertView;
@@ -102,7 +105,7 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 		protected FilterResults performFiltering(CharSequence constraint) {
 			
 			FilterResults results = new FilterResults();
-			if(constraint == null || constraint.length()==0){ //Ã»ÓĞ¹ıÂËÌõ¼ş
+			if(constraint == null || constraint.length()==0){ //Ã»ï¿½Ğ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				results.values = this.original;
 				results.count = this.original.size();
 				
@@ -143,11 +146,11 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 		public void onClick(View v) {
 			int vid = v.getId();
 			if(vid == holder.delete.getId()){
-			 //É¾³ı
+			 //É¾ï¿½ï¿½
 				/*new AlertDialog.Builder(context.getApplicationContext())  
-		        .setTitle("±êÌâ")
-		        .setMessage("¼òµ¥ÏûÏ¢¿ò")
-		        //.setPositiveButton("È·¶¨", null)
+		        .setTitle("ï¿½ï¿½ï¿½ï¿½")
+		        .setMessage("ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½")
+		        //.setPositiveButton("È·ï¿½ï¿½", null)
 		        .show();
 		        */
 				

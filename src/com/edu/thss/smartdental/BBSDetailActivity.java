@@ -3,6 +3,7 @@ package com.edu.thss.smartdental;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -15,41 +16,65 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.edu.thss.smartdental.adapter.BBSDetailAdapter;
+import com.edu.thss.smartdental.adapter.CommentAdapter;
 import com.edu.thss.smartdental.model.BBSElement;
 import com.edu.thss.smartdental.model.BBSDetail;
+import com.edu.thss.smartdental.model.CommentElement;
 
 public class BBSDetailActivity extends Activity {
-	TextView test;
-	private ListView list;
+	private ListView list2;
+	private ListView list1;
 	private ArrayList<BBSDetail> posts;
+	private ArrayList<CommentElement> posts1;
 	private BBSDetailAdapter bbsAdapter;
+	private CommentAdapter commentAdapter;
 	private Context context;
+	private SharedPreferences preferences = null;
 
-	 public static final int RESULT_CODE = 1; //·µ»ØÂë
+	 public static final int RESULT_CODE = 1; //Â·ÂµÂ»Ã˜Ã‚Ã«
 	 @Override
 	 protected void onCreate(Bundle savedInstanceState) {
-	  super.onCreate(savedInstanceState);
-	  setContentView(R.layout.activity_bbs_detail);  //ºÍXMLÎÄ¼şÓ³Éä
-	  test = (TextView)findViewById(R.id.textView1); //idºÅºÍXMLÖĞ¶¨ÒåµÄID¶ÔÓ¦
-	  String data = "À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²íÁË";
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_bbs_detail);  //ÂºÃXMLÃÃ„Â¼Ã¾Ã“Â³Ã‰Ã¤
+	  //test = (TextView)findViewById(R.id.textView1); //idÂºÃ…ÂºÃXMLÃ–ÃÂ¶Â¨Ã’Ã¥ÂµÃ„IDÂ¶Ã”Ã“Â¦
+	  //String data = "Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²Ã€Â²ÂÃ­ÃÃ‹";
 	  //String data = getIntent().getExtras().getString("data");
-	  test.setText(data);
+	  //test.setText(data);
 	  
-
-		list = (ListView)findViewById(R.id.listView1);
+		preferences = this.getSharedPreferences("setting", Activity.MODE_PRIVATE);
+		
+		list2 = (ListView)findViewById(R.id.listView2);
 		initPosts();
 		context = this.getApplicationContext();
-		bbsAdapter = new BBSDetailAdapter(posts,this.getApplicationContext());
-		list.setAdapter(bbsAdapter);
+		bbsAdapter = new BBSDetailAdapter(posts, context);
+		list2.setAdapter(bbsAdapter);
+		
+		list1 = (ListView)findViewById(R.id.listView1);
+		initPosts1();
+		commentAdapter = new CommentAdapter(posts1, context, preferences.getString("username", ""));
+		list1.setAdapter(commentAdapter);
 	 }
 	 
-
 		private void initPosts(){
 			posts = new ArrayList<BBSDetail>();
-			BBSDetail i = new BBSDetail("ÌìÆø²»´í","Ìû×ÓÔ”Çé½ñÌì·çËÙ74000km/h£¬´µµÃÎÒÑÀÍ´£¬ÑÛ½ŞÃ«ÌÛ£¬±Ç×ÓÌÛ£¬ ×ì°ÍÌÛ¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£","2011-1-15","ÕÅÈı");
+			String author = getIntent().getExtras().getString("author");
+			String time = getIntent().getExtras().getString("time");
+			String content = getIntent().getExtras().getString("content");
+			String title = getIntent().getExtras().getString("title");
+			
+			BBSDetail i = new BBSDetail(title,content,time,author);
 			posts.add(i);
-			i = new BBSDetail("À²À²À²","É³·¢É³·¢É³·¢É³·¢É³·¢É³·¢É³·¢É³·¢É³·¢É³·¢","2011-1-15","ÀîËÄ");
-			posts.add(i);
+		}
+		
+
+		private void initPosts1(){
+			posts1 = new ArrayList<CommentElement>();
+			String author = getIntent().getExtras().getString("author");
+			String time = getIntent().getExtras().getString("time");
+			String content = getIntent().getExtras().getString("content");
+			
+			CommentElement i = new CommentElement(content,time,author);
+			posts1.add(i);
 		}
 
 }

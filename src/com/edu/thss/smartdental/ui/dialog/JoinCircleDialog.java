@@ -18,6 +18,7 @@ public class JoinCircleDialog extends DialogFragment {
 	
 	private View dialogView;
 	private String docName;
+	private String docID;
 	
 	public interface JoinCircleDialogListener {
 		public void onDialogPositiveClick(JoinCircleDialog dialog);
@@ -66,5 +67,13 @@ public class JoinCircleDialog extends DialogFragment {
 	
 	public View getDialogView() {
 		return dialogView;
+	}
+	
+	public void setDocID(String id) {
+		docID = id.trim();
+	}
+	
+	public String getDocID() {
+		return docID;
 	}
 }

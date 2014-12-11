@@ -1,5 +1,5 @@
 /*
- * Author:qiaocy
+ * AuthorBy:qiaocy
  * 
  */
 package com.edu.thss.smartdental.RemoteDB;
@@ -22,7 +22,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞÓÃ»§µÄĞÅÏ¢
+	 * è·å–æ‰€æœ‰ç”¨æˆ·çš„ä¿¡æ¯
 	 * 
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * »ñÈ¡ËùÓĞÒ½ÉúµÄĞÅÏ¢
+	 * è·å–æ‰€æœ‰åŒ»ç”Ÿçš„ä¿¡æ¯
 	 * 
 	 * @return
 	 */
@@ -89,7 +89,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÓÃ»§µÄÈ¦×ÓĞÅÏ¢
+	 * è·å–å½“å‰ç”¨æˆ·çš„åœˆå­ä¿¡æ¯
 	 * 
 	 * @return
 	 */
@@ -125,7 +125,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * Ôö¼ÓÒ»¸öÓÃ»§
+	 * å¢åŠ ä¸€ä¸ªç”¨æˆ·
 	 * 
 	 * @return
 	 */
@@ -153,7 +153,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * µÇÂ½
+	 * ç™»é™†
 	 * if log in success return true
 	 * else if user not exist return user does not exist
 	 * else if wrong password return wrong password
@@ -181,7 +181,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * É¾³ıÒ»¸öÓÃ»§
+	 * åˆ é™¤ä¸€ä¸ªç”¨æˆ·
 	 * 
 	 * @return
 	 */
@@ -204,7 +204,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * ¼ÓÈëÈ¦×Ó
+	 * åŠ å…¥åœˆå­
 	 * 
 	 * @return
 	 */
@@ -229,7 +229,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * Éè¶¨È¦×ÓÃÜÂë
+	 * è®¾å®šåœˆå­å¯†ç 
 	 * 
 	 * @return
 	 */
@@ -255,7 +255,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * Ìß³öÈ¦×Ó
+	 * è¸¢å‡ºåœˆå­
 	 * 
 	 * @return
 	 */
@@ -278,7 +278,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * »ñÈ¡ËùÓĞÌû×ÓµÄĞÅÏ¢
+	 * è·å–æ‰€æœ‰å¸–å­
 	 * 
 	 * @return
 	 */
@@ -321,7 +321,174 @@ public class DBUtil {
 	}
 
 	/**
-	t * ĞÂ½¨Ìû×Ó
+	 * è·å–æŸä¸€Idå¸–å­
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectPostById(int PostId) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("PostId");
+		brrayList.add(Integer.toString(PostId));
+		try{
+			
+			crrayList = Soap.GetWebService("selectPostById", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("postname", "postname");
+		tempHash.put("postcontent", "postcontent");
+		tempHash.put("time", "time");
+		tempHash.put("author", "author");
+		tempHash.put("PostId", "PostId");
+		tempHash.put("tag", "tag");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 6) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("postname", crrayList.get(j));
+			hashMap.put("postcontent", crrayList.get(j + 1));
+			hashMap.put("time", crrayList.get(j + 2));
+			hashMap.put("author", crrayList.get(j + 3));
+			hashMap.put("PostId", crrayList.get(j + 4));
+			hashMap.put("tag", crrayList.get(j + 5));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	
+	/**
+	 * è·å–æŸä¸ªç”¨æˆ·çš„å¸–å­
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectAllPostByUser(String username) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("username");
+		brrayList.add(username);
+		try{
+			
+			crrayList = Soap.GetWebService("selectAllPostByUser", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("postname", "postname");
+		tempHash.put("postcontent", "postcontent");
+		tempHash.put("time", "time");
+		tempHash.put("author", "author");
+		tempHash.put("PostId", "PostId");
+		tempHash.put("tag", "tag");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 6) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("postname", crrayList.get(j));
+			hashMap.put("postcontent", crrayList.get(j + 1));
+			hashMap.put("time", crrayList.get(j + 2));
+			hashMap.put("author", crrayList.get(j + 3));
+			hashMap.put("PostId", crrayList.get(j + 4));
+			hashMap.put("tag", crrayList.get(j + 5));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	
+	/**
+	 * è·å–æ”¶è—çš„å¸–å­Id
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectcollectPostid(String userName) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("userName");
+		brrayList.add(userName);
+		try{
+			
+			crrayList = Soap.GetWebService("selectcollectPostid", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("postid", "postname");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 1) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("postid", crrayList.get(j));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	/**
+	 * æ”¶è—å¸–å­
+	 * 
+	 * @return
+	 */
+	public String collectpost(String username,int PostId){
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("username");
+		arrayList.add("PostId");
+		brrayList.add(username);
+		brrayList.add(Integer.toString(PostId));
+		try{
+			crrayList = Soap.GetWebService("collectpost", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}		
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	
+	/**
+	 * å–æ¶ˆæ”¶è—å¸–å­
+	 * 
+	 * @return
+	 */
+	public String deletecollectpost(String username,int PostId){
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("username");
+		arrayList.add("PostId");
+		brrayList.add(username);
+		brrayList.add(Integer.toString(PostId));
+		try{
+			crrayList = Soap.GetWebService("deletecollectpost", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}		
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	/**
+	 * æ–°å»ºå¸–å­
 	 * 
 	 * @return
 	 */
@@ -353,7 +520,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * É¾³ıÌû×Ó
+	 * åˆ é™¤å¸–å­
 	 * 
 	 * @return
 	 */
@@ -377,7 +544,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * »ñÈ¡Ìû×ÓÄÚÆÀÂÛ
+	 * è·å–å¸–å­å†…è¯„è®º
 	 * 
 	 * @return
 	 */
@@ -420,7 +587,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * ĞÂÔöÆÀÂÛ
+	 * æ–°å¢è¯„è®º
 	 * 
 	 * @return
 	 */
@@ -451,7 +618,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * É¾³ıÆÀÂÛ
+	 * åˆ é™¤è¯„è®º
 	 * 
 	 * @return
 	 */
@@ -465,6 +632,142 @@ public class DBUtil {
 		brrayList.add(commentId);
 		try{
 			crrayList = Soap.GetWebService("deleteComment", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	/**
+	 * è·å–æœªè¯»æ–°æ¶ˆæ¯
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectAllUnreadNewsByUsername(String username) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("username");
+		brrayList.add(username);
+		try{
+			
+			crrayList = Soap.GetWebService("selectAllUnreadNewsByUsername", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("newsId", "newsId");
+		tempHash.put("newstype", "newstype");
+		tempHash.put("username", "username");
+		tempHash.put("content", "content");
+		tempHash.put("time", "time");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 5) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("newsId", crrayList.get(j));
+			hashMap.put("newstype", crrayList.get(j + 1));
+			hashMap.put("username", crrayList.get(j + 2));
+			hashMap.put("content", crrayList.get(j + 3));
+			hashMap.put("time", crrayList.get(j + 4));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	/**
+	 * è·å–å·²è¯»æ¶ˆæ¯
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectAllReadNewsByUsername(String username) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("username");
+		brrayList.add(username);
+		try{
+			
+			crrayList = Soap.GetWebService("selectAllReadNewsByUsername", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("newsId", "newsId");
+		tempHash.put("newstype", "newstype");
+		tempHash.put("username", "username");
+		tempHash.put("content", "content");
+		tempHash.put("time", "time");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 5) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("newsId", crrayList.get(j));
+			hashMap.put("newstype", crrayList.get(j + 1));
+			hashMap.put("username", crrayList.get(j + 2));
+			hashMap.put("content", crrayList.get(j + 3));
+			hashMap.put("time", crrayList.get(j + 4));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	
+	/**
+	 * æ–°å¢æ¶ˆæ¯
+	 * 
+	 * @return
+	 */
+	public String insertNews(String newstype, String username, String replytouser, String haveread,String newscontent) {
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("newstype");
+		arrayList.add("username");
+		arrayList.add("replytouser");
+		arrayList.add("haveread");
+		arrayList.add("newscontent");
+		brrayList.add(newstype);
+		brrayList.add(username);
+		brrayList.add(replytouser);
+		brrayList.add(haveread);	
+		brrayList.add(newscontent);
+		try{
+			crrayList = Soap.GetWebService("insertNews", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}	
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	
+	/**
+	 * æ›´è¯¥æ¶ˆæ¯çŠ¶æ€ä¸ºå·²è¯»
+	 * 
+	 * @return
+	 */
+	public String haveread(String newsid) {
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("newsid");
+		brrayList.add(newsid);
+		try{
+			crrayList = Soap.GetWebService("haveread", arrayList, brrayList);
 		}
 		catch(Exception e) {
 		}

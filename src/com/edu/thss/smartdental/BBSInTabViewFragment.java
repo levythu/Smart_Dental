@@ -1,3 +1,6 @@
+/*
+ * author: Chen Minghai
+ */
 package com.edu.thss.smartdental;
 
 import java.util.ArrayList;
@@ -70,7 +73,7 @@ public class BBSInTabViewFragment extends Fragment {
 		editText = (EditText)rootView.findViewById(R.id.bbs_searchbox);
 		editText.addTextChangedListener(filterTextWatcher);
 		list = (ListView)rootView.findViewById(R.id.bbs_list);
-		//initPosts("È«²¿");
+		//initPosts("È«ï¿½ï¿½");
 		context = this.getActivity().getApplicationContext();
 		bbsAdapter = new BBSListAdapter(posts,this.getActivity().getApplicationContext());
 		list.setAdapter(bbsAdapter);
@@ -94,6 +97,10 @@ public class BBSInTabViewFragment extends Fragment {
             // if(list.get(position).equals("LinearLayout"))
                  Intent intent = new Intent();
                  intent.setClass(context,BBSDetailActivity.class);
+                 intent.putExtra("author", posts.get(position).author);
+                 intent.putExtra("title", posts.get(position).title);
+                 intent.putExtra("content", posts.get(position).content);
+                 intent.putExtra("time", posts.get(position).time);
                  startActivity(intent);       
                  
          }
@@ -120,12 +127,13 @@ public class BBSInTabViewFragment extends Fragment {
 	};
 
 	private void initPosts(String tag){
+		/*
 		DBUtil db = new DBUtil();
 		List<HashMap<String, String>> PostList  = db.getAllPostInfo(UserId);
 		posts.clear();
 		BBSElement post;
 		for (int i = 1; i < PostList.size(); i++){
-			if (tag == "È«²¿" || tag.equals(PostList.get(i).get("tag"))){
+			if (tag == "È«ï¿½ï¿½" || tag.equals(PostList.get(i).get("tag"))){
 				String s1=PostList.get(i).get("postname");
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
@@ -133,20 +141,21 @@ public class BBSInTabViewFragment extends Fragment {
 				posts.add(post);
 			}
 		}
-		/*
-		i = new BBSElement("ÌìÆø²»´í","½ñÌì·çËÙ74km/h£¬´µµÃÎÒÑÀÍ´","2011-1-15","ÕÅÈý",true,true);
-		posts.add(i);
-		i = new BBSElement("À²À²À²","ÎÒÏ²»¶Õâ¸öÒ½Éú","2011-1-15","ÀîËÄ",true,false);
-		posts.add(i);
-		i = new BBSElement("»¨»¨»¨","°ÎÑÀÓä¿ìÀ²À²","2012-1-25","¶þÍÞ",false,true);
-		posts.add(i);
-		i = new BBSElement("ºÇºÇºÇ","ÎÒÑÀ³ÝºÜ°×","2013-1-25","°ÂÇ§",false,false);
-		posts.add(i);
-		i = new BBSElement("ºÇºÇºÇ","ÎÒÑÀ³ÝºÜ°×","2013-1-25","°ÂÇ§",false,false);
-		posts.add(i);
-		i = new BBSElement("ºÇºÇºÇ","ÎÒÑÀ³ÝºÜ°×","2013-1-25","°ÂÇ§",false,false);
-		posts.add(i);
 		*/
+
+		BBSElement i;
+		i = new BBSElement("ä¸€é£žå§å¤ªå¼ºäº†","3000ç±³è·‘äº†10åˆ†é’Ÿ","2011-1-15","å²³ä¸€é£ž",true,true);
+		posts.add(i);
+		i = new BBSElement("ä¸€é£žå§å¤ªå¼ºäº†","3000ç±³è·‘äº†13åˆ†é’Ÿ","2011-1-15","å²³ä¸€é£ž",true,false);
+		posts.add(i);
+		i = new BBSElement("ä¸€é£žå§å¤ªå¼ºäº†","3000ç±³è·‘äº†14åˆ†é’Ÿ","2012-1-25","å²³ä¸€é£ž",false,true);
+		posts.add(i);
+		i = new BBSElement("ä¸€é£žå§å¤ªå¼ºäº†","3000ç±³è·‘äº†15åˆ†é’Ÿ","2013-1-25","å²³ä¸€é£ž",false,false);
+		posts.add(i);
+		i = new BBSElement("ä¸€é£žå§å¤ªå¼ºäº†","3000ç±³è·‘äº†16åˆ†é’Ÿ","2013-1-25","å²³ä¸€é£ž",false,false);
+		posts.add(i);
+		i = new BBSElement("ä¸€é£žå§å¤ªå¼ºäº†","3000ç±³è·‘äº†17åˆ†é’Ÿ","2013-1-25","å²³ä¸€é£ž",false,false);
+		posts.add(i);
 	}
 	
 }
