@@ -473,4 +473,140 @@ public class DBUtil {
 		}
 		return crrayList.get(0);
 	}
+	/**
+	 * 获取未读新消息
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectAllUnreadNewsByUsername(String username) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("username");
+		brrayList.add(username);
+		try{
+			
+			crrayList = Soap.GetWebService("selectAllUnreadNewsByUsername", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("newsId", "newsId");
+		tempHash.put("newstype", "newstype");
+		tempHash.put("username", "username");
+		tempHash.put("content", "content");
+		tempHash.put("time", "time");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 5) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("newsId", crrayList.get(j));
+			hashMap.put("newstype", crrayList.get(j + 1));
+			hashMap.put("username", crrayList.get(j + 2));
+			hashMap.put("content", crrayList.get(j + 3));
+			hashMap.put("time", crrayList.get(j + 4));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	/**
+	 * 获取已读消息
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectAllReadNewsByUsername(String username) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("username");
+		brrayList.add(username);
+		try{
+			
+			crrayList = Soap.GetWebService("selectAllReadNewsByUsername", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("newsId", "newsId");
+		tempHash.put("newstype", "newstype");
+		tempHash.put("username", "username");
+		tempHash.put("content", "content");
+		tempHash.put("time", "time");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 5) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("newsId", crrayList.get(j));
+			hashMap.put("newstype", crrayList.get(j + 1));
+			hashMap.put("username", crrayList.get(j + 2));
+			hashMap.put("content", crrayList.get(j + 3));
+			hashMap.put("time", crrayList.get(j + 4));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	
+	/**
+	 * 新增消息
+	 * 
+	 * @return
+	 */
+	public String insertNews(String newstype, String username, String replytouser, String haveread,String newscontent) {
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("newstype");
+		arrayList.add("username");
+		arrayList.add("replytouser");
+		arrayList.add("haveread");
+		arrayList.add("newscontent");
+		brrayList.add(newstype);
+		brrayList.add(username);
+		brrayList.add(replytouser);
+		brrayList.add(haveread);	
+		brrayList.add(newscontent);
+		try{
+			crrayList = Soap.GetWebService("insertNews", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}	
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	
+	/**
+	 * 更改消息状态为已读
+	 * 
+	 * @return
+	 */
+	public String haveread(String newsid) {
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("newsid");
+		brrayList.add(newsid);
+		try{
+			crrayList = Soap.GetWebService("haveread", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
 }
