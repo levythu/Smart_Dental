@@ -42,7 +42,7 @@ public class BBSFragment extends Fragment {
 		context = this.getActivity().getApplicationContext();
 		
 		join_circle_button = rootView.findViewById(R.id.join_circle_button);
-		join_circle_button.setOnClickListener(new OnJoinButtonClickListener(context));
+		join_circle_button.setOnClickListener(new OnJoinButtonClickListener());
 		
 		fragmentManager = getFragmentManager();
 		list = (ListView) rootView.findViewById(R.id.circle_list);
@@ -70,16 +70,9 @@ public class BBSFragment extends Fragment {
 	
 	private class OnJoinButtonClickListener implements OnClickListener {
 
-		private Context context;
-		
-		public OnJoinButtonClickListener(Context context) {
-			this.context = context;
-		}
-
 		@Override
 		public void onClick(View arg0) {
-			Intent intent = new Intent();
-			intent.setClass(context, JoinCircleActivity.class);
+			Intent intent = new Intent(getActivity(), JoinCircleActivity.class);
 			startActivityForResult(intent, 101);
 		}
 		
