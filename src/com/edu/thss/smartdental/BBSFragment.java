@@ -15,6 +15,7 @@ import com.edu.thss.smartdental.model.CircleElement;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -67,13 +68,6 @@ public class BBSFragment extends Fragment {
 		}
 	}
 	
-	//public void onResume() {
-		//initCircles();
-		//listAdapter = new CircleListAdapter(circles, this.getActivity().getApplicationContext());
-		//list.setAdapter(listAdapter);
-		//list.setOnItemClickListener(new OnCircleItemClickListener());
-	//}
-	
 	private class OnJoinButtonClickListener implements OnClickListener {
 
 		private Context context;
@@ -85,8 +79,8 @@ public class BBSFragment extends Fragment {
 		@Override
 		public void onClick(View arg0) {
 			Intent intent = new Intent();
-			intent.setClass(context,JoinCircleActivity.class);
-			startActivity(intent);
+			intent.setClass(context, JoinCircleActivity.class);
+			startActivityForResult(intent, 101);
 		}
 		
 	}
@@ -97,6 +91,9 @@ public class BBSFragment extends Fragment {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Fragment fragment= new BBSInFragment(Integer.parseInt(circles.get(position).docID));
+			Editor editor = getActivity().getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
+			editor.putString("current_circle", circles.get(position).docName);
+			editor.commit();
 			fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
 		}
 		
