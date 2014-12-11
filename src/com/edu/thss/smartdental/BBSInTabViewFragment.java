@@ -145,7 +145,8 @@ public class BBSInTabViewFragment extends Fragment {
 				String s1=PostList.get(i).get("postname");
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
-				post = new BBSElement(s1,s2,s3,"zhangsan",true,true);
+				String s4 = PostList.get(i).get("author");
+				post = new BBSElement(s1,s2,s3,s4,true,true);
 				posts.add(post);
 			}
 		}
