@@ -321,6 +321,173 @@ public class DBUtil {
 	}
 
 	/**
+	 * 获取某一Id帖子
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectPostById(int PostId) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("PostId");
+		brrayList.add(Integer.toString(PostId));
+		try{
+			
+			crrayList = Soap.GetWebService("selectPostById", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("postname", "postname");
+		tempHash.put("postcontent", "postcontent");
+		tempHash.put("time", "time");
+		tempHash.put("author", "author");
+		tempHash.put("PostId", "PostId");
+		tempHash.put("tag", "tag");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 6) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("postname", crrayList.get(j));
+			hashMap.put("postcontent", crrayList.get(j + 1));
+			hashMap.put("time", crrayList.get(j + 2));
+			hashMap.put("author", crrayList.get(j + 3));
+			hashMap.put("PostId", crrayList.get(j + 4));
+			hashMap.put("tag", crrayList.get(j + 5));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	
+	/**
+	 * 获取某个用户的帖子
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectAllPostByUser(String username) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("username");
+		brrayList.add(username);
+		try{
+			
+			crrayList = Soap.GetWebService("selectAllPostByUser", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("postname", "postname");
+		tempHash.put("postcontent", "postcontent");
+		tempHash.put("time", "time");
+		tempHash.put("author", "author");
+		tempHash.put("PostId", "PostId");
+		tempHash.put("tag", "tag");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 6) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("postname", crrayList.get(j));
+			hashMap.put("postcontent", crrayList.get(j + 1));
+			hashMap.put("time", crrayList.get(j + 2));
+			hashMap.put("author", crrayList.get(j + 3));
+			hashMap.put("PostId", crrayList.get(j + 4));
+			hashMap.put("tag", crrayList.get(j + 5));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	
+	/**
+	 * 获取收藏的帖子Id
+	 * 
+	 * @return
+	 */
+	public List<HashMap<String, String>> selectcollectPostid(String userName) {
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("userName");
+		brrayList.add(userName);
+		try{
+			
+			crrayList = Soap.GetWebService("selectcollectPostid", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+
+		HashMap<String, String> tempHash = new HashMap<String, String>();
+		tempHash.put("postid", "postname");
+		list.add(tempHash);
+		
+		for (int j = 0; j < crrayList.size(); j += 1) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("postid", crrayList.get(j));
+			list.add(hashMap);
+		}
+
+		return list;
+	}
+	/**
+	 * 收藏帖子
+	 * 
+	 * @return
+	 */
+	public String collectpost(String username,int PostId){
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("username");
+		arrayList.add("PostId");
+		brrayList.add(username);
+		brrayList.add(Integer.toString(PostId));
+		try{
+			crrayList = Soap.GetWebService("collectpost", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}		
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	
+	/**
+	 * 取消收藏帖子
+	 * 
+	 * @return
+	 */
+	public String deletecollectpost(String username,int PostId){
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		
+		arrayList.add("username");
+		arrayList.add("PostId");
+		brrayList.add(username);
+		brrayList.add(Integer.toString(PostId));
+		try{
+			crrayList = Soap.GetWebService("deletecollectpost", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}		
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	/**
 	 * 新建帖子
 	 * 
 	 * @return
