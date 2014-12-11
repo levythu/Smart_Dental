@@ -142,7 +142,7 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 		}
 		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 		if (joinResult.compareTo("true") == 0) {
-			Editor editor = getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
+			Editor editor = getSharedPreferences("setting", Activity.MODE_PRIVATE).edit();
 			editor.putString("current_circle", dialog.getDocName());
 			editor.putString("current_circle_id", dialog.getDocID());
 			editor.commit();
