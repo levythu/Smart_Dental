@@ -22,7 +22,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * 获取所有用户的信息
+	 * 鑾峰彇鎵�鏈夌敤鎴风殑淇℃伅
 	 * 
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * 获取所有医生的信息
+	 * 鑾峰彇鎵�鏈夊尰鐢熺殑淇℃伅
 	 * 
 	 * @return
 	 */
@@ -89,7 +89,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 获取当前用户的圈子信息
+	 * 鑾峰彇褰撳墠鐢ㄦ埛鐨勫湀瀛愪俊鎭�
 	 * 
 	 * @return
 	 */
@@ -125,7 +125,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 增加一个用户
+	 * 澧炲姞涓�涓敤鎴�
 	 * 
 	 * @return
 	 */
@@ -153,7 +153,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 登陆
+	 * 鐧婚檰
 	 * if log in success return true
 	 * else if user not exist return user does not exist
 	 * else if wrong password return wrong password
@@ -181,7 +181,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 删除一个用户
+	 * 鍒犻櫎涓�涓敤鎴�
 	 * 
 	 * @return
 	 */
@@ -204,7 +204,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 加入圈子
+	 * 鍔犲叆鍦堝瓙
 	 * 
 	 * @return
 	 */
@@ -229,7 +229,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 设定圈子密码
+	 * 璁惧畾鍦堝瓙瀵嗙爜
 	 * 
 	 * @return
 	 */
@@ -255,7 +255,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 踢出圈子
+	 * 韪㈠嚭鍦堝瓙
 	 * 
 	 * @return
 	 */
@@ -278,7 +278,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 获取所有帖子
+	 * 鑾峰彇鎵�鏈夊笘瀛�
 	 * 
 	 * @return
 	 */
@@ -321,7 +321,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * 获取某一Id帖子
+	 * 鑾峰彇鏌愪竴Id甯栧瓙
 	 * 
 	 * @return
 	 */
@@ -366,7 +366,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 获取某个用户的帖子
+	 * 鑾峰彇鏌愪釜鐢ㄦ埛鐨勫笘瀛�
 	 * 
 	 * @return
 	 */
@@ -409,7 +409,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 获取收藏的帖子Id
+	 * 鑾峰彇鏀惰棌鐨勫笘瀛怚d
 	 * 
 	 * @return
 	 */
@@ -441,7 +441,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * 收藏帖子
+	 * 鏀惰棌甯栧瓙
 	 * 
 	 * @return
 	 */
@@ -466,7 +466,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 取消收藏帖子
+	 * 鍙栨秷鏀惰棌甯栧瓙
 	 * 
 	 * @return
 	 */
@@ -490,11 +490,11 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 新建帖子
+	 * 鏂板缓甯栧瓙
 	 * 
 	 * @return
 	 */
-	public String insertPost(String PostName, String postContent,String username, String doctorname, String tag) {
+	public String insertPost(String PostName, String postContent,String username, String doctorid, String tag) {
 
 		arrayList.clear();
 		brrayList.clear();
@@ -503,12 +503,12 @@ public class DBUtil {
 		arrayList.add("PostName");
 		arrayList.add("postContent");
 		arrayList.add("username");
-		arrayList.add("doctorname");
+		arrayList.add("doctorid");
 		arrayList.add("tag");
 		brrayList.add(PostName);
 		brrayList.add(postContent);
 		brrayList.add(username);
-		brrayList.add(doctorname);
+		brrayList.add(doctorid);
 		brrayList.add(tag);
 		try{
 			crrayList = Soap.GetWebService("insertPost", arrayList, brrayList);
@@ -522,7 +522,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 删除帖子
+	 * 鍒犻櫎甯栧瓙
 	 * 
 	 * @return
 	 */
@@ -546,7 +546,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 获取帖子内评论
+	 * 鑾峰彇甯栧瓙鍐呰瘎璁�
 	 * 
 	 * @return
 	 */
@@ -589,7 +589,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * 新增评论
+	 * 鏂板璇勮
 	 * 
 	 * @return
 	 */
@@ -620,7 +620,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 删除评论
+	 * 鍒犻櫎璇勮
 	 * 
 	 * @return
 	 */
@@ -643,7 +643,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 获取未读新消息
+	 * 鑾峰彇鏈鏂版秷鎭�
 	 * 
 	 * @return
 	 */
@@ -683,7 +683,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * 获取已读消息
+	 * 鑾峰彇宸茶娑堟伅
 	 * 
 	 * @return
 	 */
@@ -724,7 +724,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 新增消息
+	 * 鏂板娑堟伅
 	 * 
 	 * @return
 	 */
@@ -756,7 +756,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 更该消息状态为已读
+	 * 鏇磋娑堟伅鐘舵�佷负宸茶
 	 * 
 	 * @return
 	 */

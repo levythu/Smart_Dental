@@ -66,7 +66,7 @@ public class BBSInTabPostFragment extends Fragment {
 				Toast.makeText(getActivity(), "请填写帖子内容", Toast.LENGTH_LONG).show();
 				return;
 			}
-			PostElement postElement = new PostElement(title, content, preferences.getString("username", ""), tabName, preferences.getString("current_circle", ""), new Date(), false);
+			PostElement postElement = new PostElement(title, content, preferences.getString("username", ""), tabName, preferences.getString("current_circle_id", ""), new Date(), false);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			postElement.insertToDB();
 			builder.setMessage("发布成功")
@@ -79,6 +79,7 @@ public class BBSInTabPostFragment extends Fragment {
 						FragmentTransaction ft = getFragmentManager().beginTransaction();
 						ft.replace(R.id.bbs_in_tab_content, new BBSInTabViewFragment());
 						ft.commit();*/
+						
 					}
 				});
 			builder.show();

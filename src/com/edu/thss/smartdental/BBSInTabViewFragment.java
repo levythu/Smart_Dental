@@ -13,9 +13,11 @@ import com.edu.thss.smartdental.adapter.ImgListAdapter;
 import com.edu.thss.smartdental.model.BBSElement;
 import com.edu.thss.smartdental.model.ImageElement;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -73,7 +75,6 @@ public class BBSInTabViewFragment extends Fragment {
 		editText = (EditText)rootView.findViewById(R.id.bbs_searchbox);
 		editText.addTextChangedListener(filterTextWatcher);
 		list = (ListView)rootView.findViewById(R.id.bbs_list);
-		//initPosts("ȫ��");
 		context = this.getActivity().getApplicationContext();
 		bbsAdapter = new BBSListAdapter(posts,this.getActivity().getApplicationContext());
 		list.setAdapter(bbsAdapter);
@@ -127,13 +128,20 @@ public class BBSInTabViewFragment extends Fragment {
 	};
 
 	private void initPosts(String tag){
-		/*
-		DBUtil db = new DBUtil();
-		List<HashMap<String, String>> PostList  = db.getAllPostInfo(UserId);
 		posts.clear();
+		String circle_id_st = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("current_circle_id", "");
+		int circle_id;
+		if (circle_id_st =="")
+			return;
+		else circle_id = Integer.parseInt(circle_id_st);
+		
+		DBUtil db = new DBUtil();
+		List<HashMap<String, String>> PostList  = db.getAllPostInfo(circle_id);
+		
+		
 		BBSElement post;
 		for (int i = 1; i < PostList.size(); i++){
-			if (tag == "ȫ��" || tag.equals(PostList.get(i).get("tag"))){
+			if (tag == "全部" || tag.equals(PostList.get(i).get("tag"))){
 				String s1=PostList.get(i).get("postname");
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
@@ -141,8 +149,10 @@ public class BBSInTabViewFragment extends Fragment {
 				posts.add(post);
 			}
 		}
-		*/
-
+		
+		
+		
+/*
 		BBSElement i;
 		i = new BBSElement("一飞姐太强了","3000米跑了10分钟","2011-1-15","岳一飞",true,true);
 		posts.add(i);
@@ -156,6 +166,7 @@ public class BBSInTabViewFragment extends Fragment {
 		posts.add(i);
 		i = new BBSElement("一飞姐太强了","3000米跑了17分钟","2013-1-25","岳一飞",false,false);
 		posts.add(i);
+		*/
 	}
 	
 }
