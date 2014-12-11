@@ -1,3 +1,6 @@
+/*
+ * author: Chen Minghai
+ */
 package com.edu.thss.smartdental;
 
 import java.util.ArrayList;
