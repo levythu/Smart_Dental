@@ -15,6 +15,7 @@ public class PostElement {
 	private String content;
 	private String author;
 	private String tab;
+	private String doctorName;
 	private Date date;
 	private Boolean onlyToDoctor;
 	private static final DBUtil db = new DBUtil();
@@ -22,12 +23,13 @@ public class PostElement {
 	public PostElement() {
 	}
 	
-	public PostElement (String title, String content, String author, String tab, Date date, Boolean onlyToDoctor) {
+	public PostElement (String title, String content, String author, String tab, String doctorName, Date date, Boolean onlyToDoctor) {
 		this.title = title;
 		this.content = content;
 		this.author = author;
 		this.tab = tab;
 		this.date = date;
+		this.doctorName = doctorName;
 		this.onlyToDoctor = onlyToDoctor;
 	}
 	
@@ -77,6 +79,6 @@ public class PostElement {
 	}
 	
 	public String insertToDB() {
-		return db.insertPost(this.title, this.content, "t", "123", this.tab);
+		return db.insertPost(this.title, this.content, this.author, this.doctorName, this.tab);
 	}
 }
