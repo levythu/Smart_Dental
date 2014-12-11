@@ -48,13 +48,10 @@ public class MainActivity extends FragmentActivity implements OnItemClickListene
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (requestCode) {
-		case 101:
-			if (resultCode == Activity.RESULT_OK) {
-				finish();
-				startActivity(getIntent());
-			}
-			break;
+		if (resultCode == Activity.RESULT_OK) {
+			finish();
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
 		}
     }
 	
