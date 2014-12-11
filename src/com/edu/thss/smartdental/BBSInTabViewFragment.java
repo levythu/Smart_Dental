@@ -49,7 +49,7 @@ public class BBSInTabViewFragment extends Fragment {
 		
 		
 		view_spinner = (Spinner)rootView.findViewById(R.id.bbs_view_spinner);
-		tagAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.tab_names, android.R.layout.simple_spinner_item);
+		tagAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.view_tag_names, android.R.layout.simple_spinner_item);
 		tagAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		view_spinner.setAdapter(tagAdapter);
 		view_spinner.setVisibility(View.VISIBLE);
@@ -66,10 +66,11 @@ public class BBSInTabViewFragment extends Fragment {
 		    }
 		});
 		
+		
 		editText = (EditText)rootView.findViewById(R.id.bbs_searchbox);
 		editText.addTextChangedListener(filterTextWatcher);
 		list = (ListView)rootView.findViewById(R.id.bbs_list);
-		initPosts("全部");
+		//initPosts("全部");
 		context = this.getActivity().getApplicationContext();
 		bbsAdapter = new BBSListAdapter(posts,this.getActivity().getApplicationContext());
 		list.setAdapter(bbsAdapter);
@@ -79,7 +80,7 @@ public class BBSInTabViewFragment extends Fragment {
 				
 
 	
-			
+		view_spinner.setSelection(5);
 		return rootView;
 	}
 	
