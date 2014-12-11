@@ -29,7 +29,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class JoinCircleActivity extends FragmentActivity implements JoinCircleDialog.JoinCircleDialogListener{
