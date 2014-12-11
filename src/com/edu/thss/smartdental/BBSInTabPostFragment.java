@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class BBSInTabPostFragment extends Fragment {
 	private Button post_bbs_btn;
@@ -62,9 +63,17 @@ public class BBSInTabPostFragment extends Fragment {
 			String title = edit_bbs_title.getText().toString();
 			String content = edit_bbs_content.getText().toString();
 			String tabName = edit_tab_spinner.getSelectedItem().toString();
+			if (title.equals("")) {
+				Toast.makeText(getActivity(), "请输入标题", Toast.LENGTH_LONG).show();
+				return;
+			}
+			if (content.equals("")) {
+				Toast.makeText(getActivity(), "请输入帖子内容", Toast.LENGTH_LONG).show();
+				return;
+			}
 			PostElement postElement = new PostElement(title, content, "岳一飞", tabName, new Date(), false);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage(postElement.insertToDB())
+			builder.setMessage("发布成功")
 				   .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					
 					@Override

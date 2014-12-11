@@ -42,7 +42,11 @@
         android:id="@+id/edit_bbs_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minLines="6"
+        android:maxLines="6"
+        android:gravity="left|top"
         android:ems="10"
+        android:background="@drawable/edit_text_bg"
         android:hint="请输入帖子内容"
         android:inputType="textMultiLine" >
 
