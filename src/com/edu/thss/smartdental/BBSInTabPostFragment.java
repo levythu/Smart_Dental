@@ -1,6 +1,6 @@
 /*
- * ×÷Õß£ºÍõÓîì¿
- * ÈÕÆÚ£º2014Äê12ÔÂ7ÈÕ
+ * ä½œè€…ï¼šçŽ‹å®‡ç‚œ
+ * æ—¥æœŸï¼š2014å¹´12æœˆ7æ—¥
  */
 package com.edu.thss.smartdental;
 
@@ -37,7 +37,7 @@ public class BBSInTabPostFragment extends Fragment {
 	private DBUtil db = new DBUtil();
 	private static SharedPreferences preferences = null;
 	private static Editor editor = null;
-//	private static final String[] TABS_STRINGS = {"¹àË®", "ÇóÖú", "ÖªÊ¶", "¹«¸æ"};
+//	private static final String[] TABS_STRINGS = {"ï¿½ï¿½Ë®", "ï¿½ï¿½ï¿½ï¿½", "ÖªÊ¶", "ï¿½ï¿½ï¿½ï¿½"};
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		preferences = preferences == null ? this.getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE) : preferences;
@@ -64,17 +64,17 @@ public class BBSInTabPostFragment extends Fragment {
 			String content = edit_bbs_content.getText().toString();
 			String tabName = edit_tab_spinner.getSelectedItem().toString();
 			if (title.equals("")) {
-				Toast.makeText(getActivity(), "ÇëÊäÈë±êÌâ", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (content.equals("")) {
-				Toast.makeText(getActivity(), "ÇëÊäÈëÌû×ÓÄÚÈÝ", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_LONG).show();
 				return;
 			}
 			PostElement postElement = new PostElement(title, content, preferences.getString("username", ""), tabName, preferences.getString("current_circle", ""), new Date(), false);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			postElement.insertToDB();
-			builder.setMessage("·¢²¼³É¹¦")
+			builder.setMessage("ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½")
 				   .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					
 					@Override

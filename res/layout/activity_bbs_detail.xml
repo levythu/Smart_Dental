@@ -7,15 +7,15 @@
     <ListView
         android:id="@+id/listView2"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:layout_weight="0.53" >
-    </ListView>
+        android:layout_height="wrap_content" >
 
+    </ListView>
 
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="352dp" >
+
     </ListView>
 
 </LinearLayout>
