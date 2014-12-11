@@ -145,7 +145,12 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 			Editor editor = getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
 			editor.putString("current_circle", dialog.getDocName());
 			editor.commit();
-			setResult(Activity.RESULT_OK);
+			if (getCallingActivity() != null) {
+				setResult(Activity.RESULT_OK);
+			} else {
+				Intent intent = new Intent(this, MainActivity.class);
+				startActivity(intent);
+			}
 			finish();
 		}
 	}
