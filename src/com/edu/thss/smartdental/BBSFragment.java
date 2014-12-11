@@ -80,7 +80,7 @@ public class BBSFragment extends Fragment {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			Fragment fragment= new BBSInFragment(Integer.parseInt(circles.get(position).docID));
-			Editor editor = getActivity().getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
+			Editor editor = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).edit();
 			editor.putString("current_circle", circles.get(position).docName);
 			editor.putString("current_circle_id", circles.get(position).docID);
 			editor.commit();
