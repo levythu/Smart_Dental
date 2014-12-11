@@ -50,20 +50,25 @@ public class LoginActivity extends Activity {
 	private OnClickListener loginListener = new OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent();
-			editor.putString("username", username.getText().toString());
-			editor.putString("password", password.getText().toString());
-			editor.commit();
 			if (username.getText().toString().equals(getString(R.string.admin_username)))
-				if (password.getText().toString().equals(getString(R.string.admin_password)))
+				if (password.getText().toString().equals(getString(R.string.admin_password))) {
+					editor.putString("username", username.getText().toString());
+					editor.putString("password", password.getText().toString());
+					editor.commit();
 					intent.setClass(LoginActivity.this, AdminActivity.class);
+				}
 				else {
 					Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_LONG).show();
 					return;
 				}
 			else {
 				String t = db.login(username.getText().toString(), password.getText().toString());
-				if (t.equals("true"))
+				if (t.equals("true")) {
+					editor.putString("username", username.getText().toString());
+					editor.putString("password", password.getText().toString());
+					editor.commit();
 					intent.setClass(LoginActivity.this, MainActivity.class);
+				}
 				else {
 					if (t.equals("user does not exist"))
 						Toast.makeText(LoginActivity.this, "用户不存在", Toast.LENGTH_LONG).show();
@@ -87,6 +92,7 @@ public class LoginActivity extends Activity {
 			Intent intent = new Intent();
 			intent.setClass(LoginActivity.this, RegisterActivity.class);
 			startActivity(intent);
+			finish();
 		}
 	};
 }

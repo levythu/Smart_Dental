@@ -34,4 +34,12 @@
    	    <item>知识</item>
    	    <item>公告</item>
    	</string-array>
+   	<string-array name="view_tag_names">
+   		<item >灌水</item>
+   		<item >知识</item>
+   		<item >求助</item>
+   		<item >公告</item>
+   		<item >收藏</item>
+   		<item >全部</item>
+   	</string-array>
 </resources>
