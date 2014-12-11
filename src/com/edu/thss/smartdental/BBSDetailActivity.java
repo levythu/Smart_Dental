@@ -25,18 +25,18 @@ public class BBSDetailActivity extends Activity {
 	private BBSDetailAdapter bbsAdapter;
 	private Context context;
 
-	 public static final int RESULT_CODE = 1; //返回码
+	 public static final int RESULT_CODE = 1; //路碌禄脴脗毛
 	 @Override
 	 protected void onCreate(Bundle savedInstanceState) {
 	  super.onCreate(savedInstanceState);
-	  setContentView(R.layout.activity_bbs_detail);  //和XML文件映射
-	  test = (TextView)findViewById(R.id.textView1); //id号和XML中定义的ID对应
-	  String data = "啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦來了";
+	  setContentView(R.layout.activity_bbs_detail);  //潞脥XML脦脛录镁脫鲁脡盲
+	  //test = (TextView)findViewById(R.id.textView1); //id潞脜潞脥XML脰脨露篓脪氓碌脛ID露脭脫娄
+	  //String data = "脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏脌虏聛铆脕脣";
 	  //String data = getIntent().getExtras().getString("data");
-	  test.setText(data);
+	  //test.setText(data);
 	  
 
-		list = (ListView)findViewById(R.id.listView1);
+		list = (ListView)findViewById(R.id.listView2);
 		initPosts();
 		context = this.getApplicationContext();
 		bbsAdapter = new BBSDetailAdapter(posts,this.getApplicationContext());
@@ -46,9 +46,11 @@ public class BBSDetailActivity extends Activity {
 
 		private void initPosts(){
 			posts = new ArrayList<BBSDetail>();
-			BBSDetail i = new BBSDetail("天气不错","帖子詳情今天风速74000km/h，吹得我牙痛，眼睫毛疼，鼻子疼， 嘴巴疼。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。","2011-1-15","张三");
-			posts.add(i);
-			i = new BBSDetail("啦啦啦","沙发沙发沙发沙发沙发沙发沙发沙发沙发沙发","2011-1-15","李四");
+			String author = getIntent().getExtras().getString("author");
+			String time = getIntent().getExtras().getString("time");
+			String content = getIntent().getExtras().getString("content");
+			String title = getIntent().getExtras().getString("title");
+			BBSDetail i = new BBSDetail(title,content,time,author);
 			posts.add(i);
 		}
 
