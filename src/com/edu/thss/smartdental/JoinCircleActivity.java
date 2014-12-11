@@ -1,3 +1,6 @@
+/**
+ * Author: FU CHIN SENG
+ */
 package com.edu.thss.smartdental;
 
 import java.util.ArrayList;
@@ -10,6 +13,9 @@ import com.edu.thss.smartdental.adapter.JoinCircleListAdapter;
 import com.edu.thss.smartdental.model.CircleElement;
 import com.edu.thss.smartdental.ui.dialog.JoinCircleDialog;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -19,11 +25,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class JoinCircleActivity extends FragmentActivity {
+public class JoinCircleActivity extends FragmentActivity implements JoinCircleDialog.JoinCircleDialogListener{
 	
 	private ListView list;
 	private ArrayList<CircleElement> circles;
@@ -45,7 +53,6 @@ public class JoinCircleActivity extends FragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.join_circle, menu);
 		SearchView searchView = (SearchView) menu.findItem(R.id.join_circle_action_search).getActionView();
 		searchView.setIconifiedByDefault(false);
@@ -56,9 +63,6 @@ public class JoinCircleActivity extends FragmentActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		switch (id) {
 		case R.id.join_circle_action_search:
@@ -78,8 +82,6 @@ public class JoinCircleActivity extends FragmentActivity {
 			CircleElement circleElement = new CircleElement(element.get("doctorname"), element.get("doctorid"));
 			circles.add(circleElement);
 		}
-		//CircleElement circleElement = new CircleElement("张三医生", 1);
-		//circles.add(circleElement);
 	}
 	
 	private SearchView.OnQueryTextListener filterQueryTextListener = new SearchView.OnQueryTextListener() {
@@ -107,5 +109,44 @@ public class JoinCircleActivity extends FragmentActivity {
 			dialog.show(fragmentManager, "JoinCircle");
 		}
 		
+	}
+
+	@SuppressLint("CommitPrefEdits")
+	@Override
+	public void onDialogPositiveClick(JoinCircleDialog dialog) {
+		DBUtil db = new DBUtil();
+		EditText text = (EditText) dialog.getDialogView().findViewById(R.id.circle_password);
+		String password = text.getText().toString();
+		String username = getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
+		String joinResult = db.joinCircle(username, password, dialog.getDocName());
+		String message = new String();
+		switch (joinResult) {
+		case "doctor does not exist":
+			message = getResources().getString(R.string.doctor_does_not_exist);
+			break;
+		case "wrong password":
+			message = getResources().getString(R.string.wrong_password);
+			break;
+		case "user does not exist":
+			message = getResources().getString(R.string.user_does_not_exist);
+			break;
+		case "already in circle":
+			message = getResources().getString(R.string.already_in_circle);
+			break;
+		case "true":
+			message = getResources().getString(R.string.join_successfully);
+			break;
+		case "System busy,please wait":
+			message = getResources().getString(R.string.system_busy);
+		}
+		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+		if (joinResult.compareTo("true") == 0) {
+			Editor editor = getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
+			editor.putString("current_circle", dialog.getDocName());
+		}
+	}
+
+	@Override
+	public void onDialogNegativeClick(JoinCircleDialog dialog) {
 	}
 }

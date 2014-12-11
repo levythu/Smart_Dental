@@ -1,3 +1,6 @@
+/**
+ * Author: FU CHIN SENG
+ */
 package com.edu.thss.smartdental.adapter;
 
 import java.util.ArrayList;
