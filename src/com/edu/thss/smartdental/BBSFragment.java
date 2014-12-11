@@ -13,7 +13,6 @@ import com.edu.thss.smartdental.adapter.CircleListAdapter;
 import com.edu.thss.smartdental.model.CircleElement;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -33,13 +32,10 @@ public class BBSFragment extends Fragment {
 	private ArrayList<CircleElement> circles;
 	private CircleListAdapter listAdapter;
 	private View join_circle_button;
-	private Context context;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_bbs, container, false);
-		
-		context = this.getActivity().getApplicationContext();
 		
 		join_circle_button = rootView.findViewById(R.id.join_circle_button);
 		join_circle_button.setOnClickListener(new OnJoinButtonClickListener());
@@ -86,6 +82,7 @@ public class BBSFragment extends Fragment {
 			Fragment fragment= new BBSInFragment(Integer.parseInt(circles.get(position).docID));
 			Editor editor = getActivity().getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
 			editor.putString("current_circle", circles.get(position).docName);
+			editor.putString("current_circle_id", circles.get(position).docID);
 			editor.commit();
 			fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
 		}

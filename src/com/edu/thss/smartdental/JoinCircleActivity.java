@@ -106,8 +106,9 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			JoinCircleDialog dialog = new JoinCircleDialog();
-			TextView text = (TextView) view.findViewById(R.id.circle_list_item_title);
-			dialog.setDocName(text.getText().toString());
+			
+			dialog.setDocName(circles.get(position).docName);
+			dialog.setDocID(circles.get(position).docID);
 			dialog.show(fragmentManager, "JoinCircle");
 		}
 	}
@@ -144,6 +145,7 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 		if (joinResult.compareTo("true") == 0) {
 			Editor editor = getSharedPreferences("settings", Activity.MODE_PRIVATE).edit();
 			editor.putString("current_circle", dialog.getDocName());
+			editor.putString("current_circle_id", dialog.getDocID());
 			editor.commit();
 			if (getCallingActivity() != null) {
 				setResult(Activity.RESULT_OK);
