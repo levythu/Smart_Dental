@@ -5,6 +5,9 @@
 package com.edu.thss.smartdental;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,10 +21,14 @@ public class RegisterActivity extends Activity {
 	Button register_btn, login_btn;
 	EditText username_edit, password_edit, repeat_password_edit;
 	DBUtil db = new DBUtil();
+	SharedPreferences preferences = null;
+	Editor editor = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		preferences = getSharedPreferences("setting", MODE_PRIVATE);
+		editor = preferences.edit();
 		username_edit = (EditText)findViewById(R.id.username_edit);
 		password_edit = (EditText)findViewById(R.id.password_edit);
 		repeat_password_edit = (EditText)findViewById(R.id.repeat_password_edit);
@@ -51,8 +58,12 @@ public class RegisterActivity extends Activity {
 				return;
 			}
 			String t = db.insertUser(username, password, "patient"); 
-			if (t.equals("true"))
-				Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_LONG).show();
+			if (t.equals("true")) {
+				editor.putString("username", username);
+				editor.putString("password", password);
+				editor.commit();
+				Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+			}
 			else {
 				if (t.equals("username exists"))
 					Toast.makeText(RegisterActivity.this, "用户名已存在", Toast.LENGTH_LONG).show();
@@ -63,12 +74,18 @@ public class RegisterActivity extends Activity {
 						Toast.makeText(RegisterActivity.this, "未知错误", Toast.LENGTH_LONG).show();
 				return;
 			}
+			Intent intent = new Intent();
+			intent.setClass(RegisterActivity.this, JoinCircleActivity.class);
+			startActivity(intent);
 			finish();
 		}
 	};
 	
 	private OnClickListener loginListener = new OnClickListener() {
 		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(RegisterActivity.this, LoginActivity.class);
+			startActivity(intent);
 			finish();
 		}
 	};
