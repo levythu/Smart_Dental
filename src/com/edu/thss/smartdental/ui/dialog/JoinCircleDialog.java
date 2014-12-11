@@ -1,24 +1,30 @@
+/**
+ * Author: FU CHIN SENG
+ */
 package com.edu.thss.smartdental.ui.dialog;
 
 import com.edu.thss.smartdental.R;
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class JoinCircleDialog extends DialogFragment {
 	
 	private View dialogView;
 	private String docName;
+	
+	public interface JoinCircleDialogListener {
+		public void onDialogPositiveClick(JoinCircleDialog dialog);
+		public void onDialogNegativeClick(JoinCircleDialog dialog);
+    }
+	
+	JoinCircleDialogListener mListener;
 	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -30,21 +36,35 @@ public class JoinCircleDialog extends DialogFragment {
 		builder.setTitle(R.string.enter_circle_password)
           .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
         	  	public void onClick(DialogInterface dialog, int id) {
-        	  		DBUtil db = new DBUtil();
-        	  		EditText text = (EditText) dialogView.findViewById(R.id.circle_password);
-        	  		String password = text.getText().toString();
-        	  		String username = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
-        	  		Toast.makeText(getActivity(), db.joinCircle(username, password, docName), Toast.LENGTH_LONG).show();
+        	  		mListener.onDialogPositiveClick(JoinCircleDialog.this);
         	  					}
           					})
           .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
         	  	public void onClick(DialogInterface dialog, int id) {
+        	  		mListener.onDialogPositiveClick(JoinCircleDialog.this);
         	  					}
                				});
 		return builder.create();
     }
 	
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		try {
+			mListener = (JoinCircleDialogListener) activity;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(activity.toString() + " must implement NoticeDialogListener");
+		}
+    }
+	
 	public void setDocName(String name) {
 		docName = name.trim();
+	}
+	
+	public String getDocName() {
+		return docName;
+	}
+	
+	public View getDialogView() {
+		return dialogView;
 	}
 }

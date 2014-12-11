@@ -71,8 +71,9 @@ public class BBSInTabPostFragment extends Fragment {
 				Toast.makeText(getActivity(), "请输入帖子内容", Toast.LENGTH_LONG).show();
 				return;
 			}
-			PostElement postElement = new PostElement(title, content, "岳一飞", tabName, new Date(), false);
+			PostElement postElement = new PostElement(title, content, preferences.getString("username", ""), tabName, preferences.getString("current_circle", ""), new Date(), false);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			postElement.insertToDB();
 			builder.setMessage("发布成功")
 				   .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 					
