@@ -10,6 +10,7 @@ import com.edu.thss.smartdental.model.CommentElement;
 import com.edu.thss.smartdental.R;
 
 import android.content.Context;
+import android.text.LoginFilter.UsernameFilterGeneric;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,14 +23,15 @@ public class CommentAdapter extends BaseAdapter {
 	private ArrayList<CommentElement> list;
 	private Context context;
 	private buttonViewHolder holder;
-	
+	private String username;
 	private class buttonViewHolder {
 		Button delete;
 	}
-	public CommentAdapter(ArrayList<CommentElement> list, Context context) {
+	public CommentAdapter(ArrayList<CommentElement> list, Context context, String username) {
 		// TODO Auto-generated constructor stub
 		this.list = list;
 		this.context = context;
+		this.username = username;
 	}
 	
 	@Override
@@ -68,6 +70,12 @@ public class CommentAdapter extends BaseAdapter {
 		
 		holder = new buttonViewHolder();
 		holder.delete = (Button)convertView.findViewById(R.id.comment_item_delete);
+		if (author.equals(this.username)) {
+			holder.delete.setVisibility(View.VISIBLE);
+		}
+		else {
+			holder.delete.setVisibility(View.INVISIBLE);
+		}
 		holder.delete.setOnClickListener(new ButtonListener(position));
 		return convertView;
 	}

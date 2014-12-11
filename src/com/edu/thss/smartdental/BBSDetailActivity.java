@@ -3,6 +3,7 @@ package com.edu.thss.smartdental;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -28,18 +29,20 @@ public class BBSDetailActivity extends Activity {
 	private BBSDetailAdapter bbsAdapter;
 	private CommentAdapter commentAdapter;
 	private Context context;
+	private SharedPreferences preferences = null;
 
 	 public static final int RESULT_CODE = 1; //·µ»ØÂë
 	 @Override
 	 protected void onCreate(Bundle savedInstanceState) {
-	  super.onCreate(savedInstanceState);
-	  setContentView(R.layout.activity_bbs_detail);  //ºÍXMLÎÄ¼þÓ³Éä
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_bbs_detail);  //ºÍXMLÎÄ¼þÓ³Éä
 	  //test = (TextView)findViewById(R.id.textView1); //idºÅºÍXMLÖÐ¶¨ÒåµÄID¶ÔÓ¦
 	  //String data = "À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²íÁË";
 	  //String data = getIntent().getExtras().getString("data");
 	  //test.setText(data);
 	  
-
+		preferences = this.getSharedPreferences("setting", Activity.MODE_PRIVATE);
+		
 		list2 = (ListView)findViewById(R.id.listView2);
 		initPosts();
 		context = this.getApplicationContext();
@@ -48,7 +51,7 @@ public class BBSDetailActivity extends Activity {
 		
 		list1 = (ListView)findViewById(R.id.listView1);
 		initPosts1();
-		commentAdapter = new CommentAdapter(posts1, context);
+		commentAdapter = new CommentAdapter(posts1, context, preferences.getString("username", ""));
 		list1.setAdapter(commentAdapter);
 	 }
 	 
