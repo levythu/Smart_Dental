@@ -13,11 +13,11 @@ public class BBSElement {
 	public BBSElement(String title,String content, String time, String author, boolean isCollected, boolean isDeletable){
 		this.title = title;
 		this.content = content;
-		if (content.length()<=20){
+		//if (content.length()<=20){
 			this.preview = content;
-		}else{
-			this.preview = content.substring(0, 20);
-		}
+		//}else{
+			//this.preview = content.substring(0, 20);
+		//}
 		this.time =time;
 		this.tab = "";
 		this.author = author;

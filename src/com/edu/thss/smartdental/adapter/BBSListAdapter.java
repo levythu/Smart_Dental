@@ -27,15 +27,11 @@ import android.widget.TextView;
 
 
 public class BBSListAdapter extends BaseAdapter implements Filterable{
-	private class buttonViewHolder{
-		//Button read; //�Ķ�
-		Button delete; //ɾ��
-		Button collect;//�ղ�
-	}
+	
 	private ArrayList<BBSElement> list;
 	private Context context;
 	private BBSFilter filter;
-	private buttonViewHolder holder;
+	//private buttonViewHolder holder;
 	
 	public BBSListAdapter(ArrayList<BBSElement> list, Context context){
 		this.list = list;
@@ -73,7 +69,7 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 		preview.setText(post.preview);
 		time.setText(post.time);
 		author.setText(post.author);
-		
+		/*
 		holder = new buttonViewHolder();
 		holder.delete = (Button)convertView.findViewById(R.id.bbs_list_item_delete);
 		if(!post.isDeletable){
@@ -85,6 +81,7 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 		holder.collect.setText(post.isCollected?"取消收藏":"收藏");
 		holder.delete.setOnClickListener(new ButtonListner(position));
 		holder.collect.setOnClickListener(new ButtonListner(position));
+		*/
 		return convertView;
 	}
 
@@ -145,27 +142,27 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 		@Override
 		public void onClick(View v) {
 			int vid = v.getId();
-			if(vid == holder.delete.getId()){
-			 //ɾ��
-				/*new AlertDialog.Builder(context.getApplicationContext())  
+			/*if(vid == holder.delete.getId()){
+			 ɾ��
+				new AlertDialog.Builder(context.getApplicationContext())  
 		        .setTitle("����")
 		        .setMessage("����Ϣ��")
 		        //.setPositiveButton("ȷ��", null)
 		        .show();
-		        */
+		        
 				
 				
 				list.remove(itemPosition);
 				notifyDataSetChanged();
 			}
-		    /*if(vid == holder.hide.getId()){
+		    if(vid == holder.hide.getId()){
 		    	BBSElement temp = list.get(this.itemPosition);
 		    	if(temp.isHidden == false)
 		    	temp.isHidden = true;
 		    	else temp.isHidden = false;
 		    	list.set(this.itemPosition, temp);
 		    	notifyDataSetChanged();
-		    }*/
+		    }
 		    if(vid == holder.collect.getId()){
 		    	
 		    	BBSElement temp = list.get(this.itemPosition);
@@ -175,7 +172,7 @@ public class BBSListAdapter extends BaseAdapter implements Filterable{
 		    	list.set(this.itemPosition, temp);
 		    	notifyDataSetChanged();
 		    }
-		   /* if(vid == holder.read.getId()){
+		    if(vid == holder.read.getId()){
 		    	ImageElement temp = list.get(this.itemPosition);
 		    	if(temp.isRead == false)
 		    	temp.isRead = true;
