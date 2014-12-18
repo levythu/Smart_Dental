@@ -245,7 +245,7 @@ public class DBUtil {
 		brrayList.add(newpassword);
 		brrayList.add(doctorname);
 		try{
-			crrayList = Soap.GetWebService("SetcirclePassword", arrayList, brrayList);
+			crrayList = Soap.GetWebService("SetuserPassword", arrayList, brrayList);
 		}
 		catch(Exception e) {
 		}
@@ -254,7 +254,23 @@ public class DBUtil {
 		}
 		return crrayList.get(0);
 	}
-	
+	public String getuseridentity(String username)
+	{
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("username");
+		brrayList.add(username);
+		try{
+			crrayList = Soap.GetWebService("Getuseridentity", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
 	/**
 	 * 设置圈子密码
 	 * 
