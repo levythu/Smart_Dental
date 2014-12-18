@@ -45,6 +45,11 @@
             android:launchMode="standard" >
         </activity>
         <activity
+            android:name=".ChangePasswordActivity"
+            android:label="@string/title_activity_change_password"
+            android:launchMode="standard" >
+        </activity>
+        <activity
             android:name=".AdminActivity"
             android:label="@string/title_activity_admin"
             android:launchMode="standard" >
