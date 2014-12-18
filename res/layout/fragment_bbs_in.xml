@@ -33,6 +33,11 @@
             style="@style/emr_tab"
             android:drawableBottom="@drawable/emr_tab_bottom"
             android:text="发帖" />
+        <RadioButton
+            android:id="@+id/bbs_in_tab_manage"
+            style="@style/emr_tab"
+            android:drawableBottom="@drawable/emr_tab_bottom" 
+            android:text="管理" />
         
     </RadioGroup>
     <FrameLayout

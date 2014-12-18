@@ -77,7 +77,7 @@ public class BBSInTabViewFragment extends Fragment {
 		context = this.getActivity().getApplicationContext();
 		bbsAdapter = new BBSListAdapter(posts,this.getActivity().getApplicationContext());
 		list.setAdapter(bbsAdapter);
-		
+		list.setDivider(null);
 		      
 		list.setOnItemClickListener(new OnPostItemClickListener(context));
 				
@@ -165,10 +165,6 @@ public class BBSInTabViewFragment extends Fragment {
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
 				String s4 = PostList.get(i).get("author");
-				if (i==5)
-				{
-					i=i+1-1;
-				}
 				post = new BBSElement(s1,s2,s3,s4,true,true);
 				posts.add(post);
 			}
