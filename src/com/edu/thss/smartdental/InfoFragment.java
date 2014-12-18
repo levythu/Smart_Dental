@@ -30,9 +30,9 @@ import android.widget.Toast;
 
 public class InfoFragment extends Fragment{
 	
-	private String[] ops = new String[]{"ѡ�񱾵�ͼƬ","����"};
-	private static final String IMAGE_FILE_NAME = "faceimage"; /*ͷ������*/
-	/*������*/
+	private String[] ops = new String[]{"选择本地图片","拍照"};
+	private static final String IMAGE_FILE_NAME = "faceimage"; /*头像名称*/
+	/*请求码*/
 	private static final int IMAGE_REQUEST_CODE = 0;
 	private static final int CAMERA_REQUEST_CODE = 1;
 	private static final int RESULT_REQUEST_CODE = 2;
@@ -59,7 +59,7 @@ public class InfoFragment extends Fragment{
 	Context context;
 	ImageView faceImage;
 	
-	/*���ݿ����*/
+	/*数据库相关*/
 	private DBManager mgr;
 	
 	private View.OnClickListener listener = new View.OnClickListener(){
@@ -127,7 +127,7 @@ public class InfoFragment extends Fragment{
 		this.context = rootView.getContext();
 		mgr = new DBManager(this.context);
 	    mgr.openDatabase();
-		SDPatient patient= mgr.queryByName("��һ");
+		SDPatient patient= mgr.queryByName("王一");
 		Button upload = (Button)rootView.findViewById(R.id.infoupload);
 		Button changepwd = (Button)rootView.findViewById(R.id.change_password);
 		faceImage = (ImageView)rootView.findViewById(R.id.infoImageItem);
@@ -159,17 +159,17 @@ public class InfoFragment extends Fragment{
 	}
 	
 	/**
-	 * ��ʾ�Ի���
+	 * 显示对话框
 	 * */
 	private void showDialog(){
-		new AlertDialog.Builder(context).setTitle("����ͷ��").setItems(ops, new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(context).setTitle("设置头像").setItems(ops, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				switch(which){
 				case 0:
 					Intent intentFromLocal = new Intent();
-					//�����ļ�����
+					//设置文件类型
 					intentFromLocal.setType("image/*");
 					intentFromLocal.setAction(Intent.ACTION_GET_CONTENT);
 					startActivityForResult(intentFromLocal,IMAGE_REQUEST_CODE);
@@ -185,7 +185,7 @@ public class InfoFragment extends Fragment{
 					break;
 				}	
 			}
-		}).setNegativeButton("ȡ��", new DialogInterface.OnClickListener() {
+		}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -220,7 +220,7 @@ public class InfoFragment extends Fragment{
 					File tempFile = new File(path,IMAGE_FILE_NAME);
 						startPhotoZoom(Uri.fromFile(tempFile));
 				}else{
-					Toast.makeText(getActivity(), "δ�ҵ��洢�����޷��洢��Ƭ��", Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), "未找到存储卡，无法存储照片！", Toast.LENGTH_LONG).show();
 				}
 				break;
 			case RESULT_REQUEST_CODE:
@@ -234,12 +234,12 @@ public class InfoFragment extends Fragment{
 	}
 	
 	/**
-	 * �ü�ͼƬ
+	 * 裁剪图片
 	 * */
    public void startPhotoZoom(Uri uri){
 	   Intent intent = new Intent("com.android.camera.action.CROP");
 	   intent.setDataAndType(uri, "image/*");
-	   //���òü�
+	   //设置裁剪
 	   intent.putExtra("crop", "true");
 	   intent.putExtra("aspectX", 1);
 	   intent.putExtra("aspectY", 1);
@@ -249,7 +249,7 @@ public class InfoFragment extends Fragment{
 	   startActivityForResult(intent,RESULT_REQUEST_CODE);
    }
    /**
-    * ����ü�֮���ͼƬ����
+    * 保存裁剪之后的图片数据
     * */
    private void getImageToView(Intent data){
 	   Bundle extras = data.getExtras();
