@@ -41,22 +41,8 @@ public class ChangePasswordActivity extends Activity {
 				Toast.makeText(ChangePasswordActivity.this, "两次新密码输入不一致", Toast.LENGTH_LONG).show();
 				return;
 			}
-			String t = db.login(preferences.getString("username", ""), old_password);
-			if (t.matches("\\d+")) {
-				Toast.makeText(ChangePasswordActivity.this, "密码修改成功", Toast.LENGTH_LONG).show();
-				finish();
-			}
-			else
-				if (t.equals("user does not exist"))
-					Toast.makeText(ChangePasswordActivity.this, "用户不存在", Toast.LENGTH_LONG).show();
-				else
-					if (t.equals("wrong password"))
-						Toast.makeText(ChangePasswordActivity.this, "旧密码错误", Toast.LENGTH_LONG).show();
-					else
-						if (t.equals("fail to connect to Database"))
-							Toast.makeText(ChangePasswordActivity.this, "连不上服务器", Toast.LENGTH_LONG).show();
-						else
-							Toast.makeText(ChangePasswordActivity.this, "未知错误", Toast.LENGTH_LONG).show();
+			String t = db.setuserPassword(old_password, new_password, preferences.getString("username", ""));
+			Toast.makeText(ChangePasswordActivity.this, t, Toast.LENGTH_LONG).show();
 		}
 	};
 	
