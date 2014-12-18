@@ -165,28 +165,13 @@ public class BBSInTabViewFragment extends Fragment {
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
 				String s4 = PostList.get(i).get("author");
-				post = new BBSElement(s1,s2,s3,s4,true,true);
+				String postId = PostList.get(i).get("PostId");
+				post = new BBSElement(s1,s2,s3,s4,true,true, postId);
 				posts.add(post);
 			}
 		}
 		
 		
-		
-/*
-		BBSElement i;
-		i = new BBSElement("一飞姐太强了","3000米跑了10分钟","2011-1-15","岳一飞",true,true);
-		posts.add(i);
-		i = new BBSElement("一飞姐太强了","3000米跑了13分钟","2011-1-15","岳一飞",true,false);
-		posts.add(i);
-		i = new BBSElement("一飞姐太强了","3000米跑了14分钟","2012-1-25","岳一飞",false,true);
-		posts.add(i);
-		i = new BBSElement("一飞姐太强了","3000米跑了15分钟","2013-1-25","岳一飞",false,false);
-		posts.add(i);
-		i = new BBSElement("一飞姐太强了","3000米跑了16分钟","2013-1-25","岳一飞",false,false);
-		posts.add(i);
-		i = new BBSElement("一飞姐太强了","3000米跑了17分钟","2013-1-25","岳一飞",false,false);
-		posts.add(i);
-		*/
 	}
 	
 }
