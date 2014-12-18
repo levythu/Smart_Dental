@@ -22,7 +22,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * 鑾峰彇鎵�鏈夌敤鎴风殑淇℃伅
+	 * 获取圈子内全部患者
 	 * 
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * 鑾峰彇鎵�鏈夊尰鐢熺殑淇℃伅
+	 * 获取全部医生
 	 * 
 	 * @return
 	 */
@@ -89,7 +89,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 鑾峰彇褰撳墠鐢ㄦ埛鐨勫湀瀛愪俊鎭�
+	 * 获得一个用户所有圈子医生列表
 	 * 
 	 * @return
 	 */
@@ -125,7 +125,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 澧炲姞涓�涓敤鎴�
+	 * 注册用户
 	 * 
 	 * @return
 	 */
@@ -153,7 +153,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 鐧婚檰
+	 * 登录
 	 * if log in success return true
 	 * else if user not exist return user does not exist
 	 * else if wrong password return wrong password
@@ -181,7 +181,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 鍒犻櫎涓�涓敤鎴�
+	 * 删除一个用户
 	 * 
 	 * @return
 	 */
@@ -204,7 +204,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 鍔犲叆鍦堝瓙
+	 * 加入圈子
 	 * 
 	 * @return
 	 */
@@ -228,8 +228,35 @@ public class DBUtil {
 		}
 		return crrayList.get(0);
 	}
+	
 	/**
-	 * 璁惧畾鍦堝瓙瀵嗙爜
+	 * 设置用户密码
+	 * 
+	 * @return
+	 */
+	public String SetuserPassword(String oldpassword, String newpassword, String doctorname){
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("oldpassword");
+		arrayList.add("newpassword");
+		arrayList.add("username");
+		brrayList.add(oldpassword);
+		brrayList.add(newpassword);
+		brrayList.add(doctorname);
+		try{
+			crrayList = Soap.GetWebService("SetcirclePassword", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	
+	/**
+	 * 设置圈子密码
 	 * 
 	 * @return
 	 */
@@ -255,7 +282,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 韪㈠嚭鍦堝瓙
+	 * 踢出圈子
 	 * 
 	 * @return
 	 */
@@ -278,7 +305,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 鑾峰彇鎵�鏈夊笘瀛�
+	 * 获取圈子内全部帖子信息
 	 * 
 	 * @return
 	 */
@@ -323,7 +350,7 @@ public class DBUtil {
 	}
 
 	/**
-	 * 鑾峰彇鏌愪竴Id甯栧瓙
+	 * 通过id获取帖子
 	 * 
 	 * @return
 	 */
@@ -368,7 +395,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 鑾峰彇鏌愪釜鐢ㄦ埛鐨勫笘瀛�
+	 * 获取一个用户的全部帖子
 	 * 
 	 * @return
 	 */
@@ -411,7 +438,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 鑾峰彇鏀惰棌鐨勫笘瀛怚d
+	 * 获得用户收藏帖子列表
 	 * 
 	 * @return
 	 */
@@ -443,7 +470,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * 鏀惰棌甯栧瓙
+	 * 收藏帖子
 	 * 
 	 * @return
 	 */
@@ -468,7 +495,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 鍙栨秷鏀惰棌甯栧瓙
+	 * 取消收藏
 	 * 
 	 * @return
 	 */
@@ -492,7 +519,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 鏂板缓甯栧瓙
+	 * 发新帖子
 	 * 
 	 * @return
 	 */
@@ -524,7 +551,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 鍒犻櫎甯栧瓙
+	 * 删除帖子
 	 * 
 	 * @return
 	 */
@@ -548,7 +575,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 鑾峰彇甯栧瓙鍐呰瘎璁�
+	 * 获取帖子内全部评论
 	 * 
 	 * @return
 	 */
@@ -591,22 +618,22 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * 鏂板璇勮
+	 * 新增评论
 	 * 
 	 * @return
 	 */
-	public String insertComment(String CommentName, String commentContent, String username, String CommentType, String ReplyUserName) {
+	public String insertComment(String postid, String commentContent, String username, String CommentType, String ReplyUserName) {
 
 		arrayList.clear();
 		brrayList.clear();
 		crrayList.clear();
 		
-		arrayList.add("CommentName");
+		arrayList.add("postId");
 		arrayList.add("commentContent");
 		arrayList.add("username");
 		arrayList.add("CommentType");
 		arrayList.add("ReplyUserName");
-		brrayList.add(CommentName);
+		brrayList.add(postid);
 		brrayList.add(commentContent);
 		brrayList.add(username);
 		brrayList.add(CommentType);	
@@ -622,7 +649,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 鍒犻櫎璇勮
+	 * 删除评论
 	 * 
 	 * @return
 	 */
@@ -645,7 +672,7 @@ public class DBUtil {
 		return crrayList.get(0);
 	}
 	/**
-	 * 鑾峰彇鏈鏂版秷鎭�
+	 * 获得用户全部新消息
 	 * 
 	 * @return
 	 */
@@ -685,7 +712,7 @@ public class DBUtil {
 		return list;
 	}
 	/**
-	 * 鑾峰彇宸茶娑堟伅
+	 * 获取用户全部已读消息
 	 * 
 	 * @return
 	 */
@@ -726,7 +753,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 鏂板娑堟伅
+	 * 新建一条消息
 	 * 
 	 * @return
 	 */

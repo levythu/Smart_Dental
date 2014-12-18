@@ -1,6 +1,6 @@
 /*
- * ×÷Õß£ºÍõÓîì¿
- * ÈÕÆÚ£º2014Äê12ÔÂ7ÈÕ
+ * ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½Ú£ï¿½2014ï¿½ï¿½12ï¿½ï¿½7ï¿½ï¿½
  */
 package com.edu.thss.smartdental.model;
 
@@ -77,10 +77,6 @@ public class PostElement {
 		return this.doctorName;
 	}
 	
-	public BBSElement display() {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return new BBSElement(this.title, this.content.substring(0, 20), simpleDateFormat.format(this.date), author, !this.onlyToDoctor, true);
-	}
 	
 	public String insertToDB() {
 		return db.insertPost(this.title, this.content, this.author, this.doctorName, this.tab);
