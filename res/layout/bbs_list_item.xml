@@ -36,7 +36,7 @@
 	    android:textSize="16sp"
 	    android:textColor="@color/app_grey"
 	    android:layout_alignParentRight="true"
-	    android:layout_alignParentTop="true"
+	    android:layout_below="@+id/bbs_list_item_preview"
 	    android:layout_marginTop="10dp"
 	    android:text="author"
 	    />
@@ -46,38 +46,16 @@
 	    android:layout_height="wrap_content"
 	    android:textSize="16sp"
 	    android:textColor="@color/app_grey"
-	    android:layout_toLeftOf="@+id/bbs_list_item_author"
+	    
+	    android:layout_alignParentLeft="true"
 	    android:layout_marginRight = "20dp"
-	    android:layout_alignParentTop="true"
+	    android:layout_below="@+id/bbs_list_item_preview"
 	    android:layout_marginTop="10dp"
 	    android:text="time"
 	    />
 	
 	
-	<Button
-	    android:id="@+id/bbs_list_item_collect"
-	    android:layout_width="wrap_content"
-	    android:layout_height="30dp"
-	    android:layout_below="@+id/bbs_list_item_preview"
-	    android:layout_marginRight="10dp"
-	    android:layout_marginLeft="10dp"
-	    android:background="@color/app_white"
-	    android:text="收藏"
-	    android:textSize="16sp"
-	    android:textColor="@color/app_blue"
-	    android:layout_marginBottom="5dp"
-	     />
-	<Button
-	    android:id="@+id/bbs_list_item_delete"
-	    android:layout_width="wrap_content"
-	    android:layout_height="30dp"
-	    android:layout_marginLeft="10dp"
-	    android:layout_alignBottom="@+id/bbs_list_item_collect"
-	    android:layout_toRightOf="@+id/bbs_list_item_collect"
-	    android:textSize="16sp"
-	    android:background="@color/app_white"
-	    android:text="删除"
-	    android:textColor="@color/app_blue"  />
+	
 	
 	
 <!--	<Button
