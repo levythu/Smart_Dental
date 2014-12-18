@@ -234,7 +234,7 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public String SetuserPassword(String oldpassword, String newpassword, String doctorname){
+	public String setuserPassword(String oldpassword, String newpassword, String doctorname){
 		arrayList.clear();
 		brrayList.clear();
 		crrayList.clear();
@@ -260,7 +260,7 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public String SetcirclePassword(String oldpassword, String newpassword, String doctorname){
+	public String setcirclePassword(String oldpassword, String newpassword, String doctorname){
 		arrayList.clear();
 		brrayList.clear();
 		crrayList.clear();
