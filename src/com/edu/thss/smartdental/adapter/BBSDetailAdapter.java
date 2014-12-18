@@ -2,10 +2,12 @@ package com.edu.thss.smartdental.adapter;
 
 import java.util.ArrayList;
 
+import com.edu.thss.smartdental.MainActivity;
 import com.edu.thss.smartdental.R;
 import com.edu.thss.smartdental.model.BBSDetail;
 
 import android.content.Context;
+import android.content.SharedPreferences.Editor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +21,15 @@ import android.widget.TextView;
 public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 	private class buttonViewHolder{
 		
-		Button delete; //ɾ��
+		Button delete; //
 	}
 	private ArrayList<BBSDetail> list;
 	private Context context;
 	private BBSFilter filter;
 	private buttonViewHolder holder;
+	
+	
+	private buttonViewHolder holder1;
 	
 	public BBSDetailAdapter(ArrayList<BBSDetail> list, Context context){
 		this.list = list;
@@ -55,7 +60,6 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 			convertView = LayoutInflater.from(context).inflate(R.layout.bbs_detail_item, null);
 		}
 		BBSDetail post = list.get(position);
-		//add!!!!
 		//TextView title =(TextView)convertView.findViewById(R.id.bbs_detail_item_title);
 		TextView content = (TextView)convertView.findViewById(R.id.bbs_detail_item_content);
 		TextView time = (TextView)convertView.findViewById(R.id.bbs_detail_item_time);
@@ -67,16 +71,9 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 		author.setText(post.author);
 		
 		holder = new buttonViewHolder();
-		//holder.read = (Button)convertView.findViewById(R.id.bbs_list_item_read);
 		holder.delete = (Button)convertView.findViewById(R.id.bbs_detail_item_delete);
-		//holder.hide = (Button)convertView.findViewById(R.id.bbs_list_item_hide);
-		
-		//holder.hide.setText(post.isHidden?"������":"����");
-		//holder.read.setText(post.isRead?"�Ѷ�":"δ��");
-		
-		//holder.read.setOnClickListener(new ButtonListner(position));
 		holder.delete.setOnClickListener(new ButtonListner(position));
-		//holder.hide.setOnClickListener(new ButtonListner(position));
+
 		return convertView;
 	}
 
@@ -97,7 +94,7 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 		protected FilterResults performFiltering(CharSequence constraint) {
 			
 			FilterResults results = new FilterResults();
-			if(constraint == null || constraint.length()==0){ //û�й�������
+			if(constraint == null || constraint.length()==0){ 
 				results.values = this.original;
 				results.count = this.original.size();
 				
@@ -135,10 +132,11 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 
 		@Override
 		public void onClick(View v) {
+			
 			int vid = v.getId();
 			if(vid == holder.delete.getId()){
-			 //ɾ��
-				list.remove(itemPosition);
+			 //
+				//list.remove(itemPosition);
 				notifyDataSetChanged();
 			}
 			

@@ -7,10 +7,11 @@ public class BBSElement {
 	public String time;
 	public String tab;
 	public String author;
+	public String id;
 	public boolean isCollected;
 	public boolean isDeletable;
 	
-	public BBSElement(String title,String content, String time, String author, boolean isCollected, boolean isDeletable){
+	public BBSElement(String title,String content, String time, String author, boolean isCollected, boolean isDeletable, String id){
 		this.title = title;
 		this.content = content;
 		if (content.length()<=20){
@@ -23,5 +24,6 @@ public class BBSElement {
 		this.author = author;
 		this.isCollected = isCollected;
 		this.isDeletable = isDeletable;
+		this.id = id;
 	}
 }
