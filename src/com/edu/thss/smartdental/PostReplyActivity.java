@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 
 public class PostReplyActivity extends Activity {
 	private ActionBar actionBar;
+	private EditText edit_reply_content;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -34,6 +37,8 @@ public class PostReplyActivity extends Activity {
 		case R.id.cancel_button:
 			finish();
 			break;
+		case R.id.post_button:
+			
 		default:
 			break;
 		}

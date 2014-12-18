@@ -10,7 +10,7 @@ public class BBSInTabManageFragment extends Fragment {
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_bbs_in_select, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_bbs_in_manage, container, false);
 		
 		return rootView;
 	}
