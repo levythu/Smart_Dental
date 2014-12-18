@@ -71,6 +71,7 @@ public class BBSDetailActivity extends Activity {
 		String time = getIntent().getExtras().getString("time");
 		String content = getIntent().getExtras().getString("content");
 		String title = getIntent().getExtras().getString("title");
+		String id = getIntent().getExtras().getString("postId");
 
 		BBSDetail i = new BBSDetail(title, content, time, author);
 		posts.add(i);
