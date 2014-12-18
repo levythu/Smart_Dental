@@ -142,7 +142,7 @@ public class BBSInTabViewFragment extends Fragment {
 			String userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
 			List<HashMap<String, String>> idList = db.selectcollectPostid(userName);
 			for (int i = 1; i < idList.size(); i++){
-				String id=idList.get(i).get("postid");
+				String id=idList.get(i).get("PostId");
 				
 				List<HashMap<String, String>> postInfo = db.selectPostById(Integer.parseInt(id));
 				String doctorid=postInfo.get(1).get("doctorid");
@@ -152,7 +152,7 @@ public class BBSInTabViewFragment extends Fragment {
 				String s2=postInfo.get(1).get("postcontent");
 				String s3 = postInfo.get(1).get("time");
 				String s4 = postInfo.get(1).get("author");
-				post = new BBSElement(s1,s2,s3,s4,true,true);
+				post = new BBSElement(s1,s2,s3,s4,true,true, id);
 				posts.add(post);
 			}
 			return;
