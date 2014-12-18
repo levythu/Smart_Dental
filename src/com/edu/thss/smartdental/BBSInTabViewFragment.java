@@ -51,8 +51,6 @@ public class BBSInTabViewFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_bbs_in_view, container, false);
-		
-		
 		view_spinner = (Spinner)rootView.findViewById(R.id.bbs_view_spinner);
 		tagAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.view_tag_names, android.R.layout.simple_spinner_item);
 		tagAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -64,6 +62,7 @@ public class BBSInTabViewFragment extends Fragment {
 		            int position, long id) {
 		        String str=parent.getItemAtPosition(position).toString();
 		        initPosts(str);
+		        refreshPosts();
 		    }
 		    @Override
 		    public void onNothingSelected(AdapterView<?> parent) {
@@ -126,7 +125,9 @@ public class BBSInTabViewFragment extends Fragment {
 			bbsAdapter.getFilter().filter(s);	
 		}
 	};
-
+	private void refreshPosts(){
+		this.bbsAdapter.notifyDataSetChanged();
+	}
 	private void initPosts(String tag){
 		posts.clear();
 		String circle_id_st = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("current_circle_id", "");
@@ -136,16 +137,38 @@ public class BBSInTabViewFragment extends Fragment {
 		else circle_id = Integer.parseInt(circle_id_st);
 		
 		DBUtil db = new DBUtil();
-		List<HashMap<String, String>> PostList  = db.getAllPostInfo(circle_id);
-		
-		
 		BBSElement post;
+		if (tag.equals("收藏")){
+			String userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
+			List<HashMap<String, String>> idList = db.selectcollectPostid(userName);
+			for (int i = 1; i < idList.size(); i++){
+				String id=idList.get(i).get("postid");
+				
+				List<HashMap<String, String>> postInfo = db.selectPostById(Integer.parseInt(id));
+				String doctorid=postInfo.get(1).get("doctorid");
+				if (!doctorid.equals(circle_id_st))
+					continue;
+				String s1=postInfo.get(1).get("postname");
+				String s2=postInfo.get(1).get("postcontent");
+				String s3 = postInfo.get(1).get("time");
+				String s4 = postInfo.get(1).get("author");
+				post = new BBSElement(s1,s2,s3,s4,true,true);
+				posts.add(post);
+			}
+			return;
+		}
+		
+		List<HashMap<String, String>> PostList  = db.getAllPostInfo(circle_id);
 		for (int i = 1; i < PostList.size(); i++){
-			if (tag == "全部" || tag.equals(PostList.get(i).get("tag"))){
+			if (tag.equals("全部") || tag.equals(PostList.get(i).get("tag"))){
 				String s1=PostList.get(i).get("postname");
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
 				String s4 = PostList.get(i).get("author");
+				if (i==5)
+				{
+					i=i+1-1;
+				}
 				post = new BBSElement(s1,s2,s3,s4,true,true);
 				posts.add(post);
 			}

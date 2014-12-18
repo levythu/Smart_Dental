@@ -30,9 +30,9 @@ import android.widget.Toast;
 
 public class InfoFragment extends Fragment{
 	
-	private String[] ops = new String[]{"Ñ¡Ôñ±¾µØÍ¼Æ¬","ÅÄÕÕ"};
-	private static final String IMAGE_FILE_NAME = "faceimage"; /*Í·ÏñÃû³Æ*/
-	/*ÇëÇóÂë*/
+	private String[] ops = new String[]{"é€‰æ‹©æœ¬åœ°å›¾ç‰‡","æ‹ç…§"};
+	private static final String IMAGE_FILE_NAME = "faceimage"; /*å¤´åƒåç§°*/
+	/*è¯·æ±‚ç */
 	private static final int IMAGE_REQUEST_CODE = 0;
 	private static final int CAMERA_REQUEST_CODE = 1;
 	private static final int RESULT_REQUEST_CODE = 2;
@@ -59,7 +59,7 @@ public class InfoFragment extends Fragment{
 	Context context;
 	ImageView faceImage;
 	
-	/*Êı¾İ¿âÏà¹Ø*/
+	/*æ•°æ®åº“ç›¸å…³*/
 	private DBManager mgr;
 	
 	private View.OnClickListener listener = new View.OnClickListener(){
@@ -70,6 +70,17 @@ public class InfoFragment extends Fragment{
 			
 		}
 		
+	};
+	
+	private View.OnClickListener changePasswordlistener = new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent();
+			intent.setClass(getActivity(), ChangePasswordActivity.class);
+			startActivity(intent);
+		}
 	};
 	
 	private View.OnClickListener editlistener = new View.OnClickListener() {
@@ -116,8 +127,9 @@ public class InfoFragment extends Fragment{
 		this.context = rootView.getContext();
 		mgr = new DBManager(this.context);
 	    mgr.openDatabase();
-		SDPatient patient= mgr.queryByName("ÍõÒ»");
+		SDPatient patient= mgr.queryByName("ç‹ä¸€");
 		Button upload = (Button)rootView.findViewById(R.id.infoupload);
+		Button changepwd = (Button)rootView.findViewById(R.id.change_password);
 		faceImage = (ImageView)rootView.findViewById(R.id.infoImageItem);
 		
 		//------textview---------
@@ -141,22 +153,23 @@ public class InfoFragment extends Fragment{
 		editbasic.setOnClickListener(editlistener);
 		//this.context = rootView.getContext();
 		upload.setOnClickListener(listener);
+		changepwd.setOnClickListener(changePasswordlistener);
 		
 		return rootView;
 	}
 	
 	/**
-	 * ÏÔÊ¾¶Ô»°¿ò
+	 * æ˜¾ç¤ºå¯¹è¯æ¡†
 	 * */
 	private void showDialog(){
-		new AlertDialog.Builder(context).setTitle("ÉèÖÃÍ·Ïñ").setItems(ops, new DialogInterface.OnClickListener() {
+		new AlertDialog.Builder(context).setTitle("è®¾ç½®å¤´åƒ").setItems(ops, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				switch(which){
 				case 0:
 					Intent intentFromLocal = new Intent();
-					//ÉèÖÃÎÄ¼şÀàĞÍ
+					//è®¾ç½®æ–‡ä»¶ç±»å‹
 					intentFromLocal.setType("image/*");
 					intentFromLocal.setAction(Intent.ACTION_GET_CONTENT);
 					startActivityForResult(intentFromLocal,IMAGE_REQUEST_CODE);
@@ -172,7 +185,7 @@ public class InfoFragment extends Fragment{
 					break;
 				}	
 			}
-		}).setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+		}).setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -207,7 +220,7 @@ public class InfoFragment extends Fragment{
 					File tempFile = new File(path,IMAGE_FILE_NAME);
 						startPhotoZoom(Uri.fromFile(tempFile));
 				}else{
-					Toast.makeText(getActivity(), "Î´ÕÒµ½´æ´¢¿¨£¬ÎŞ·¨´æ´¢ÕÕÆ¬£¡", Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), "æœªæ‰¾åˆ°å­˜å‚¨å¡ï¼Œæ— æ³•å­˜å‚¨ç…§ç‰‡ï¼", Toast.LENGTH_LONG).show();
 				}
 				break;
 			case RESULT_REQUEST_CODE:
@@ -221,12 +234,12 @@ public class InfoFragment extends Fragment{
 	}
 	
 	/**
-	 * ²Ã¼ôÍ¼Æ¬
+	 * è£å‰ªå›¾ç‰‡
 	 * */
    public void startPhotoZoom(Uri uri){
 	   Intent intent = new Intent("com.android.camera.action.CROP");
 	   intent.setDataAndType(uri, "image/*");
-	   //ÉèÖÃ²Ã¼ô
+	   //è®¾ç½®è£å‰ª
 	   intent.putExtra("crop", "true");
 	   intent.putExtra("aspectX", 1);
 	   intent.putExtra("aspectY", 1);
@@ -236,7 +249,7 @@ public class InfoFragment extends Fragment{
 	   startActivityForResult(intent,RESULT_REQUEST_CODE);
    }
    /**
-    * ±£´æ²Ã¼ôÖ®ºóµÄÍ¼Æ¬Êı¾İ
+    * ä¿å­˜è£å‰ªä¹‹åçš„å›¾ç‰‡æ•°æ®
     * */
    private void getImageToView(Intent data){
 	   Bundle extras = data.getExtras();
