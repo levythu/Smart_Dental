@@ -7,60 +7,50 @@
     android:gravity="right"
     android:orientation="vertical" >
 
- <TextView
-     android:id="@+id/bbs_detail_item_author"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_alignLeft="@+id/bbs_detail_item_content"
-     android:layout_below="@+id/bbs_detail_item_content"
-     android:text="author"
-     android:textColor="@color/app_grey"
-     android:textSize="16sp" />
-
- <TextView
-     android:id="@+id/bbs_detail_item_title"
-     android:layout_width="248dp"
-     android:layout_height="wrap_content"
-     android:layout_alignLeft="@+id/bbs_detail_item_content"
-     android:layout_alignParentTop="true"
-     android:layout_marginTop="28dp"
-     android:text="title"
-     android:textColor="@color/app_black"
-     android:textSize="20sp" />
-
- <TextView
-     android:id="@+id/bbs_detail_item_time"
-     android:layout_width="90dp"
-     android:layout_height="wrap_content"
-     android:layout_alignRight="@+id/bbs_detail_item_content"
-     android:layout_alignTop="@+id/bbs_detail_item_title"
-     android:text="time"
-     android:textColor="@color/app_grey"
-     android:textSize="16sp" />
-
- <Button
-     android:id="@+id/bbs_detail_item_delete"
-     android:layout_width="90dp"
-     android:layout_height="30dp"
-     android:layout_alignBottom="@+id/bbs_detail_item_author"
-     android:layout_alignRight="@+id/bbs_detail_item_content"
-     android:layout_alignTop="@+id/bbs_detail_item_author"
-     android:layout_toRightOf="@+id/bbs_detail_item_title"
-     android:background="@color/app_white"
-     android:text="删除"
-     android:textColor="@color/app_blue"
-     android:textSize="16sp" />
 
  <TextView
      android:id="@+id/bbs_detail_item_content"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     android:layout_below="@+id/bbs_detail_item_title"
      android:layout_centerHorizontal="true"
      android:layout_margin="10dp"
      android:layout_marginTop="20dp"
      android:text="content"
      android:textColor="@color/app_black"
      android:textSize="16sp" />
+
+ <TextView
+     android:id="@+id/bbs_detail_item_time"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignLeft="@+id/bbs_detail_item_content"
+     android:layout_marginTop="30dp"
+	 android:layout_below="@+id/bbs_detail_item_content"
+     android:text="time"
+     android:textColor="@color/app_grey"
+     android:textSize="16sp" />
+
+ <TextView
+     android:id="@+id/bbs_detail_item_author"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="30dp"
+     android:layout_marginRight="10dp"
+	 android:layout_below="@+id/bbs_detail_item_content"
+	 android:layout_alignParentRight="true"
+     android:text="author"
+     android:textColor="@color/app_grey"
+     android:textSize="16sp" />
 	
+ <Button
+     android:id="@+id/bbs_detail_item_delete"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:background="@color/app_white"
+     android:layout_margin="10dp"
+     android:layout_marginTop="20dp"
+     android:text="删除"
+	 android:layout_alignParentRight="true"
+     android:textColor="@color/app_blue"
+     android:textSize="16sp" />
 </RelativeLayout>
