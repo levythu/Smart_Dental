@@ -254,6 +254,11 @@ public class DBUtil {
 		}
 		return crrayList.get(0);
 	}
+	/**
+	 * 获取用户身份
+	 * 
+	 * @return
+	 */
 	public String getuseridentity(String username)
 	{
 		arrayList.clear();
@@ -263,6 +268,28 @@ public class DBUtil {
 		brrayList.add(username);
 		try{
 			crrayList = Soap.GetWebService("Getuseridentity", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	/**
+	 * 获取圈子密码
+	 * 
+	 * @return
+	 */
+	public String getCirclePassword(String doctorname)
+	{
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("doctorname");
+		brrayList.add(doctorname);
+		try{
+			crrayList = Soap.GetWebService("GetCirclePassword", arrayList, brrayList);
 		}
 		catch(Exception e) {
 		}
