@@ -102,6 +102,10 @@
             android:name=".JoinCircleActivity"
             android:label="@string/title_activity_join_circle" >
         </activity>
+        <activity
+            android:name=".PostReplyActivity"
+            android:label="@string/title_activity_join_circle" >
+        </activity>
     </application>
 
 </manifest>
