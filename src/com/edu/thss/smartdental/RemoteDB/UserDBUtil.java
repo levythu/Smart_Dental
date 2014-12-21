@@ -18,7 +18,7 @@ public class UserDBUtil {
 	
 	
 	/**
-	 * »ñÈ¡È¦×ÓÄÚÈ«²¿»¼Õß
+	 * è·å–åœˆå­å†…å…¨éƒ¨æ‚£è€…
 	 * 
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public class UserDBUtil {
 		return list;
 	}
 	/**
-	 * »ñÈ¡È«²¿Ò½Éú
+	 * è·å–å…¨éƒ¨åŒ»ç”Ÿ
 	 * 
 	 * @return
 	 */
@@ -85,7 +85,7 @@ public class UserDBUtil {
 	}
 	
 	/**
-	 *  »ñµÃÒ»¸öÓÃ»§ËùÓĞÈ¦×ÓÒ½ÉúÁĞ±í
+	 *  è·å¾—ä¸€ä¸ªç”¨æˆ·æ‰€æœ‰åœˆå­åŒ»ç”Ÿåˆ—è¡¨
 	 * 
 	 * @return
 	 */
@@ -121,7 +121,7 @@ public class UserDBUtil {
 	}
 	
 	/**
-	 * ×¢²áÓÃ»§
+	 * æ³¨å†Œç”¨æˆ·
 	 * 
 	 * @return
 	 */
@@ -149,7 +149,7 @@ public class UserDBUtil {
 	}
 	
 	/**
-	 *  µÇÂ¼
+	 * ç™»å½•
 	 * if log in success return true
 	 * else if user not exist return user does not exist
 	 * else if wrong password return wrong password
@@ -177,7 +177,7 @@ public class UserDBUtil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * É¾³ıÒ»¸öÓÃ»§
+	 * åˆ é™¤ä¸€ä¸ªç”¨æˆ·
 	 * 
 	 * @return
 	 */
@@ -200,7 +200,7 @@ public class UserDBUtil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * ¼ÓÈëÈ¦×Ó
+	 * åŠ å…¥åœˆå­
 	 * 
 	 * @return
 	 */
@@ -226,7 +226,7 @@ public class UserDBUtil {
 	}
 	
 	/**
-	 * ÉèÖÃÓÃ»§ÃÜÂë
+	 * è®¾ç½®ç”¨æˆ·å¯†ç 
 	 * 
 	 * @return
 	 */
@@ -251,7 +251,7 @@ public class UserDBUtil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * »ñÈ¡ÓÃ»§Éí·İ
+	 * è·å–ç”¨æˆ·èº«ä»½
 	 * 
 	 * @return
 	 */
@@ -273,7 +273,7 @@ public class UserDBUtil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * »ñÈ¡È¦×ÓÃÜÂë
+	 * è·å–åœˆå­å¯†ç 
 	 * 
 	 * @return
 	 */
@@ -295,7 +295,7 @@ public class UserDBUtil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * ÉèÖÃÈ¦×ÓÃÜÂë
+	 * è®¾ç½®åœˆå­å¯†ç 
 	 * 
 	 * @return
 	 */
@@ -319,7 +319,7 @@ public class UserDBUtil {
 	}
 	
 	/**
-	 * Ìß³öÈ¦×Ó
+	 * è¸¢å‡ºåœˆå­
 	 * 
 	 * @return
 	 */
@@ -341,4 +341,6 @@ public class UserDBUtil {
 		}
 		return resultinfo.get(0);
 	}
+	
+	
 }
