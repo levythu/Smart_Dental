@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+
+
+import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 import com.edu.thss.smartdental.adapter.CircleListAdapter;
 import com.edu.thss.smartdental.model.CircleElement;
 
@@ -47,7 +49,7 @@ public class BBSFragment extends Fragment {
 		fragmentManager = getFragmentManager();
 		list = (ListView) rootView.findViewById(R.id.circle_list);
 		
-		pd = ProgressDialog.show(this.getActivity(), "", "加载中，请稍后……");
+		pd = ProgressDialog.show(this.getActivity(), "", "鍔犺浇涓紝璇风◢鍚庘�︹��");
 		circles = new ArrayList<CircleElement>();
 		
 		listAdapter = new CircleListAdapter(circles, this.getActivity().getApplicationContext());
@@ -59,7 +61,7 @@ public class BBSFragment extends Fragment {
 			public void run() {
 				// TODO Auto-generated method stub
 				initCircles();		
-				handler.sendEmptyMessage(0);// 执行耗时的方法之后发送消给handler  			
+				handler.sendEmptyMessage(0);// 鎵ц鑰楁椂鐨勬柟娉曚箣鍚庡彂閫佹秷缁檋andler  			
 			}
         }).start();  
 		
@@ -70,16 +72,16 @@ public class BBSFragment extends Fragment {
 	
 	Handler handler = new Handler() {  
         @Override  
-        public void handleMessage(Message msg) {// handler接收到消息后就会执行此方法  
+        public void handleMessage(Message msg) {// handler鎺ユ敹鍒版秷鎭悗灏变細鎵ц姝ゆ柟娉�  
         	showCircles();
-            pd.dismiss();// 关闭ProgressDialog 
+            pd.dismiss();// 鍏抽棴ProgressDialog 
             
         }  
     }; 
     
     private void initCircles(){
 		
-		DBUtil db = new DBUtil();
+		UserDBUtil db = new UserDBUtil();
 		String username = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
 		List<HashMap<String, String>> docList = db.selectDoctorsByname(username);
 		Iterator<HashMap<String, String>> iterator = docList.iterator();
