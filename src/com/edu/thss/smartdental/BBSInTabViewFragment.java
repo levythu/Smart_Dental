@@ -80,8 +80,7 @@ public class BBSInTabViewFragment extends Fragment {
 		list.setDivider(null);
 		      
 		list.setOnItemClickListener(new OnPostItemClickListener(context));
-				
-
+		
 	
 		view_spinner.setSelection(5);
 		return rootView;

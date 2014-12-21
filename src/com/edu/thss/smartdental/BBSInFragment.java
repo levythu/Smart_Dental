@@ -90,7 +90,7 @@ public class BBSInFragment extends Fragment {
 		}
 		if (tempfragment != null) {
 			transaction.replace(R.id.bbs_in_tab_content, tempfragment);
-    	transaction.commit();
+			transaction.commit();
         }
 	}
 
