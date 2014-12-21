@@ -9,16 +9,22 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
+import android.content.SharedPreferences;
 
 public class BBSInTabManageFragment extends Fragment {
 	
 	Button confirm_btn;
 	EditText circle_password_edit;
+	DBUtil db = new DBUtil();
+	SharedPreferences preferences = null;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_bbs_in_manage, container, false);
+		preferences = getActivity().getSharedPreferences("setting", android.content.Context.MODE_PRIVATE);
 		circle_password_edit = (EditText)rootView.findViewById(R.id.circle_password_edit);
+		circle_password_edit.setText(db.getCirclePassword(preferences.getString("username", "")));
 		confirm_btn = (Button)rootView.findViewById(R.id.confirm_btn);
 		confirm_btn.setOnClickListener(confirmlistener);
 		return rootView;
