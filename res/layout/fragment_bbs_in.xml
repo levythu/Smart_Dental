@@ -67,6 +67,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/manage_invisible_button"
             android:visibility="invisible"
             android:layout_height="fill_parent"
             android:layout_width="0dp"
