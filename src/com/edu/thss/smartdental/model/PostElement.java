@@ -1,6 +1,6 @@
 /*
- * ���ߣ������
- * ���ڣ�2014��12��7��
+ * 锟斤拷锟竭ｏ拷锟斤拷锟斤拷锟�
+ * 锟斤拷锟节ｏ拷2014锟斤拷12锟斤拷7锟斤拷
  */
 package com.edu.thss.smartdental.model;
 
@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.edu.thss.smartdental.R.string;
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+import com.edu.thss.smartdental.RemoteDB.PostDBUtil;
 
 public class PostElement {
 	private String title;
@@ -18,7 +18,7 @@ public class PostElement {
 	private String doctorName;
 	private Date date;
 	private Boolean onlyToDoctor;
-	private static final DBUtil db = new DBUtil();
+	private static final PostDBUtil db = new PostDBUtil();
 	
 	public PostElement() {
 	}

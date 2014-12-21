@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+
+
+import com.edu.thss.smartdental.RemoteDB.PostDBUtil;
 import com.edu.thss.smartdental.adapter.BBSListAdapter;
 import com.edu.thss.smartdental.adapter.ImgListAdapter;
 import com.edu.thss.smartdental.model.BBSElement;
@@ -66,7 +68,7 @@ public class BBSInTabViewFragment extends Fragment {
 		            int position, long id) {
 		        String str=parent.getItemAtPosition(position).toString();
 		        
-		        pd = ProgressDialog.show(parent.getContext(), "", "加载中，请稍后……");
+		        pd = ProgressDialog.show(parent.getContext(), "", "载入中，请稍候...");
 		        new Thread(new RunThread(str)).start();  
 		    }
 		    @Override
@@ -101,15 +103,15 @@ public class BBSInTabViewFragment extends Fragment {
 		public void run() {
 			// TODO Auto-generated method stub
 			initPosts(str);
-	        handler.sendEmptyMessage(0);// 执行耗时的方法之后发送消给handler  
+	        handler.sendEmptyMessage(0);
 		}
 		
 	};
 	
 	Handler handler = new Handler() {  
         @Override  
-        public void handleMessage(Message msg) {// handler接收到消息后就会执行此方法  
-            pd.dismiss();// 关闭ProgressDialog 
+        public void handleMessage(Message msg) {  
+            pd.dismiss(); 
         	refreshPosts();
         }  
     };  
@@ -160,11 +162,13 @@ public class BBSInTabViewFragment extends Fragment {
 		posts.clear();
 		String circle_id_st = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("current_circle_id", "");
 		int circle_id;
-		if (circle_id_st =="")
+		if (circle_id_st ==""){
 			return;
-		else circle_id = Integer.parseInt(circle_id_st);
+		}else{
+			circle_id = Integer.parseInt(circle_id_st);
+		}
 		
-		DBUtil db = new DBUtil();
+		PostDBUtil db = new PostDBUtil();
 		BBSElement post;
 		if (tag.equals("收藏")){
 			String userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
