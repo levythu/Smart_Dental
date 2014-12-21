@@ -49,7 +49,7 @@ public class BBSFragment extends Fragment {
 		fragmentManager = getFragmentManager();
 		list = (ListView) rootView.findViewById(R.id.circle_list);
 		
-		pd = ProgressDialog.show(this.getActivity(), "", "鍔犺浇涓紝璇风◢鍚庘�︹��");
+		pd = ProgressDialog.show(this.getActivity(), "", "载入中，请稍候...");
 		circles = new ArrayList<CircleElement>();
 		
 		listAdapter = new CircleListAdapter(circles, this.getActivity().getApplicationContext());
@@ -61,7 +61,7 @@ public class BBSFragment extends Fragment {
 			public void run() {
 				// TODO Auto-generated method stub
 				initCircles();		
-				handler.sendEmptyMessage(0);// 鎵ц鑰楁椂鐨勬柟娉曚箣鍚庡彂閫佹秷缁檋andler  			
+				handler.sendEmptyMessage(0); 			
 			}
         }).start();  
 		
