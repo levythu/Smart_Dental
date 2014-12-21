@@ -33,6 +33,7 @@ public class BBSInTabManageFragment extends Fragment {
 	private OnClickListener confirmlistener = new OnClickListener() {
 		public void onClick(View v) {
 			
+			Toast.makeText(getActivity(), db.setcirclePassword(circle_password_edit.getText().toString(), preferences.getString("username", "")), Toast.LENGTH_LONG).show();
 		}
 	};
 }
