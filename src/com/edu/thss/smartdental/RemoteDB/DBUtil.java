@@ -828,7 +828,7 @@ public class DBUtil {
 	}
 	
 	/**
-	 * 鏇磋娑堟伅鐘舵�佷负宸茶
+	 * 更新消息为已读
 	 * 
 	 * @return
 	 */
