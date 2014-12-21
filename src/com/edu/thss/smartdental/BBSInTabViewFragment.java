@@ -15,10 +15,13 @@ import com.edu.thss.smartdental.model.ImageElement;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -43,6 +46,7 @@ public class BBSInTabViewFragment extends Fragment {
 	
 	private Spinner view_spinner;
 	private ArrayAdapter tagAdapter; 
+	private ProgressDialog pd;
 	
 	public BBSInTabViewFragment(int id) {
 		UserId = id;
@@ -61,8 +65,9 @@ public class BBSInTabViewFragment extends Fragment {
 		    public void onItemSelected(AdapterView<?> parent, View view,
 		            int position, long id) {
 		        String str=parent.getItemAtPosition(position).toString();
-		        initPosts(str);
-		        refreshPosts();
+		        
+		        pd = ProgressDialog.show(parent.getContext(), "", "加载中，请稍后……");
+		        new Thread(new RunThread(str)).start();  
 		    }
 		    @Override
 		    public void onNothingSelected(AdapterView<?> parent) {
@@ -71,6 +76,7 @@ public class BBSInTabViewFragment extends Fragment {
 		});
 		
 		
+    	
 		editText = (EditText)rootView.findViewById(R.id.bbs_searchbox);
 		editText.addTextChangedListener(filterTextWatcher);
 		list = (ListView)rootView.findViewById(R.id.bbs_list);
@@ -80,12 +86,33 @@ public class BBSInTabViewFragment extends Fragment {
 		list.setDivider(null);
 		      
 		list.setOnItemClickListener(new OnPostItemClickListener(context));
-				
-
+		
 	
 		view_spinner.setSelection(5);
 		return rootView;
 	}
+	
+	private class RunThread implements Runnable{
+		String str;
+		public RunThread(String s){
+			str = s;
+		}
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			initPosts(str);
+	        handler.sendEmptyMessage(0);// 执行耗时的方法之后发送消给handler  
+		}
+		
+	};
+	
+	Handler handler = new Handler() {  
+        @Override  
+        public void handleMessage(Message msg) {// handler接收到消息后就会执行此方法  
+            pd.dismiss();// 关闭ProgressDialog 
+        	refreshPosts();
+        }  
+    };  
 	
 	private class OnPostItemClickListener implements OnItemClickListener{
 		Context context;
