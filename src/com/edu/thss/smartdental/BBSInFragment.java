@@ -3,7 +3,10 @@
  */
 package com.edu.thss.smartdental;
 
+import com.readystatesoftware.viewbadger.BadgeView;
+
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +22,7 @@ public class BBSInFragment extends Fragment {
 	private RadioGroup radioGroup;
 	private FragmentManager fragmentManager;
 	private int UserId;
+	private BadgeView badge;
 	
 	public BBSInFragment(int id) {
 		UserId = id;
@@ -31,6 +35,8 @@ public class BBSInFragment extends Fragment {
 		
 		fragmentManager = getFragmentManager();
 		radioGroup = (RadioGroup)rootView.findViewById(R.id.bbs_in_tab);
+		View button = rootView.findViewById(R.id.remind_button);
+		setBadgeView(button);
 		radioGroup.check(R.id.bbs_in_tab_view);
 		changeFragment(0);
 		RadioButton manageTag = (RadioButton)rootView.findViewById(R.id.bbs_in_tab_manage);
@@ -67,6 +73,17 @@ public class BBSInFragment extends Fragment {
 		return rootView;
 	}
 	
+	private void setBadgeView(View view) {
+		badge = new BadgeView(getActivity(), view);
+		badge.setText("12");
+		badge.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+		badge.setTextColor(Color.WHITE);
+		badge.setBadgeBackgroundColor(Color.RED);
+		badge.setTextSize(12);
+		badge.setBadgeMargin(5);
+		badge.show();
+	}
+	
 	private void changeFragment(int index){
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		Fragment tempfragment = null;
@@ -79,6 +96,7 @@ public class BBSInFragment extends Fragment {
 			tempfragment = new BBSFragment();
 			break;
 		case 2:
+			badge.hide();
 			tempfragment = new BBSInTabNewsFragment();
 			break;
 		case 3:

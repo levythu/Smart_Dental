@@ -100,6 +100,7 @@ public class BBSInTabViewFragment extends Fragment {
                  intent.putExtra("title", posts.get(position).title);
                  intent.putExtra("content", posts.get(position).content);
                  intent.putExtra("time", posts.get(position).time);
+                 intent.putExtra("postId", posts.get(position).id);
                  startActivity(intent);       
                  
          }

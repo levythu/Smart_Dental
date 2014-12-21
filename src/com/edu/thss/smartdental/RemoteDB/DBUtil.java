@@ -234,7 +234,7 @@ public class DBUtil {
 	 * 
 	 * @return
 	 */
-	public String SetuserPassword(String oldpassword, String newpassword, String doctorname){
+	public String setuserPassword(String oldpassword, String newpassword, String doctorname){
 		arrayList.clear();
 		brrayList.clear();
 		crrayList.clear();
@@ -245,7 +245,7 @@ public class DBUtil {
 		brrayList.add(newpassword);
 		brrayList.add(doctorname);
 		try{
-			crrayList = Soap.GetWebService("SetcirclePassword", arrayList, brrayList);
+			crrayList = Soap.GetWebService("SetuserPassword", arrayList, brrayList);
 		}
 		catch(Exception e) {
 		}
@@ -254,13 +254,56 @@ public class DBUtil {
 		}
 		return crrayList.get(0);
 	}
-	
+	/**
+	 * 获取用户身份
+	 * 
+	 * @return
+	 */
+	public String getuseridentity(String username)
+	{
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("username");
+		brrayList.add(username);
+		try{
+			crrayList = Soap.GetWebService("Getuseridentity", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
+	/**
+	 * 获取圈子密码
+	 * 
+	 * @return
+	 */
+	public String getCirclePassword(String doctorname)
+	{
+		arrayList.clear();
+		brrayList.clear();
+		crrayList.clear();
+		arrayList.add("doctorname");
+		brrayList.add(doctorname);
+		try{
+			crrayList = Soap.GetWebService("GetCirclePassword", arrayList, brrayList);
+		}
+		catch(Exception e) {
+		}
+		if(crrayList.size() == 0){
+			return "fail to connect to Database";
+		}
+		return crrayList.get(0);
+	}
 	/**
 	 * 设置圈子密码
 	 * 
 	 * @return
 	 */
-	public String SetcirclePassword(String oldpassword, String newpassword, String doctorname){
+	public String setcirclePassword(String oldpassword, String newpassword, String doctorname){
 		arrayList.clear();
 		brrayList.clear();
 		crrayList.clear();

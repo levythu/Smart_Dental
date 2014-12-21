@@ -32,6 +32,7 @@ public class BBSDetailActivity extends Activity {
 	private CommentAdapter commentAdapter;
 	private Context context;
 	private Button post_reply_button;
+	private String post_id;
 	private SharedPreferences preferences = null;
 
 	public static final int RESULT_CODE = 1; // ·µ»ØÂë
@@ -71,6 +72,7 @@ public class BBSDetailActivity extends Activity {
 		String time = getIntent().getExtras().getString("time");
 		String content = getIntent().getExtras().getString("content");
 		String title = getIntent().getExtras().getString("title");
+		post_id = getIntent().getExtras().getString("postId");
 
 		BBSDetail i = new BBSDetail(title, content, time, author);
 		posts.add(i);
@@ -93,6 +95,8 @@ public class BBSDetailActivity extends Activity {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent();
 			intent.setClass(context, PostReplyActivity.class);
+			intent.putExtra("postId", post_id);
+			intent.putExtra("username", preferences.getString("username", ""));
 			startActivity(intent);
 		}
 	};
