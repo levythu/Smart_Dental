@@ -9,14 +9,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 import android.content.SharedPreferences;
 
 public class BBSInTabManageFragment extends Fragment {
 	
 	Button confirm_btn;
 	EditText circle_password_edit;
-	DBUtil db = new DBUtil();
+	UserDBUtil db = new UserDBUtil();
 	SharedPreferences preferences = null;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

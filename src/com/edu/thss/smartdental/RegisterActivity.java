@@ -14,13 +14,13 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 
 public class RegisterActivity extends Activity {
 
 	Button register_btn, login_btn;
 	EditText username_edit, password_edit, repeat_password_edit;
-	DBUtil db = new DBUtil();
+	UserDBUtil db = new UserDBUtil();
 	SharedPreferences preferences = null;
 	Editor editor = null;
 	

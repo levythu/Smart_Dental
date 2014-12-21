@@ -1,6 +1,6 @@
 package com.edu.thss.smartdental;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +18,7 @@ public class ChangePasswordActivity extends Activity {
 
 	Button confirm_btn, cancel_btn;
 	EditText old_password_edit, new_password_edit, repeat_new_password_edit;
-	DBUtil db = new DBUtil();
+	UserDBUtil db = new UserDBUtil();
 	SharedPreferences preferences = null;
 	
 	protected void onCreate(Bundle savedInstanceState) {

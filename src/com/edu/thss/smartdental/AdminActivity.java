@@ -22,12 +22,12 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 
 public class AdminActivity extends FragmentActivity {
 
 	RadioGroup radioGroup;
-	DBUtil db = new DBUtil();
+	UserDBUtil db = new UserDBUtil();
 	private Notification notification;
 	private NotificationManager nManager;
 	private Notification.Builder nBuilder;
