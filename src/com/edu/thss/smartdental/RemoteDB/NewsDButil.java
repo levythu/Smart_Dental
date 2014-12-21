@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class NewsDButil {
+public class NewsDBUtil {
 	private ArrayList<String> parametername = new ArrayList<String>();
 	private ArrayList<String> parametervalue = new ArrayList<String>();
 	private ArrayList<String> resultinfo = new ArrayList<String>();

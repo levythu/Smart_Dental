@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PostDButil {
+public class PostDBUtil {
 	private ArrayList<String> parametername = new ArrayList<String>();
 	private ArrayList<String> parametervalue = new ArrayList<String>();
 	private ArrayList<String> resultinfo = new ArrayList<String>();

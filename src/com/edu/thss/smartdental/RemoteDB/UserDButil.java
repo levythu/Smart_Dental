@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UserDButil {
+public class UserDBUtil {
 	private ArrayList<String> parametername = new ArrayList<String>();
 	private ArrayList<String> parametervalue = new ArrayList<String>();
 	private ArrayList<String> resultinfo = new ArrayList<String>();
@@ -18,7 +18,7 @@ public class UserDButil {
 	
 	
 	/**
-	 * è·å–åœˆå­å†…å…¨éƒ¨æ‚£è€…
+	 * »ñÈ¡È¦×ÓÄÚÈ«²¿»¼Õß
 	 * 
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public class UserDButil {
 		return list;
 	}
 	/**
-	 * è·å–å…¨éƒ¨åŒ»ç”Ÿ
+	 * »ñÈ¡È«²¿Ò½Éú
 	 * 
 	 * @return
 	 */
@@ -85,7 +85,7 @@ public class UserDButil {
 	}
 	
 	/**
-	 * è·å¾—ä¸€ä¸ªç”¨æˆ·æ‰€æœ‰åœˆå­åŒ»ç”Ÿåˆ—è¡¨
+	 *  »ñµÃÒ»¸öÓÃ»§ËùÓĞÈ¦×ÓÒ½ÉúÁĞ±í
 	 * 
 	 * @return
 	 */
@@ -121,7 +121,7 @@ public class UserDButil {
 	}
 	
 	/**
-	 * æ³¨å†Œç”¨æˆ·
+	 * ×¢²áÓÃ»§
 	 * 
 	 * @return
 	 */
@@ -149,7 +149,7 @@ public class UserDButil {
 	}
 	
 	/**
-	 * ç™»å½•
+	 *  µÇÂ¼
 	 * if log in success return true
 	 * else if user not exist return user does not exist
 	 * else if wrong password return wrong password
@@ -177,7 +177,7 @@ public class UserDButil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * åˆ é™¤ä¸€ä¸ªç”¨æˆ·
+	 * É¾³ıÒ»¸öÓÃ»§
 	 * 
 	 * @return
 	 */
@@ -200,7 +200,7 @@ public class UserDButil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * åŠ å…¥åœˆå­
+	 * ¼ÓÈëÈ¦×Ó
 	 * 
 	 * @return
 	 */
@@ -226,7 +226,7 @@ public class UserDButil {
 	}
 	
 	/**
-	 * è®¾ç½®ç”¨æˆ·å¯†ç 
+	 * ÉèÖÃÓÃ»§ÃÜÂë
 	 * 
 	 * @return
 	 */
@@ -251,7 +251,7 @@ public class UserDButil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * è·å–ç”¨æˆ·èº«ä»½
+	 * »ñÈ¡ÓÃ»§Éí·İ
 	 * 
 	 * @return
 	 */
@@ -273,7 +273,7 @@ public class UserDButil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * è·å–åœˆå­å¯†ç 
+	 * »ñÈ¡È¦×ÓÃÜÂë
 	 * 
 	 * @return
 	 */
@@ -295,7 +295,7 @@ public class UserDButil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * è®¾ç½®åœˆå­å¯†ç 
+	 * ÉèÖÃÈ¦×ÓÃÜÂë
 	 * 
 	 * @return
 	 */
@@ -319,7 +319,7 @@ public class UserDButil {
 	}
 	
 	/**
-	 * è¸¢å‡ºåœˆå­
+	 * Ìß³öÈ¦×Ó
 	 * 
 	 * @return
 	 */
