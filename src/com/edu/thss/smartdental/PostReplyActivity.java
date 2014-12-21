@@ -1,7 +1,11 @@
 package com.edu.thss.smartdental;
 
+import com.edu.thss.smartdental.RemoteDB.DBUtil;
+
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +16,9 @@ import android.widget.EditText;
 public class PostReplyActivity extends Activity {
 	private ActionBar actionBar;
 	private EditText edit_reply_content;
+	private String post_id;
+	private String username;
+	private static DBUtil db = new DBUtil();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -19,6 +26,9 @@ public class PostReplyActivity extends Activity {
 		actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.activity_post);
+		edit_reply_content = (EditText)findViewById(R.id.edit_reply_content);
+		post_id = getIntent().getExtras().getString("postId");
+		username = getIntent().getExtras().getString("username");
 	}
 	
 	@Override
@@ -38,7 +48,39 @@ public class PostReplyActivity extends Activity {
 			finish();
 			break;
 		case R.id.post_button:
-			
+			String result;
+			if (edit_reply_content.getText().toString().equals("")) {
+				result = "评论不能为空";
+			}
+			else {
+				result = db.insertComment(post_id, edit_reply_content.getText().toString(), username, "回帖", "1");
+			}
+			if (result.equals("true")) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(PostReplyActivity.this);
+				builder.setMessage("发布成功")
+					   .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							finish();
+						}
+					});
+				builder.show();
+			}
+			else {
+				AlertDialog.Builder builder = new AlertDialog.Builder(PostReplyActivity.this);
+				if (result.equals("false")) result = "连不上服务器";
+				builder.setMessage(result)
+					   .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+						}
+					});
+				builder.show();
+			};
 		default:
 			break;
 		}
