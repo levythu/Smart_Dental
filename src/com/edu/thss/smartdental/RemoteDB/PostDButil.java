@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PostDButil {
+public class PostDBUtil {
 	private ArrayList<String> parametername = new ArrayList<String>();
 	private ArrayList<String> parametervalue = new ArrayList<String>();
 	private ArrayList<String> resultinfo = new ArrayList<String>();
 	private HttpConnSoap Soap = new HttpConnSoap();
 	/**
-	 * 获取圈子内全部帖子信息
+	 * 鑾峰彇鍦堝瓙鍐呭叏閮ㄥ笘瀛愪俊鎭�
 	 * 
 	 * @return
 	 */
@@ -60,7 +60,7 @@ public class PostDButil {
 	}
 
 	/**
-	 * 通过id获取帖子
+	 * 閫氳繃id鑾峰彇甯栧瓙
 	 * 
 	 * @return
 	 */
@@ -105,7 +105,7 @@ public class PostDButil {
 	}
 	
 	/**
-	 * 获取一个用户的全部帖子
+	 * 鑾峰彇涓�涓敤鎴风殑鍏ㄩ儴甯栧瓙
 	 * 
 	 * @return
 	 */
@@ -148,7 +148,7 @@ public class PostDButil {
 	}
 	
 	/**
-	 * 获得用户收藏帖子列表
+	 * 鑾峰緱鐢ㄦ埛鏀惰棌甯栧瓙鍒楄〃
 	 * 
 	 * @return
 	 */
@@ -180,7 +180,7 @@ public class PostDButil {
 		return list;
 	}
 	/**
-	 * 收藏帖子
+	 * 鏀惰棌甯栧瓙
 	 * 
 	 * @return
 	 */
@@ -205,7 +205,7 @@ public class PostDButil {
 	}
 	
 	/**
-	 * 取消收藏
+	 * 鍙栨秷鏀惰棌
 	 * 
 	 * @return
 	 */
@@ -229,7 +229,7 @@ public class PostDButil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * 发新帖子
+	 * 鍙戞柊甯栧瓙
 	 * 
 	 * @return
 	 */
@@ -261,7 +261,7 @@ public class PostDButil {
 	}
 	
 	/**
-	 * 删除帖子
+	 * 鍒犻櫎甯栧瓙
 	 * 
 	 * @return
 	 */

@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CommentDButil {
+public class CommentDBUtil {
 	private ArrayList<String> parametername = new ArrayList<String>();
 	private ArrayList<String> parametervalue = new ArrayList<String>();
 	private ArrayList<String> resultinfo = new ArrayList<String>();
 	private HttpConnSoap Soap = new HttpConnSoap();
 	/**
-	 * 获取帖子内全部评论
+	 * 鑾峰彇甯栧瓙鍐呭叏閮ㄨ瘎璁�
 	 * 
 	 * @return
 	 */
@@ -54,7 +54,7 @@ public class CommentDButil {
 		return list;
 	}
 	/**
-	 * 新增评论
+	 * 鏂板璇勮
 	 * 
 	 * @return
 	 */
@@ -85,7 +85,7 @@ public class CommentDButil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * 删除评论
+	 * 鍒犻櫎璇勮
 	 * 
 	 * @return
 	 */
