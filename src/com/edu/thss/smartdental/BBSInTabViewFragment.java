@@ -68,7 +68,7 @@ public class BBSInTabViewFragment extends Fragment {
 		            int position, long id) {
 		        String str=parent.getItemAtPosition(position).toString();
 		        
-		        pd = ProgressDialog.show(parent.getContext(), "", "鍔犺浇涓紝璇风◢鍚庘�︹��");
+		        pd = ProgressDialog.show(parent.getContext(), "", "载入中，请稍候...");
 		        new Thread(new RunThread(str)).start();  
 		    }
 		    @Override
@@ -103,15 +103,15 @@ public class BBSInTabViewFragment extends Fragment {
 		public void run() {
 			// TODO Auto-generated method stub
 			initPosts(str);
-	        handler.sendEmptyMessage(0);// 鎵ц鑰楁椂鐨勬柟娉曚箣鍚庡彂閫佹秷缁檋andler  
+	        handler.sendEmptyMessage(0);
 		}
 		
 	};
 	
 	Handler handler = new Handler() {  
         @Override  
-        public void handleMessage(Message msg) {// handler鎺ユ敹鍒版秷鎭悗灏变細鎵ц姝ゆ柟娉�  
-            pd.dismiss();// 鍏抽棴ProgressDialog 
+        public void handleMessage(Message msg) {  
+            pd.dismiss(); 
         	refreshPosts();
         }  
     };  
@@ -170,7 +170,7 @@ public class BBSInTabViewFragment extends Fragment {
 		
 		PostDBUtil db = new PostDBUtil();
 		BBSElement post;
-		if (tag.equals("鏀惰棌")){
+		if (tag.equals("收藏")){
 			String userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
 			List<HashMap<String, String>> idList = db.selectcollectPostid(userName);
 			for (int i = 1; i < idList.size(); i++){
@@ -192,7 +192,7 @@ public class BBSInTabViewFragment extends Fragment {
 		
 		List<HashMap<String, String>> PostList  = db.getAllPostInfo(circle_id);
 		for (int i = 1; i < PostList.size(); i++){
-			if (tag.equals("鍏ㄩ儴") || tag.equals(PostList.get(i).get("tag"))){
+			if (tag.equals("全部") || tag.equals(PostList.get(i).get("tag"))){
 				String s1=PostList.get(i).get("postname");
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
