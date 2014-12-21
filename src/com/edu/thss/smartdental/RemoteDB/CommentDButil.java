@@ -11,7 +11,7 @@ public class CommentDBUtil {
 	private ArrayList<String> resultinfo = new ArrayList<String>();
 	private HttpConnSoap Soap = new HttpConnSoap();
 	/**
-	 * 鑾峰彇甯栧瓙鍐呭叏閮ㄨ瘎璁�
+	 * 获取帖子内全部评论
 	 * 
 	 * @return
 	 */
@@ -54,7 +54,7 @@ public class CommentDBUtil {
 		return list;
 	}
 	/**
-	 * 鏂板璇勮
+	 * 新增评论
 	 * 
 	 * @return
 	 */
@@ -85,7 +85,7 @@ public class CommentDBUtil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * 鍒犻櫎璇勮
+	 * 删除评论
 	 * 
 	 * @return
 	 */

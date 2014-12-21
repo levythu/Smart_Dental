@@ -11,7 +11,7 @@ public class NewsDBUtil {
 	private ArrayList<String> resultinfo = new ArrayList<String>();
 	private HttpConnSoap Soap = new HttpConnSoap();
 	/**
-	 * 鑾峰緱鐢ㄦ埛鍏ㄩ儴鏂版秷鎭�
+	 * 获得用户全部新消息
 	 * 
 	 * @return
 	 */
@@ -51,7 +51,7 @@ public class NewsDBUtil {
 		return list;
 	}
 	/**
-	 * 鑾峰彇鐢ㄦ埛鍏ㄩ儴宸茶娑堟伅
+	 * 获取用户全部已读消息
 	 * 
 	 * @return
 	 */
@@ -92,7 +92,7 @@ public class NewsDBUtil {
 	}
 	
 	/**
-	 * 鏂板缓涓�鏉℃秷鎭�
+	 * 新建一条消息
 	 * 
 	 * @return
 	 */
@@ -124,7 +124,7 @@ public class NewsDBUtil {
 	}
 	
 	/**
-	 * 鏇存柊娑堟伅涓哄凡璇�
+	 * 更新消息为已读
 	 * 
 	 * @return
 	 */

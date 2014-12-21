@@ -15,7 +15,7 @@ public class PostDBUtil {
 	private ArrayList<String> resultinfo = new ArrayList<String>();
 	private HttpConnSoap Soap = new HttpConnSoap();
 	/**
-	 * 鑾峰彇鍦堝瓙鍐呭叏閮ㄥ笘瀛愪俊鎭�
+	 * 获取圈子内全部帖子信息
 	 * 
 	 * @return
 	 */
@@ -60,7 +60,7 @@ public class PostDBUtil {
 	}
 
 	/**
-	 * 閫氳繃id鑾峰彇甯栧瓙
+	 * 通过id获取帖子
 	 * 
 	 * @return
 	 */
@@ -105,7 +105,7 @@ public class PostDBUtil {
 	}
 	
 	/**
-	 * 鑾峰彇涓�涓敤鎴风殑鍏ㄩ儴甯栧瓙
+	 * 获取一个用户的全部帖子
 	 * 
 	 * @return
 	 */
@@ -148,7 +148,7 @@ public class PostDBUtil {
 	}
 	
 	/**
-	 * 鑾峰緱鐢ㄦ埛鏀惰棌甯栧瓙鍒楄〃
+	 * 获得用户收藏帖子列表
 	 * 
 	 * @return
 	 */
@@ -180,7 +180,7 @@ public class PostDBUtil {
 		return list;
 	}
 	/**
-	 * 鏀惰棌甯栧瓙
+	 * 收藏帖子
 	 * 
 	 * @return
 	 */
@@ -205,7 +205,7 @@ public class PostDBUtil {
 	}
 	
 	/**
-	 * 鍙栨秷鏀惰棌
+	 * 取消收藏
 	 * 
 	 * @return
 	 */
@@ -229,7 +229,7 @@ public class PostDBUtil {
 		return resultinfo.get(0);
 	}
 	/**
-	 * 鍙戞柊甯栧瓙
+	 * 发新帖子
 	 * 
 	 * @return
 	 */
@@ -261,7 +261,7 @@ public class PostDBUtil {
 	}
 	
 	/**
-	 * 鍒犻櫎甯栧瓙
+	 * 删除帖子
 	 * 
 	 * @return
 	 */
