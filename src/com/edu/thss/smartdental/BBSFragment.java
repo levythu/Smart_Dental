@@ -13,9 +13,12 @@ import com.edu.thss.smartdental.adapter.CircleListAdapter;
 import com.edu.thss.smartdental.model.CircleElement;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -32,6 +35,7 @@ public class BBSFragment extends Fragment {
 	private ArrayList<CircleElement> circles;
 	private CircleListAdapter listAdapter;
 	private View join_circle_button;
+	private ProgressDialog pd;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -42,16 +46,39 @@ public class BBSFragment extends Fragment {
 		
 		fragmentManager = getFragmentManager();
 		list = (ListView) rootView.findViewById(R.id.circle_list);
-		initCircles();
+		
+		pd = ProgressDialog.show(this.getActivity(), "", "加载中，请稍后……");
+		circles = new ArrayList<CircleElement>();
+		
 		listAdapter = new CircleListAdapter(circles, this.getActivity().getApplicationContext());
-		list.setAdapter(listAdapter);
-		list.setOnItemClickListener(new OnCircleItemClickListener());
+	    list.setAdapter(listAdapter);
+	    list.setOnItemClickListener(new OnCircleItemClickListener());
+        new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				initCircles();		
+				handler.sendEmptyMessage(0);// 执行耗时的方法之后发送消给handler  			
+			}
+        }).start();  
+		
+       
 		
 		return rootView;
 	}
 	
-	private void initCircles(){
-		circles = new ArrayList<CircleElement>();
+	Handler handler = new Handler() {  
+        @Override  
+        public void handleMessage(Message msg) {// handler接收到消息后就会执行此方法  
+        	showCircles();
+            pd.dismiss();// 关闭ProgressDialog 
+            
+        }  
+    }; 
+    
+    private void initCircles(){
+		
 		DBUtil db = new DBUtil();
 		String username = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
 		List<HashMap<String, String>> docList = db.selectDoctorsByname(username);
@@ -64,6 +91,10 @@ public class BBSFragment extends Fragment {
 		}
 	}
 	
+    private void showCircles(){
+		this.listAdapter.notifyDataSetChanged();
+    }
+    
 	private class OnJoinButtonClickListener implements OnClickListener {
 
 		@Override
