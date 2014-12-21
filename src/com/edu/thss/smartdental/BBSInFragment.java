@@ -3,10 +3,6 @@
  */
 package com.edu.thss.smartdental;
 
-import java.util.HashMap;
-import java.util.List;
-
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 import android.app.Activity;
@@ -17,7 +13,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v4.app.FragmentManager;
@@ -45,11 +40,9 @@ public class BBSInFragment extends Fragment {
 		radioGroup.check(R.id.bbs_in_tab_view);
 		changeFragment(0);
 		RadioButton manageTag = (RadioButton)rootView.findViewById(R.id.bbs_in_tab_manage);
-		Button manageInvisibleTag = (Button) rootView.findViewById(R.id.manage_invisible_button);
 		String user_name = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
 		if(!user_name.equals("qq")){
 			manageTag.setVisibility(View.GONE);
-			manageInvisibleTag.setVisibility(View.GONE);
 		}
 		radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 			
@@ -82,19 +75,13 @@ public class BBSInFragment extends Fragment {
 	
 	private void setBadgeView(View view) {
 		badge = new BadgeView(getActivity(), view);
-		DBUtil db = new DBUtil();
-		String userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
-		List<HashMap<String, String>> newsList = db.selectAllUnreadNewsByUsername(userName);
-		int num = newsList.size() - 1;
-		badge.setText(Integer.toString(num));
+		badge.setText("12");
 		badge.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
 		badge.setTextColor(Color.WHITE);
 		badge.setBadgeBackgroundColor(Color.RED);
 		badge.setTextSize(12);
 		badge.setBadgeMargin(5);
-		if (num > 0) {
-			badge.show();
-		}
+		badge.show();
 	}
 	
 	private void changeFragment(int index){
