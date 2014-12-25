@@ -104,7 +104,11 @@
         </activity>
         <activity
             android:name=".PostReplyActivity"
-            android:label="@string/title_activity_join_circle" >
+            android:label="@string/title_activity_reply" >
+        </activity>
+        <activity
+            android:name=".PostBBSActivity"
+            android:label="@string/title_activity_reply" >
         </activity>
     </application>
 

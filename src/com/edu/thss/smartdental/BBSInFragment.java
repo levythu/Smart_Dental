@@ -6,6 +6,7 @@ package com.edu.thss.smartdental;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -100,13 +101,19 @@ public class BBSInFragment extends Fragment {
 			tempfragment = new BBSInTabNewsFragment();
 			break;
 		case 3:
-			tempfragment = new BBSInTabPostFragment();
+			//tempfragment = new BBSInTabPostFragment();
+			Intent intent = new Intent();
+			intent.setClass(getActivity().getApplicationContext(), PostBBSActivity.class);
+//			intent.putExtra("postId", 11);
+//			intent.putExtra("username", "yy");
+			startActivity(intent);
+			radioGroup.check(R.id.bbs_in_tab_view);
 			break;
 		case 4:
 			tempfragment = new BBSInTabManageFragment();
 			break;
 		}
-		if (tempfragment != null) {
+		if (tempfragment != null && index != 4) {
 			transaction.replace(R.id.bbs_in_tab_content, tempfragment);
     	transaction.commit();
         }
