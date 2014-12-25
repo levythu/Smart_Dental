@@ -5,17 +5,19 @@
 package com.edu.thss.smartdental;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 
 public class LoginActivity extends Activity {
@@ -25,6 +27,7 @@ public class LoginActivity extends Activity {
 	UserDBUtil db = new UserDBUtil();
 	SharedPreferences preferences = null;
 	Editor editor = null;
+	ProgressDialog pd;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()  
@@ -47,9 +50,37 @@ public class LoginActivity extends Activity {
 		register_btn.setOnClickListener(registerListener);
 	}
 	
-	private OnClickListener loginListener = new OnClickListener() {
-		public void onClick(View v) {
+	Handler handler = new Handler() {  
+        @Override  
+        public void handleMessage(Message msg) { 
+            switch (msg.what) {
+            case 0:
+            	pd.dismiss();
+            	break;
+            case 1:
+            	Toast.makeText(LoginActivity.this, "用户不存在", Toast.LENGTH_LONG).show();
+            	break;
+            case 2:
+            	Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_LONG).show();
+            	break;
+            case 3:
+            	Toast.makeText(LoginActivity.this, "连不上服务器", Toast.LENGTH_LONG).show();
+            	break;
+            case 4:
+            	Toast.makeText(LoginActivity.this, "未知错误", Toast.LENGTH_LONG).show();
+            	break;
+            default:
+            	break;	
+            }
+        }  
+    };
+    
+	private class loginThread implements Runnable{
+		@Override
+		public void run() {
 			Intent intent = new Intent();
+			Message message1 = new Message();
+			Message message2 = new Message();
 			if (username.getText().toString().equals(getString(R.string.admin_username)))
 				if (password.getText().toString().equals(getString(R.string.admin_password))) {
 					editor.putString("username", username.getText().toString());
@@ -58,11 +89,16 @@ public class LoginActivity extends Activity {
 					intent.setClass(LoginActivity.this, AdminActivity.class);
 				}
 				else {
-					Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_LONG).show();
+					message1.what = 0;
+					handler.sendMessage(message1);
+					message2.what = 2;
+					handler.sendMessage(message2);
 					return;
 				}
 			else {
 				String t = db.login(username.getText().toString(), password.getText().toString());
+				message1.what = 0;
+				handler.sendMessage(message1);
 				if (t.matches("\\d+")) {
 					editor.putInt("userid", Integer.parseInt(t));
 					editor.putString("username", username.getText().toString());
@@ -72,15 +108,16 @@ public class LoginActivity extends Activity {
 				}
 				else {
 					if (t.equals("user does not exist"))
-						Toast.makeText(LoginActivity.this, "用户不存在", Toast.LENGTH_LONG).show();
+						message2.what = 1;
 					else
 						if (t.equals("wrong password"))
-							Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_LONG).show();
+							message2.what = 2;
 						else
 							if (t.equals("fail to connect to Database"))
-								Toast.makeText(LoginActivity.this, "连不上服务器", Toast.LENGTH_LONG).show();
+								message2.what = 3;
 							else
-								Toast.makeText(LoginActivity.this, "未知错误", Toast.LENGTH_LONG).show();
+								message2.what = 4;
+					handler.sendMessage(message2);
 					return;
 				}
 			}
@@ -88,6 +125,14 @@ public class LoginActivity extends Activity {
 			finish();
 		}
 	};
+	
+	private OnClickListener loginListener = new OnClickListener() {
+		public void onClick(View v) {
+			pd = ProgressDialog.show(LoginActivity.this, "", "登录中");
+	        new Thread(new loginThread()).start();
+		}
+	};
+	
 	private OnClickListener registerListener = new OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent();
