@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/light_grey">
 
     <ListView
         android:id="@+id/listView2"
@@ -10,7 +11,16 @@
         android:layout_height="wrap_content" >
 
     </ListView>
-
+    
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="match_parent"
+    	android:layout_height="20dp"
+    	android:background="@color/light_grey"
+    	android:orientation="horizontal" 
+    	android:layout_below="@+id/listView2"
+    	android:descendantFocusability="blocksDescendants">
+     </RelativeLayout>
+     
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
