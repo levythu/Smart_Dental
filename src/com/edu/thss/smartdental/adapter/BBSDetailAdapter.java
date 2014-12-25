@@ -2,9 +2,12 @@ package com.edu.thss.smartdental.adapter;
 
 import java.util.ArrayList;
 
+import com.edu.thss.smartdental.BBSDetailActivity;
 import com.edu.thss.smartdental.MainActivity;
 import com.edu.thss.smartdental.R;
+import com.edu.thss.smartdental.RemoteDB.PostDBUtil;
 import com.edu.thss.smartdental.model.BBSDetail;
+
 
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
@@ -30,10 +33,12 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 	
 	
 	private buttonViewHolder holder1;
+	BBSDetailActivity context1;
 	
-	public BBSDetailAdapter(ArrayList<BBSDetail> list, Context context){
+	public BBSDetailAdapter(ArrayList<BBSDetail> list, Context context, BBSDetailActivity context1){
 		this.list = list;
 		this.context = context;
+		this.context1 = context1;
 	}
 
 	@Override
@@ -74,6 +79,9 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 		holder.delete = (Button)convertView.findViewById(R.id.bbs_detail_item_delete);
 		holder.delete.setOnClickListener(new ButtonListner(position));
 
+		if(!context1.isLocalUser()){
+			holder.delete.setVisibility(View.INVISIBLE);
+		}
 		return convertView;
 	}
 
@@ -132,12 +140,20 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 
 		@Override
 		public void onClick(View v) {
-			
+
 			int vid = v.getId();
-			if(vid == holder.delete.getId()){
-			 //
-				//list.remove(itemPosition);
+			if(context1.isLocalUser()){
+				//delete the post 
+				PostDBUtil dbUtil = new PostDBUtil();
+				dbUtil.deletePost(Integer.parseInt(context1.getPostId()));
+				
+				list.remove(itemPosition);
 				notifyDataSetChanged();
+				
+				//jump page to BBSInTabView
+				//Intent intent = new Intent();
+                //intent.setClass(context,BBSDetailActivity.class);
+                
 			}
 			
 		}
