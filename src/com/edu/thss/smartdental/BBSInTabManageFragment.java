@@ -11,10 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 import android.content.SharedPreferences;
+import android.content.Intent;
 
 public class BBSInTabManageFragment extends Fragment {
 	
-	Button confirm_btn;
+	Button confirm_btn, all_patient_btn;
 	EditText circle_password_edit;
 	UserDBUtil db = new UserDBUtil();
 	SharedPreferences preferences = null;
@@ -27,6 +28,8 @@ public class BBSInTabManageFragment extends Fragment {
 		circle_password_edit.setText(db.getCirclePassword(preferences.getString("username", "")));
 		confirm_btn = (Button)rootView.findViewById(R.id.confirm_btn);
 		confirm_btn.setOnClickListener(confirmlistener);
+		all_patient_btn = (Button)rootView.findViewById(R.id.all_patient_btn);
+		all_patient_btn.setOnClickListener(allpatientlistener);
 		return rootView;
 	}
 
@@ -40,6 +43,14 @@ public class BBSInTabManageFragment extends Fragment {
 					Toast.makeText(getActivity(), "连不上服务器", Toast.LENGTH_LONG).show();
 				else
 					Toast.makeText(getActivity(), "未知错误", Toast.LENGTH_LONG).show();
+		}
+	};
+	
+	private OnClickListener allpatientlistener = new OnClickListener() {
+		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(getActivity(), AllPatientActivity.class);
+			startActivity(intent);
 		}
 	};
 }

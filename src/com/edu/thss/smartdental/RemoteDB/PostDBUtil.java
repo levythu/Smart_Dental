@@ -265,14 +265,14 @@ public class PostDBUtil {
 	 * 
 	 * @return
 	 */
-	public String deletePost(String postname) {
+	public String deletePost(int postId) {
 
 		parametername.clear();
 		parametervalue.clear();
 		resultinfo.clear();
 		
-		parametername.add("postname");
-		parametervalue.add(postname);
+		parametername.add("postId");
+		parametervalue.add(Integer.toString(postId));
 		try{
 			resultinfo = Soap.GetWebService("deletePost", parametername, parametervalue);
 		}
