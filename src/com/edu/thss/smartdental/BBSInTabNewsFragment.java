@@ -1,7 +1,9 @@
 package com.edu.thss.smartdental;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import com.edu.thss.smartdental.RemoteDB.NewsDBUtil;
 import com.edu.thss.smartdental.adapter.NewsListAdapter;
 import com.edu.thss.smartdental.model.NewsElement;
 
@@ -42,9 +44,16 @@ public class BBSInTabNewsFragment extends Fragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+			NewsDBUtil db = new NewsDBUtil();
+			NewsElement element = newsList.get(position);
+			Iterator<String> iterator = element.getNewsIDList().iterator();
+			while (iterator.hasNext()) {
+				db.haveread(iterator.next());
+			}
 			Intent intent = new Intent(getActivity(), BBSDetailActivity.class);
-			intent.putExtra("postId", newsList.get(position).getPostID());
+			intent.putExtra("postId", element.getPostID());
 			startActivity(intent);
+			view.setVisibility(View.GONE);
 		}
 		
 	}
