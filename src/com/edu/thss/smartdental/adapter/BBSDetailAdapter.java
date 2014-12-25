@@ -150,6 +150,7 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 				list.remove(itemPosition);
 				notifyDataSetChanged();
 				
+				context1.finish();
 				//jump page to BBSInTabView
 				//Intent intent = new Intent();
                 //intent.setClass(context,BBSDetailActivity.class);
