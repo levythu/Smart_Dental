@@ -21,6 +21,8 @@
     <string name="title_activity_change_password">修改密码</string>
     <string name="title_activity_admin">超级管理员</string>
     <string name="title_activity_my_test">MyTestActivity</string>
+    <string name="title_activity_reply">评论</string>
+    <string name="title_activity_post_bbs">发帖</string>
     <string name="admin_username">admin</string>
     <string name="admin_password">admin123</string>
     <string name="choose_circle">选择圈子</string>
@@ -37,5 +39,6 @@
     <string name="already_in_circle">您已加入过该圈子</string>
     <string name="join_successfully">加入成功</string>
     <string name="system_busy">系统繁忙，请稍候</string>
+    <string name="loading">载入中，请稍候...</string>
 
 </resources>

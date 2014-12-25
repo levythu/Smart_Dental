@@ -27,7 +27,7 @@ public class PostReplyActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		setContentView(R.layout.activity_post);
+		setContentView(R.layout.activity_post_reply);
 		edit_reply_content = (EditText)findViewById(R.id.edit_reply_content);
 		post_id = getIntent().getExtras().getString("postId");
 		username = getIntent().getExtras().getString("username");

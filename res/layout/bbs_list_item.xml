@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Image历史记录中每一个item的格式 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -55,14 +54,13 @@
 	    android:layout_marginTop="14dp"
 	    android:text="time"
 	    />
-		<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="20dp"
-    android:background="@color/light_grey"
-    android:orientation="horizontal" 
-    android:layout_below="@+id/bbs_list_item_author"
-    android:descendantFocusability="blocksDescendants">
-
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="match_parent"
+    	android:layout_height="20dp"
+    	android:background="@color/light_grey"
+    	android:orientation="horizontal" 
+    	android:layout_below="@+id/bbs_list_item_author"
+    	android:descendantFocusability="blocksDescendants">
      </RelativeLayout>
 
 	

@@ -68,7 +68,7 @@ public class BBSInTabViewFragment extends Fragment {
 		            int position, long id) {
 		        String str=parent.getItemAtPosition(position).toString();
 		        
-		        pd = ProgressDialog.show(parent.getContext(), "", "载入中，请稍候...");
+		        pd = ProgressDialog.show(parent.getContext(), "", getActivity().getResources().getString(R.string.loading));
 		        new Thread(new RunThread(str)).start();  
 		    }
 		    @Override
@@ -170,7 +170,7 @@ public class BBSInTabViewFragment extends Fragment {
 		
 		PostDBUtil db = new PostDBUtil();
 		BBSElement post;
-		if (tag.equals("收藏")){
+		if (tag.equals("�ղ�")){
 			String userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
 			List<HashMap<String, String>> idList = db.selectcollectPostid(userName);
 			for (int i = 1; i < idList.size(); i++){
@@ -192,7 +192,7 @@ public class BBSInTabViewFragment extends Fragment {
 		
 		List<HashMap<String, String>> PostList  = db.getAllPostInfo(circle_id);
 		for (int i = 1; i < PostList.size(); i++){
-			if (tag.equals("全部") || tag.equals(PostList.get(i).get("tag"))){
+			if (tag.equals("ȫ��") || tag.equals(PostList.get(i).get("tag"))){
 				String s1=PostList.get(i).get("postname");
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
