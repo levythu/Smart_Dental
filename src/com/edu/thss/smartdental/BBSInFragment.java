@@ -3,6 +3,9 @@
  */
 package com.edu.thss.smartdental;
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.readystatesoftware.viewbadger.BadgeView;
 
 import android.app.Activity;
@@ -17,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v4.app.FragmentManager;
+
+import com.edu.thss.smartdental.RemoteDB.NewsDBUtil;
 import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 
 public class BBSInFragment extends Fragment {
@@ -24,8 +29,10 @@ public class BBSInFragment extends Fragment {
 	private RadioGroup radioGroup;
 	private FragmentManager fragmentManager;
 	private int UserId;
+	private String userName;
 	private BadgeView badge;
 	UserDBUtil db = new UserDBUtil();
+	private List<HashMap<String, String>> newsListFromDB;
 	
 	public BBSInFragment(int id) {
 		UserId = id;
@@ -39,12 +46,13 @@ public class BBSInFragment extends Fragment {
 		fragmentManager = getFragmentManager();
 		radioGroup = (RadioGroup)rootView.findViewById(R.id.bbs_in_tab);
 		View button = rootView.findViewById(R.id.remind_button);
+		this.userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
+		this.newsListFromDB = getNewsList();
 		setBadgeView(button);
 		radioGroup.check(R.id.bbs_in_tab_view);
 		changeFragment(0);
 		RadioButton manageTag = (RadioButton)rootView.findViewById(R.id.bbs_in_tab_manage);
-		String user_name = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
-		if(!db.getuseridentity(user_name).equals("doctor")){
+		if(!db.getuseridentity(this.userName).equals("doctor")){
 			manageTag.setVisibility(View.GONE);
 		}
 		radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
@@ -78,13 +86,28 @@ public class BBSInFragment extends Fragment {
 	
 	private void setBadgeView(View view) {
 		badge = new BadgeView(getActivity(), view);
-		badge.setText("12");
-		badge.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
-		badge.setTextColor(Color.WHITE);
-		badge.setBadgeBackgroundColor(Color.RED);
-		badge.setTextSize(12);
-		badge.setBadgeMargin(5);
-		badge.show();
+		int num = this.newsListFromDB.size() - 1;
+		if (num > 0) {
+			if (num > 99) {
+				badge.setText("...");
+			} else {
+				badge.setText(Integer.toString(num));
+			}
+			badge.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+			badge.setTextColor(Color.WHITE);
+			badge.setBadgeBackgroundColor(Color.RED);
+			badge.setTextSize(12);
+			badge.setBadgeMargin(5);
+			badge.show();
+		} else {
+			badge.hide();
+		}
+	}
+	
+	private List<HashMap<String, String>> getNewsList() {
+		NewsDBUtil newsDB = new NewsDBUtil();
+		List<HashMap<String, String>> newsList = newsDB.selectAllUnreadNewsByUsername(this.userName);
+		return newsList;
 	}
 	
 	private void changeFragment(int index){
@@ -95,12 +118,11 @@ public class BBSInFragment extends Fragment {
 			tempfragment = new BBSInTabViewFragment(this.UserId);
 			break;
 		case 1:
-			//tempfragment = new BBSInTabSearchFragment();
 			tempfragment = new BBSFragment();
 			break;
 		case 2:
 			badge.hide();
-			tempfragment = new BBSInTabNewsFragment();
+			tempfragment = new BBSInTabNewsFragment(newsListFromDB);
 			break;
 		case 3:
 			//tempfragment = new BBSInTabPostFragment();
