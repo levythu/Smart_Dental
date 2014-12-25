@@ -9,13 +9,15 @@ public class NewsElement {
 	private String postTitle;
 	private String type;
 	private ArrayList<String> userNameList;
+	private ArrayList<String> newsIDList;
 	private String time;
 	
-	public NewsElement(String postID, String postTitle, String type, ArrayList<String> userNameList, String time) {
+	public NewsElement(String postID, String postTitle, String type, ArrayList<String> userNameList, ArrayList<String> newsIDList, String time) {
 		this.postID = postID;
 		this.postTitle = postTitle;
 		this.type = type;
 		this.userNameList = userNameList;
+		this.newsIDList = newsIDList;
 		this.time = time;
 	}
 	
@@ -73,4 +75,13 @@ public class NewsElement {
 	public void setPostTitle(String postTitle) {
 		this.postTitle = postTitle;
 	}
+	
+	public ArrayList<String> getNewsIDList() {
+		return this.newsIDList;
+	}
+	
+	public void addNewsID(String newsID) {
+		this.newsIDList.add(newsID);
+	}
+	
 }
