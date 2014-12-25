@@ -1,39 +1,76 @@
 package com.edu.thss.smartdental.model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class NewsElement {
 
-	private String ID;
+	private String postID;
+	private String postTitle;
 	private String type;
-	private String userName;
-	private String content;
+	private ArrayList<String> userNameList;
 	private String time;
 	
-	public NewsElement(String ID, String type, String userName, String content, String time) {
-		this.ID = ID;
+	public NewsElement(String postID, String postTitle, String type, ArrayList<String> userNameList, String time) {
+		this.postID = postID;
+		this.postTitle = postTitle;
 		this.type = type;
-		this.userName = userName;
-		this.content = content;
+		this.userNameList = userNameList;
 		this.time = time;
 	}
 	
-	public String getID() {
-		return this.ID;
+	public NewsElement() {
+		this.userNameList = new ArrayList<String>();
+	}
+	
+	public String getPostID() {
+		return this.postID;
+	}
+	
+	public String getPostTitle() {
+		return this.postTitle;
 	}
 	
 	public String getType() {
 		return this.type;
 	}
 	
-	public String getUserName() {
-		return this.userName;
-	}
-	
-	public String getContent() {
-		return this.content;
+	public ArrayList<String> getUserNameList() {
+		return this.userNameList;
 	}
 	
 	public String getTime() {
 		return this.time;
 	}
 	
+	public void addUserToList(String userName) {
+		Iterator<String> iterator = this.userNameList.iterator();
+		
+		while (iterator.hasNext()) {
+			if (iterator.next().compareTo(userName) == 0) {
+				return;
+			}
+		}
+		this.userNameList.add(userName);
+	}
+	
+	public int getUserListSize() {
+		return this.userNameList.size();
+	}
+	
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public void setPostID(String postID) {
+		this.postID = postID;
+	}
+	
+	public void setPostTitle(String postTitle) {
+		this.postTitle = postTitle;
+	}
 }

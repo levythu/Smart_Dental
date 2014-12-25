@@ -47,7 +47,7 @@ public class CommentDBUtil {
 			hashMap.put("commenttitle", resultinfo.get(j + 2));
 			hashMap.put("commentcontent", resultinfo.get(j + 3));
 			hashMap.put("replytouser", resultinfo.get(j + 4));
-			hashMap.put("time", resultinfo.get(j + 4));
+			hashMap.put("time", resultinfo.get(j + 5));
 			list.add(hashMap);
 		}
 
