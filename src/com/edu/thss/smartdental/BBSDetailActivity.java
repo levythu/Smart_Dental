@@ -1,5 +1,6 @@
 package com.edu.thss.smartdental;
 
+import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +15,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.soap.Detail;
 
+import com.edu.thss.smartdental.RemoteDB.CommentDBUtil;
+import com.edu.thss.smartdental.RemoteDB.PostDBUtil;
 import com.edu.thss.smartdental.adapter.BBSDetailAdapter;
 import com.edu.thss.smartdental.adapter.CommentAdapter;
 import com.edu.thss.smartdental.model.BBSElement;
@@ -31,22 +36,18 @@ public class BBSDetailActivity extends Activity {
 	private BBSDetailAdapter bbsAdapter;
 	private CommentAdapter commentAdapter;
 	private Context context;
+	private BBSDetailActivity context1;
 	private Button post_reply_button;
 	private String post_id;
 	private SharedPreferences preferences = null;
+	private String author, time, content, title;
 
 	public static final int RESULT_CODE = 1; // ·µ»ØÂë
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_bbs_detail); // ºÍXMLÎÄ¼þÓ³Éä
-		// test = (TextView)findViewById(R.id.textView1);
-		// //idºÅºÍXMLÖÐ¶¨ÒåµÄID¶ÔÓ¦
-		// String data =
-		// "À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²À²íÁË";
-		// String data = getIntent().getExtras().getString("data");
-		// test.setText(data);
+		setContentView(R.layout.activity_bbs_detail); 
 
 		preferences = this.getSharedPreferences("setting",
 				Activity.MODE_PRIVATE);
@@ -56,7 +57,8 @@ public class BBSDetailActivity extends Activity {
 		post_reply_button = (Button) findViewById(R.id.post_reply_button);
 		post_reply_button.setOnClickListener(postReplyListener);
 		context = this.getApplicationContext();
-		bbsAdapter = new BBSDetailAdapter(posts, context);
+		context1 = this;
+		bbsAdapter = new BBSDetailAdapter(posts, context, context1);
 		list2.setAdapter(bbsAdapter);
 
 		list1 = (ListView) findViewById(R.id.listView1);
@@ -68,10 +70,10 @@ public class BBSDetailActivity extends Activity {
 
 	private void initPosts() {
 		posts = new ArrayList<BBSDetail>();
-		String author = getIntent().getExtras().getString("author");
-		String time = getIntent().getExtras().getString("time");
-		String content = getIntent().getExtras().getString("content");
-		String title = getIntent().getExtras().getString("title");
+		author = getIntent().getExtras().getString("author");
+		time = getIntent().getExtras().getString("time");
+		content = getIntent().getExtras().getString("content");
+		title = getIntent().getExtras().getString("title");
 		post_id = getIntent().getExtras().getString("postId");
 
 		BBSDetail i = new BBSDetail(title, content, time, author);
@@ -80,12 +82,25 @@ public class BBSDetailActivity extends Activity {
 
 	private void initPosts1() {
 		posts1 = new ArrayList<CommentElement>();
-		String author = getIntent().getExtras().getString("author");
-		String time = getIntent().getExtras().getString("time");
-		String content = getIntent().getExtras().getString("content");
+		//String author = getIntent().getExtras().getString("author");
+		//String time = getIntent().getExtras().getString("time");
+		//String content = getIntent().getExtras().getString("content");
 
-		CommentElement i = new CommentElement(content, time, author);
-		posts1.add(i);
+		//CommentElement i = new CommentElement(content, time, author);
+		//posts1.add(i);
+		
+		CommentDBUtil db = new CommentDBUtil();
+		List<HashMap<String, String>> str = db.getAllComments(Integer.parseInt(post_id));
+		
+		for(int i = 1; i < str.size(); i++){
+			String author = str.get(i).get("commentusername");
+			String time = str.get(i).get("time");
+			String content = str.get(i).get("commentcontent");
+			String commentId = str.get(i).get("commentid");
+			CommentElement element = new CommentElement(content, time, author, Integer.parseInt(commentId));
+			
+			posts1.add(element);
+		}
 	}
 	
 	private OnClickListener postReplyListener = new OnClickListener() {
@@ -100,5 +115,20 @@ public class BBSDetailActivity extends Activity {
 			startActivity(intent);
 		}
 	};
+
+	public boolean isLocalUser(){
+		SharedPreferences pre = getSharedPreferences("setting", MODE_PRIVATE);
+		String localUser = pre.getString("username", "");
+		if(author.equals(localUser))
+			return true;
+		else {
+			return false;
+		}
+	}
+	
+	public String getPostId(){
+		return this.post_id;
+	}
+
 
 }

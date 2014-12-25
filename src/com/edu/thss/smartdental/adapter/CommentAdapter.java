@@ -1,6 +1,6 @@
 /*
- * 浣滆�咃細鐜嬪畤鐐�
- * 鏃ユ湡锛�2014骞�12鏈�11鏃�
+ * 娴ｆ粏锟藉拑绱伴悳瀣暏閻愶拷
+ * 閺冦儲婀￠敍锟�2014楠烇拷12閺堬拷11閺冿拷
  */
 package com.edu.thss.smartdental.adapter;
 
@@ -95,7 +95,7 @@ public class CommentAdapter extends BaseAdapter {
 			// TODO Auto-generated method stub
 			int viewId = view.getId();
 			if (viewId == holder.delete.getId()) {
-				int postId=list.get(itemPosition).id;
+				int commentId = list.get(itemPosition).id;
 				
 				list.remove(itemPosition);
 				notifyDataSetChanged();
