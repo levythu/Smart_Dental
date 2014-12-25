@@ -196,7 +196,7 @@ public class BBSInTabViewFragment extends Fragment {
 		
 		List<HashMap<String, String>> PostList  = db.getAllPostInfo(circle_id);
 		for (int i = 1; i < PostList.size(); i++){
-			if (tag.equals(tag.equals(tag_name[5])) || tag.equals(PostList.get(i).get("tag"))){
+			if (tag.equals(tag_name[5]) || tag.equals(PostList.get(i).get("tag"))){
 				String s1=PostList.get(i).get("postname");
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");
