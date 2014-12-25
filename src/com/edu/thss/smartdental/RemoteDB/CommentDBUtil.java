@@ -34,20 +34,18 @@ public class CommentDBUtil {
 		HashMap<String, String> tempHash = new HashMap<String, String>();
 		tempHash.put("commentusername", "commentusername");
 		tempHash.put("commenttype", "commenttype");
-		tempHash.put("commenttitle", "commenttitle");
 		tempHash.put("commentcontent", "commentcontent");
 		tempHash.put("replytouser", "replytouser");
 		tempHash.put("time","time");
 		list.add(tempHash);
 		
-		for (int j = 0; j < resultinfo.size(); j += 6) {
+		for (int j = 0; j < resultinfo.size(); j += 5) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("commentusername", resultinfo.get(j));
 			hashMap.put("commenttype", resultinfo.get(j + 1));
-			hashMap.put("commenttitle", resultinfo.get(j + 2));
-			hashMap.put("commentcontent", resultinfo.get(j + 3));
-			hashMap.put("replytouser", resultinfo.get(j + 4));
-			hashMap.put("time", resultinfo.get(j + 5));
+			hashMap.put("commentcontent", resultinfo.get(j + 2));
+			hashMap.put("replytouser", resultinfo.get(j + 3));
+			hashMap.put("time", resultinfo.get(j + 4));
 			list.add(hashMap);
 		}
 

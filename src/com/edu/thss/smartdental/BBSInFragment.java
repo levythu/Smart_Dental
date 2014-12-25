@@ -102,7 +102,7 @@ public class BBSInFragment extends Fragment {
 			if (num > 99) {
 				badge.setText("...");
 			} else {
-				badge.setText(Integer.valueOf(num));
+				badge.setText(Integer.toString(num));
 			}
 		} else {
 			badge.hide();
@@ -130,7 +130,7 @@ public class BBSInFragment extends Fragment {
 			iteratorOfLocal = this.newsList.iterator();
 			while (iteratorOfLocal.hasNext()) {
 				element = iteratorOfLocal.next();
-				if (element.getPostID().compareTo(elementFromDB.get("postID")) == 0 && element.getType().compareTo(elementFromDB.get("newstype")) == 0) {
+				if (element.getPostID().compareTo(elementFromDB.get("postId")) == 0 && element.getType().compareTo(elementFromDB.get("newstype")) == 0) {
 					is_existed = true;
 					element.addUserToList(elementFromDB.get("username"));
 					element.setTime(elementFromDB.get("time"));
@@ -140,7 +140,7 @@ public class BBSInFragment extends Fragment {
 			if (!is_existed) {
 				element = new NewsElement();
 				element.addUserToList(elementFromDB.get("username"));
-				element.setPostID(elementFromDB.get("postID"));
+				element.setPostID(elementFromDB.get("postId"));
 				element.setPostTitle(elementFromDB.get("postname"));
 				element.setTime(elementFromDB.get("time"));
 				element.setType(elementFromDB.get("newstype"));
