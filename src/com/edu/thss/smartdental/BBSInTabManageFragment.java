@@ -50,7 +50,7 @@ public class BBSInTabManageFragment extends Fragment {
 		public void onClick(View v) {
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), AllPatientActivity.class);
-			
+			startActivity(intent);
 		}
 	};
 }
