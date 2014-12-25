@@ -40,7 +40,7 @@ public class NewsListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int index, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = LayoutInflater.from(this.context).inflate(R.layout.circle_list_item, null);
+			convertView = LayoutInflater.from(this.context).inflate(R.layout.news_list_item, null);
 		}
 		
 		NewsElement element = list.get(index);
@@ -53,7 +53,7 @@ public class NewsListAdapter extends BaseAdapter {
 		TextView timeView = (TextView) convertView.findViewById(R.id.news_list_item_time);
 		timeView.setText(time);
 		
-		return null;
+		return convertView;
 	}
 	
 }
