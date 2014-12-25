@@ -45,10 +45,27 @@ public class NewsListAdapter extends BaseAdapter {
 		
 		NewsElement element = list.get(index);
 		String time = element.getTime();
-		String type = element.getType();
+		String replyer;
+		ArrayList<String> userList = element.getUserNameList();
+		switch (userList.size()) {
+		case 1:
+			replyer = userList.get(0);
+			break;
+		case 2:
+			replyer = userList.get(0) + " " + context.getResources().getString(R.string.and) + " " + userList.get(1);
+			break;
+		default:
+			replyer = userList.get(0) + " " + context.getResources().getString(R.string.etc) + " " + Integer.toString(userList.size()) + " " + context.getResources().getString(R.string.person);
+			break;
+		}
+		String title = context.getResources().getString(R.string.has_replied) + " " + element.getPostTitle();
 		
+		TextView replyerView = (TextView) convertView.findViewById(R.id.news_list_item_replyer);
 		TextView titleView = (TextView) convertView.findViewById(R.id.news_list_item_title);
 		TextView timeView = (TextView) convertView.findViewById(R.id.news_list_item_time);
+		
+		replyerView.setText(replyer);
+		titleView.setText(title);
 		timeView.setText(time);
 		
 		return convertView;

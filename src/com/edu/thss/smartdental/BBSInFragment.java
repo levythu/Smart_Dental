@@ -52,8 +52,8 @@ public class BBSInFragment extends Fragment {
 		View invisible_button = rootView.findViewById(R.id.manage_invisible_button);
 		this.userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
 		List<HashMap<String, String>> listFromDB = getNewsList();
-		initNewsListToShow(listFromDB);
 		
+		initNewsListToShow(listFromDB);
 		setBadgeView(button, this.newsList.size());
 		radioGroup.check(R.id.bbs_in_tab_view);
 		changeFragment(0);
@@ -102,7 +102,7 @@ public class BBSInFragment extends Fragment {
 			if (num > 99) {
 				badge.setText("...");
 			} else {
-				badge.setText(Integer.valueOf(num));
+				badge.setText(Integer.toString(num));
 			}
 		} else {
 			badge.hide();
@@ -130,9 +130,10 @@ public class BBSInFragment extends Fragment {
 			iteratorOfLocal = this.newsList.iterator();
 			while (iteratorOfLocal.hasNext()) {
 				element = iteratorOfLocal.next();
-				if (element.getPostID().compareTo(elementFromDB.get("postID")) == 0) {
+				if (element.getPostID().compareTo(elementFromDB.get("postId")) == 0 && element.getType().compareTo(elementFromDB.get("newstype")) == 0) {
 					is_existed = true;
 					element.addUserToList(elementFromDB.get("username"));
+					element.addNewsID(elementFromDB.get("newsId"));
 					element.setTime(elementFromDB.get("time"));
 					break;
 				}
@@ -140,7 +141,8 @@ public class BBSInFragment extends Fragment {
 			if (!is_existed) {
 				element = new NewsElement();
 				element.addUserToList(elementFromDB.get("username"));
-				element.setPostID(elementFromDB.get("postID"));
+				element.addNewsID(elementFromDB.get("newsId"));
+				element.setPostID(elementFromDB.get("postId"));
 				element.setPostTitle(elementFromDB.get("postname"));
 				element.setTime(elementFromDB.get("time"));
 				element.setType(elementFromDB.get("newstype"));

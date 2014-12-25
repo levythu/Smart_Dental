@@ -1,15 +1,20 @@
 package com.edu.thss.smartdental;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import com.edu.thss.smartdental.RemoteDB.NewsDBUtil;
 import com.edu.thss.smartdental.adapter.NewsListAdapter;
 import com.edu.thss.smartdental.model.NewsElement;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class BBSInTabNewsFragment extends Fragment {
@@ -29,8 +34,27 @@ public class BBSInTabNewsFragment extends Fragment {
 		this.listView = (ListView) rootView.findViewById(R.id.bbs_news_list);
 		this.listAdapter = new NewsListAdapter(newsList, getActivity());
 		listView.setAdapter(listAdapter);
+		listView.setOnItemClickListener(new OnNewsListItemClickListener());
 		
 		return rootView;
 	}
 
+	private class OnNewsListItemClickListener implements OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			NewsDBUtil db = new NewsDBUtil();
+			NewsElement element = newsList.get(position);
+			Iterator<String> iterator = element.getNewsIDList().iterator();
+			while (iterator.hasNext()) {
+				db.haveread(iterator.next());
+			}
+			Intent intent = new Intent(getActivity(), BBSDetailActivity.class);
+			intent.putExtra("postId", element.getPostID());
+			startActivity(intent);
+			view.setVisibility(View.GONE);
+		}
+		
+	}
 }

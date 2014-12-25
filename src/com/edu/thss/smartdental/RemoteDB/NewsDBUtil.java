@@ -23,8 +23,7 @@ public class NewsDBUtil {
 		resultinfo.clear();
 		parametername.add("username");
 		parametervalue.add(username);
-		try{
-			
+		try{			
 			resultinfo = Soap.GetWebService("selectAllUnreadNewsByUsername", parametername, parametervalue);
 		}
 		catch(Exception e) {
@@ -37,9 +36,10 @@ public class NewsDBUtil {
 		tempHash.put("content", "content");
 		tempHash.put("time", "time");
 		tempHash.put("postname", "postname");
+		tempHash.put("postId", "postId");
 		list.add(tempHash);
 		
-		for (int j = 0; j < resultinfo.size(); j += 6) {
+		for (int j = 0; j < resultinfo.size(); j += 7) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("newsId", resultinfo.get(j));
 			hashMap.put("newstype", resultinfo.get(j + 1));
@@ -47,6 +47,7 @@ public class NewsDBUtil {
 			hashMap.put("content", resultinfo.get(j + 3));
 			hashMap.put("time", resultinfo.get(j + 4));
 			hashMap.put("postname", resultinfo.get(j + 5));
+			hashMap.put("postId", resultinfo.get(j + 6));
 			list.add(hashMap);
 		}
 
@@ -79,9 +80,10 @@ public class NewsDBUtil {
 		tempHash.put("content", "content");
 		tempHash.put("time", "time");
 		tempHash.put("postname", "postname");
+		tempHash.put("postId", "postId");
 		list.add(tempHash);
 		
-		for (int j = 0; j < resultinfo.size(); j += 6) {
+		for (int j = 0; j < resultinfo.size(); j += 7) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("newsId", resultinfo.get(j));
 			hashMap.put("newstype", resultinfo.get(j + 1));
@@ -89,6 +91,7 @@ public class NewsDBUtil {
 			hashMap.put("content", resultinfo.get(j + 3));
 			hashMap.put("time", resultinfo.get(j + 4));
 			hashMap.put("postname", resultinfo.get(j + 5));
+			hashMap.put("postId", resultinfo.get(j + 6));
 			list.add(hashMap);
 		}
 
@@ -100,7 +103,7 @@ public class NewsDBUtil {
 	 * 
 	 * @return
 	 */
-	public String insertNews(String newstype, String username, String replytouser, String haveread,String newscontent,String postname) {
+	public String insertNews(String newstype, String username, String replytouser, String haveread,String newscontent,String postname,int postId) {
 
 		parametername.clear();
 		parametervalue.clear();
@@ -112,12 +115,14 @@ public class NewsDBUtil {
 		parametername.add("haveread");
 		parametername.add("newscontent");
 		parametername.add("postname");
+		parametername.add("postId");
 		parametervalue.add(newstype);
 		parametervalue.add(username);
 		parametervalue.add(replytouser);
 		parametervalue.add(haveread);	
 		parametervalue.add(newscontent);
 		parametername.add(postname);
+		parametername.add(Integer.toString(postId));
 		try{
 			resultinfo = Soap.GetWebService("insertNews", parametername, parametervalue);
 		}
