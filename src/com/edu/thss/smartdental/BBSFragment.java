@@ -10,6 +10,7 @@ import java.util.List;
 
 
 
+
 import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 import com.edu.thss.smartdental.adapter.CircleListAdapter;
 import com.edu.thss.smartdental.model.CircleElement;
@@ -49,7 +50,7 @@ public class BBSFragment extends Fragment {
 		fragmentManager = getFragmentManager();
 		list = (ListView) rootView.findViewById(R.id.circle_list);
 		
-		pd = ProgressDialog.show(this.getActivity(), "", "载入中，请稍候...");
+		pd = ProgressDialog.show(this.getActivity(), "", getActivity().getResources().getString(R.string.loading));
 		circles = new ArrayList<CircleElement>();
 		
 		listAdapter = new CircleListAdapter(circles, this.getActivity().getApplicationContext());

@@ -68,7 +68,7 @@ public class BBSInTabViewFragment extends Fragment {
 		            int position, long id) {
 		        String str=parent.getItemAtPosition(position).toString();
 		        
-		        pd = ProgressDialog.show(parent.getContext(), "", "载入中，请稍候...");
+		        pd = ProgressDialog.show(parent.getContext(), "", getActivity().getResources().getString(R.string.loading));
 		        new Thread(new RunThread(str)).start();  
 		    }
 		    @Override

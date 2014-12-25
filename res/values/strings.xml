@@ -37,5 +37,6 @@
     <string name="already_in_circle">您已加入过该圈子</string>
     <string name="join_successfully">加入成功</string>
     <string name="system_busy">系统繁忙，请稍候</string>
+    <string name="loading">载入中，请稍候...</string>
 
 </resources>
