@@ -45,13 +45,15 @@ public class NewsListAdapter extends BaseAdapter {
 		
 		NewsElement element = list.get(index);
 		String time = element.getTime();
+		String type = element.getType();
+		String userName = element.getUserName();
 		
-		TextView timeView =(TextView)convertView.findViewById(R.id.news_list_item_time);
+		TextView titleView = (TextView) convertView.findViewById(R.id.news_list_item_title);
+		titleView.setText(userName);
+		TextView timeView = (TextView) convertView.findViewById(R.id.news_list_item_time);
 		timeView.setText(time);
 		
 		return null;
 	}
-	
-	
 	
 }
