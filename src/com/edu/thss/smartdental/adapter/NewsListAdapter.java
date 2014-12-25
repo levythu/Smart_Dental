@@ -47,6 +47,12 @@ public class NewsListAdapter extends BaseAdapter {
 		String time = element.getTime();
 		String type = element.getType();
 		
+		switch (type) {
+		case "ReplyToPost":
+			
+		}
+		
+		TextView replyerView = (TextView) convertView.findViewById(R.id.news_list_item_replyer);
 		TextView titleView = (TextView) convertView.findViewById(R.id.news_list_item_title);
 		TextView timeView = (TextView) convertView.findViewById(R.id.news_list_item_time);
 		timeView.setText(time);

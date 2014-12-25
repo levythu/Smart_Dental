@@ -6,22 +6,30 @@
     android:orientation="vertical" >
     
     <TextView 
-	    android:id="@+id/news_list_item_title"
+	    android:id="@+id/news_list_item_replyer"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_marginLeft="10dp"
 	    android:layout_marginTop="10dp"
 	    android:textSize="25sp"
 	    android:textColor="@color/app_black"
-	    android:text="title"
-	    />
+	    android:text="replyer"/>
+    <TextView 
+	    android:id="@+id/news_list_item_title"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/news_list_item_replyer"
+	    android:layout_below="@+id/news_list_item_replyer"
+	    android:textSize="25sp"
+	    android:textColor="@color/app_black"
+	    android:text="title"/>
     <TextView 
 	    android:id="@+id/news_list_item_time"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:textSize="18sp"
 	    android:textColor="@color/preview_grey"
-	    android:layout_alignLeft="@+id/news_list_item_title"
+	    android:layout_alignLeft="@+id/news_list_item_replyer"
 	    android:layout_below="@+id/news_list_item_title"
 	    android:layout_marginTop="10dp"
 	    android:layout_marginBottom="5dp"

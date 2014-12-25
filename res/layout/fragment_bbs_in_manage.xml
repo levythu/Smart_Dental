@@ -8,11 +8,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
     
-    <TextView 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="设置圈子密码" />
-    
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,21 +15,27 @@
         android:shrinkColumns="1">
         
         <TableRow>
-        <EditText
-            android:id="@+id/circle_password_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/circle_password_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:inputType="text" />
 
-        <Button
-            android:id="@+id/confirm_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:text="确认" />
+            <Button
+                android:id="@+id/confirm_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="设置圈子密码" />
         </TableRow>
         
     </TableLayout>
     
+    <Button
+        android:id="@+id/all_patient_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:text="管理圈子的所有病人" />
 </LinearLayout>

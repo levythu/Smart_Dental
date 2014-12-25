@@ -130,7 +130,7 @@ public class BBSInFragment extends Fragment {
 			iteratorOfLocal = this.newsList.iterator();
 			while (iteratorOfLocal.hasNext()) {
 				element = iteratorOfLocal.next();
-				if (element.getPostID().compareTo(elementFromDB.get("postID")) == 0) {
+				if (element.getPostID().compareTo(elementFromDB.get("postID")) == 0 && element.getType().compareTo(elementFromDB.get("newstype")) == 0) {
 					is_existed = true;
 					element.addUserToList(elementFromDB.get("username"));
 					element.setTime(elementFromDB.get("time"));
@@ -177,7 +177,7 @@ public class BBSInFragment extends Fragment {
 			tempfragment = new BBSInTabManageFragment();
 			break;
 		}
-		if (tempfragment != null && index != 4) {
+		if (tempfragment != null) {
 			transaction.replace(R.id.bbs_in_tab_content, tempfragment);
 			transaction.commit();
         }
