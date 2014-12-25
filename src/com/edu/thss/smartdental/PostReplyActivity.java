@@ -1,6 +1,8 @@
 package com.edu.thss.smartdental;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+
+import com.edu.thss.smartdental.RemoteDB.CommentDBUtil;
+import com.edu.thss.smartdental.RemoteDB.PostDBUtil;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -18,8 +20,8 @@ public class PostReplyActivity extends Activity {
 	private EditText edit_reply_content;
 	private String post_id;
 	private String username;
-	private static DBUtil db = new DBUtil();
-	
+	private static PostDBUtil db = new PostDBUtil();
+	private static CommentDBUtil conmmentDB = new CommentDBUtil();
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -53,7 +55,7 @@ public class PostReplyActivity extends Activity {
 				result = "评论不能为空";
 			}
 			else {
-				result = db.insertComment(post_id, edit_reply_content.getText().toString(), username, "回帖", "1");
+				result = conmmentDB.insertComment(post_id, edit_reply_content.getText().toString(), username, "回帖", "1");
 			}
 			if (result.equals("true")) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(PostReplyActivity.this);

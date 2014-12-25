@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+
+
+import com.edu.thss.smartdental.RemoteDB.PostDBUtil;
 import com.edu.thss.smartdental.adapter.BBSListAdapter;
 import com.edu.thss.smartdental.adapter.ImgListAdapter;
 import com.edu.thss.smartdental.model.BBSElement;
@@ -15,10 +17,13 @@ import com.edu.thss.smartdental.model.ImageElement;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -43,6 +48,7 @@ public class BBSInTabViewFragment extends Fragment {
 	
 	private Spinner view_spinner;
 	private ArrayAdapter tagAdapter; 
+	private ProgressDialog pd;
 	
 	public BBSInTabViewFragment(int id) {
 		UserId = id;
@@ -61,8 +67,9 @@ public class BBSInTabViewFragment extends Fragment {
 		    public void onItemSelected(AdapterView<?> parent, View view,
 		            int position, long id) {
 		        String str=parent.getItemAtPosition(position).toString();
-		        initPosts(str);
-		        refreshPosts();
+		        
+		        pd = ProgressDialog.show(parent.getContext(), "", getActivity().getResources().getString(R.string.loading));
+		        new Thread(new RunThread(str)).start();  
 		    }
 		    @Override
 		    public void onNothingSelected(AdapterView<?> parent) {
@@ -71,6 +78,7 @@ public class BBSInTabViewFragment extends Fragment {
 		});
 		
 		
+    	
 		editText = (EditText)rootView.findViewById(R.id.bbs_searchbox);
 		editText.addTextChangedListener(filterTextWatcher);
 		list = (ListView)rootView.findViewById(R.id.bbs_list);
@@ -80,12 +88,33 @@ public class BBSInTabViewFragment extends Fragment {
 		list.setDivider(null);
 		      
 		list.setOnItemClickListener(new OnPostItemClickListener(context));
-				
-
+		
 	
 		view_spinner.setSelection(5);
 		return rootView;
 	}
+	
+	private class RunThread implements Runnable{
+		String str;
+		public RunThread(String s){
+			str = s;
+		}
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			initPosts(str);
+	        handler.sendEmptyMessage(0);
+		}
+		
+	};
+	
+	Handler handler = new Handler() {  
+        @Override  
+        public void handleMessage(Message msg) {  
+            pd.dismiss(); 
+        	refreshPosts();
+        }  
+    };  
 	
 	private class OnPostItemClickListener implements OnItemClickListener{
 		Context context;
@@ -133,13 +162,15 @@ public class BBSInTabViewFragment extends Fragment {
 		posts.clear();
 		String circle_id_st = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("current_circle_id", "");
 		int circle_id;
-		if (circle_id_st =="")
+		if (circle_id_st ==""){
 			return;
-		else circle_id = Integer.parseInt(circle_id_st);
+		}else{
+			circle_id = Integer.parseInt(circle_id_st);
+		}
 		
-		DBUtil db = new DBUtil();
+		PostDBUtil db = new PostDBUtil();
 		BBSElement post;
-		if (tag.equals("Êî∂Ëóè")){
+		if (tag.equals(" ’≤ÿ")){
 			String userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
 			List<HashMap<String, String>> idList = db.selectcollectPostid(userName);
 			for (int i = 1; i < idList.size(); i++){
@@ -161,7 +192,7 @@ public class BBSInTabViewFragment extends Fragment {
 		
 		List<HashMap<String, String>> PostList  = db.getAllPostInfo(circle_id);
 		for (int i = 1; i < PostList.size(); i++){
-			if (tag.equals("ÂÖ®ÈÉ®") || tag.equals(PostList.get(i).get("tag"))){
+			if (tag.equals("»´≤ø") || tag.equals(PostList.get(i).get("tag"))){
 				String s1=PostList.get(i).get("postname");
 				String s2=PostList.get(i).get("postcontent");
 				String s3 = PostList.get(i).get("time");

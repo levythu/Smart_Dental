@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v4.app.FragmentManager;
+import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 
 public class BBSInFragment extends Fragment {
 	
@@ -24,6 +25,7 @@ public class BBSInFragment extends Fragment {
 	private FragmentManager fragmentManager;
 	private int UserId;
 	private BadgeView badge;
+	UserDBUtil db = new UserDBUtil();
 	
 	public BBSInFragment(int id) {
 		UserId = id;
@@ -42,7 +44,7 @@ public class BBSInFragment extends Fragment {
 		changeFragment(0);
 		RadioButton manageTag = (RadioButton)rootView.findViewById(R.id.bbs_in_tab_manage);
 		String user_name = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
-		if(!user_name.equals("qq")){
+		if(!db.getuseridentity(user_name).equals("doctor")){
 			manageTag.setVisibility(View.GONE);
 		}
 		radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
@@ -115,7 +117,7 @@ public class BBSInFragment extends Fragment {
 		}
 		if (tempfragment != null && index != 4) {
 			transaction.replace(R.id.bbs_in_tab_content, tempfragment);
-    	transaction.commit();
+			transaction.commit();
         }
 	}
 

@@ -4,7 +4,7 @@
 
 package com.edu.thss.smartdental;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,7 +19,7 @@ public class AddOneFragment extends Fragment {
 	
 	Button add_one_btn;
 	EditText username_edit, password_edit, repeat_password_edit;
-	DBUtil db = new DBUtil();
+	UserDBUtil db = new UserDBUtil();
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_add_one, container, false);

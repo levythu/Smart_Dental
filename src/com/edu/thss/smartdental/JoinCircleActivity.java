@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+
+
+import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 import com.edu.thss.smartdental.adapter.JoinCircleListAdapter;
 import com.edu.thss.smartdental.model.CircleElement;
 import com.edu.thss.smartdental.ui.dialog.JoinCircleDialog;
@@ -74,7 +76,7 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 	
 	private void initCircles() {
 		circles = new ArrayList<CircleElement>();
-		DBUtil db = new DBUtil();
+		UserDBUtil db = new UserDBUtil();
 		List<HashMap<String, String>> docList = db.getAllDoctors();
 		Iterator<HashMap<String, String>> iterator = docList.iterator();
 		iterator.next();
@@ -115,7 +117,7 @@ public class JoinCircleActivity extends FragmentActivity implements JoinCircleDi
 	@SuppressLint("CommitPrefEdits")
 	@Override
 	public void onDialogPositiveClick(JoinCircleDialog dialog) {
-		DBUtil db = new DBUtil();
+		UserDBUtil db = new UserDBUtil();
 		EditText text = (EditText) dialog.getDialogView().findViewById(R.id.circle_password);
 		String password = text.getText().toString();
 		String username = getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");

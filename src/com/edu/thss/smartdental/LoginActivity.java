@@ -16,13 +16,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.edu.thss.smartdental.RemoteDB.DBUtil;
+import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 
 public class LoginActivity extends Activity {
 
 	Button login_btn, register_btn;
 	EditText username, password;
-	DBUtil db = new DBUtil();
+	UserDBUtil db = new UserDBUtil();
 	SharedPreferences preferences = null;
 	Editor editor = null;
 	
