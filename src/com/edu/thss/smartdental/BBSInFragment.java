@@ -3,6 +3,11 @@
  */
 package com.edu.thss.smartdental;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 import com.readystatesoftware.viewbadger.BadgeView;
 
 import android.app.Activity;
@@ -17,14 +22,19 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.support.v4.app.FragmentManager;
+
+import com.edu.thss.smartdental.RemoteDB.NewsDBUtil;
 import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
+import com.edu.thss.smartdental.model.NewsElement;
 
 public class BBSInFragment extends Fragment {
 	
 	private RadioGroup radioGroup;
 	private FragmentManager fragmentManager;
 	private int UserId;
+	private String userName;
 	private BadgeView badge;
+	private ArrayList<NewsElement> newsList;
 	UserDBUtil db = new UserDBUtil();
 	
 	public BBSInFragment(int id) {
@@ -39,13 +49,18 @@ public class BBSInFragment extends Fragment {
 		fragmentManager = getFragmentManager();
 		radioGroup = (RadioGroup)rootView.findViewById(R.id.bbs_in_tab);
 		View button = rootView.findViewById(R.id.remind_button);
-		setBadgeView(button);
+		View invisible_button = rootView.findViewById(R.id.manage_invisible_button);
+		this.userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
+		List<HashMap<String, String>> listFromDB = getNewsList();
+		initNewsListToShow(listFromDB);
+		
+		setBadgeView(button, this.newsList.size());
 		radioGroup.check(R.id.bbs_in_tab_view);
 		changeFragment(0);
 		RadioButton manageTag = (RadioButton)rootView.findViewById(R.id.bbs_in_tab_manage);
-		String user_name = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
-		if(!db.getuseridentity(user_name).equals("doctor")){
+		if(!db.getuseridentity(this.userName).equals("doctor")){
 			manageTag.setVisibility(View.GONE);
+			invisible_button.setVisibility(View.GONE);
 		}
 		radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 			
@@ -76,15 +91,41 @@ public class BBSInFragment extends Fragment {
 		return rootView;
 	}
 	
-	private void setBadgeView(View view) {
+	private void setBadgeView(View view, int num) {
 		badge = new BadgeView(getActivity(), view);
-		badge.setText("12");
 		badge.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
 		badge.setTextColor(Color.WHITE);
 		badge.setBadgeBackgroundColor(Color.RED);
 		badge.setTextSize(12);
 		badge.setBadgeMargin(5);
-		badge.show();
+		if (num > 0) {
+			if (num > 99) {
+				badge.setText("...");
+			} else {
+				badge.setText(Integer.valueOf(num));
+			}
+		} else {
+			badge.hide();
+		}
+	}
+	
+	private List<HashMap<String, String>> getNewsList() {
+		NewsDBUtil newsDB = new NewsDBUtil();
+		List<HashMap<String, String>> newsListFromDB = newsDB.selectAllUnreadNewsByUsername(this.userName);
+		return newsListFromDB;
+	}
+	
+	private void initNewsListToShow(List<HashMap<String, String>> listFromDB) {
+		this.newsList = new ArrayList<NewsElement>();
+		Iterator<HashMap<String, String>> iterator = listFromDB.iterator();
+		
+		iterator.next();
+		while (iterator.hasNext()) {
+			HashMap<String, String> elementFromDB = iterator.next();
+			NewsElement element = new NewsElement(elementFromDB.get("newsId"), elementFromDB.get("newstype"), elementFromDB.get("username"), elementFromDB.get("content"), elementFromDB.get("time"));
+			this.newsList.add(element);
+		}
+		
 	}
 	
 	private void changeFragment(int index){
@@ -95,12 +136,11 @@ public class BBSInFragment extends Fragment {
 			tempfragment = new BBSInTabViewFragment(this.UserId);
 			break;
 		case 1:
-			//tempfragment = new BBSInTabSearchFragment();
 			tempfragment = new BBSFragment();
 			break;
 		case 2:
 			badge.hide();
-			tempfragment = new BBSInTabNewsFragment();
+			tempfragment = new BBSInTabNewsFragment(newsList);
 			break;
 		case 3:
 			//tempfragment = new BBSInTabPostFragment();

@@ -20,10 +20,9 @@ public class BBSInTabNewsFragment extends Fragment {
 	private ListView listView;
 	private NewsListAdapter listAdapter;
 	private ArrayList<NewsElement> newsList;
-	private List<HashMap<String, String>> newsListFromDB;
 	
-	public BBSInTabNewsFragment(List<HashMap<String, String>> newsList) {
-		this.newsListFromDB = newsList;
+	public BBSInTabNewsFragment(ArrayList<NewsElement> newsList) {
+		this.newsList = newsList;
 	}
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,13 +39,9 @@ public class BBSInTabNewsFragment extends Fragment {
 
 	private void initNewsList() {
 		this.newsList = new ArrayList<NewsElement>();
-		Iterator<HashMap<String, String>> iterator = this.newsListFromDB.iterator();
 		
-		iterator.next();
-		while (iterator.hasNext()) {
-			HashMap<String, String> elementFromDB = iterator.next();
-			NewsElement element = new NewsElement(elementFromDB.get("newsId"), elementFromDB.get("newstype"), elementFromDB.get("username"), elementFromDB.get("content"), elementFromDB.get("time"));
-			this.newsList.add(element);
-		}
+		
+		NewsElement element = new NewsElement("1", "a", "ABC", "ABC", "1532");
+		this.newsList.add(element);
 	}
 }

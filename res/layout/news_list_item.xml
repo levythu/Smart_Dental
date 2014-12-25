@@ -19,7 +19,7 @@
 	    android:id="@+id/news_list_item_time"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:textSize="20sp"
+	    android:textSize="18sp"
 	    android:textColor="@color/preview_grey"
 	    android:layout_alignLeft="@+id/news_list_item_title"
 	    android:layout_below="@+id/news_list_item_title"
