@@ -46,6 +46,7 @@ public class BBSInFragment extends Fragment {
 		fragmentManager = getFragmentManager();
 		radioGroup = (RadioGroup)rootView.findViewById(R.id.bbs_in_tab);
 		View button = rootView.findViewById(R.id.remind_button);
+		View invisible_button = rootView.findViewById(R.id.manage_invisible_button);
 		this.userName = getActivity().getSharedPreferences("setting", Activity.MODE_PRIVATE).getString("username", "");
 		this.newsListFromDB = getNewsList();
 		setBadgeView(button);
@@ -54,6 +55,7 @@ public class BBSInFragment extends Fragment {
 		RadioButton manageTag = (RadioButton)rootView.findViewById(R.id.bbs_in_tab_manage);
 		if(!db.getuseridentity(this.userName).equals("doctor")){
 			manageTag.setVisibility(View.GONE);
+			invisible_button.setVisibility(View.GONE);
 		}
 		radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 			

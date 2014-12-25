@@ -5,11 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import com.edu.thss.smartdental.RemoteDB.NewsDBUtil;
 import com.edu.thss.smartdental.adapter.NewsListAdapter;
 import com.edu.thss.smartdental.model.NewsElement;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
