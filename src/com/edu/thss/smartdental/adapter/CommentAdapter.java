@@ -6,6 +6,7 @@ package com.edu.thss.smartdental.adapter;
 
 import java.util.ArrayList;
 
+import com.edu.thss.smartdental.RemoteDB.CommentDBUtil;
 import com.edu.thss.smartdental.model.CommentElement;
 import com.edu.thss.smartdental.R;
 
@@ -24,11 +25,13 @@ public class CommentAdapter extends BaseAdapter {
 	private Context context;
 	private buttonViewHolder holder;
 	private String username;
+	private CommentDBUtil commentDB;
 	private class buttonViewHolder {
 		Button delete;
 	}
 	public CommentAdapter(ArrayList<CommentElement> list, Context context, String username) {
 		// TODO Auto-generated constructor stub
+		commentDB = new CommentDBUtil();
 		this.list = list;
 		this.context = context;
 		this.username = username;
@@ -65,7 +68,7 @@ public class CommentAdapter extends BaseAdapter {
 		TextView author = (TextView)convertView.findViewById(R.id.comment_item_author);
 		
 		content.setText(comment.content);
-		time.setText(comment.time);
+		time.setText(comment.time.substring(0, 16));
 		author.setText(comment.author);
 		
 		holder = new buttonViewHolder();
@@ -92,6 +95,8 @@ public class CommentAdapter extends BaseAdapter {
 			// TODO Auto-generated method stub
 			int viewId = view.getId();
 			if (viewId == holder.delete.getId()) {
+				int postId=list.get(itemPosition).id;
+				
 				list.remove(itemPosition);
 				notifyDataSetChanged();
 			}
