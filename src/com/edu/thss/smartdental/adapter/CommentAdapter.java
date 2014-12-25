@@ -1,6 +1,6 @@
 /*
- * 作者：王宇炜
- * 日期：2014年12月11日
+ * 浣滆�咃細鐜嬪畤鐐�
+ * 鏃ユ湡锛�2014骞�12鏈�11鏃�
  */
 package com.edu.thss.smartdental.adapter;
 
@@ -70,12 +70,12 @@ public class CommentAdapter extends BaseAdapter {
 		
 		holder = new buttonViewHolder();
 		holder.delete = (Button)convertView.findViewById(R.id.comment_item_delete);
-		if (author.equals(this.username)) {
+		/*if (author.equals(this.username)) {
 			holder.delete.setVisibility(View.VISIBLE);
 		}
 		else {
 			holder.delete.setVisibility(View.INVISIBLE);
-		}
+		}*/
 		holder.delete.setOnClickListener(new ButtonListener(position));
 		return convertView;
 	}
