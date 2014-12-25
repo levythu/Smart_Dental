@@ -130,7 +130,7 @@ public class BBSInFragment extends Fragment {
 			iteratorOfLocal = this.newsList.iterator();
 			while (iteratorOfLocal.hasNext()) {
 				element = iteratorOfLocal.next();
-				if (element.getPostID().compareTo(elementFromDB.get("postID")) == 0) {
+				if (element.getPostID().compareTo(elementFromDB.get("postID")) == 0 && element.getType().compareTo(elementFromDB.get("newstype")) == 0) {
 					is_existed = true;
 					element.addUserToList(elementFromDB.get("username"));
 					element.setTime(elementFromDB.get("time"));
