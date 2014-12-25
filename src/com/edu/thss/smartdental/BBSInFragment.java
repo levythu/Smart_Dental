@@ -155,7 +155,7 @@ public class BBSInFragment extends Fragment {
 			tempfragment = new BBSInTabManageFragment();
 			break;
 		}
-		if (tempfragment != null && index != 4) {
+		if (tempfragment != null) {
 			transaction.replace(R.id.bbs_in_tab_content, tempfragment);
 			transaction.commit();
         }
