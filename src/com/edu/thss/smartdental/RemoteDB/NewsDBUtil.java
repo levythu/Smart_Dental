@@ -36,15 +36,17 @@ public class NewsDBUtil {
 		tempHash.put("username", "username");
 		tempHash.put("content", "content");
 		tempHash.put("time", "time");
+		tempHash.put("postname", "postname");
 		list.add(tempHash);
 		
-		for (int j = 0; j < resultinfo.size(); j += 5) {
+		for (int j = 0; j < resultinfo.size(); j += 6) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("newsId", resultinfo.get(j));
 			hashMap.put("newstype", resultinfo.get(j + 1));
 			hashMap.put("username", resultinfo.get(j + 2));
 			hashMap.put("content", resultinfo.get(j + 3));
 			hashMap.put("time", resultinfo.get(j + 4));
+			hashMap.put("postname", resultinfo.get(j + 5));
 			list.add(hashMap);
 		}
 
@@ -76,15 +78,17 @@ public class NewsDBUtil {
 		tempHash.put("username", "username");
 		tempHash.put("content", "content");
 		tempHash.put("time", "time");
+		tempHash.put("postname", "postname");
 		list.add(tempHash);
 		
-		for (int j = 0; j < resultinfo.size(); j += 5) {
+		for (int j = 0; j < resultinfo.size(); j += 6) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("newsId", resultinfo.get(j));
 			hashMap.put("newstype", resultinfo.get(j + 1));
 			hashMap.put("username", resultinfo.get(j + 2));
 			hashMap.put("content", resultinfo.get(j + 3));
 			hashMap.put("time", resultinfo.get(j + 4));
+			hashMap.put("postname", resultinfo.get(j + 5));
 			list.add(hashMap);
 		}
 
@@ -96,7 +100,7 @@ public class NewsDBUtil {
 	 * 
 	 * @return
 	 */
-	public String insertNews(String newstype, String username, String replytouser, String haveread,String newscontent) {
+	public String insertNews(String newstype, String username, String replytouser, String haveread,String newscontent,String postname) {
 
 		parametername.clear();
 		parametervalue.clear();
@@ -107,11 +111,13 @@ public class NewsDBUtil {
 		parametername.add("replytouser");
 		parametername.add("haveread");
 		parametername.add("newscontent");
+		parametername.add("postname");
 		parametervalue.add(newstype);
 		parametervalue.add(username);
 		parametervalue.add(replytouser);
 		parametervalue.add(haveread);	
 		parametervalue.add(newscontent);
+		parametername.add(postname);
 		try{
 			resultinfo = Soap.GetWebService("insertNews", parametername, parametervalue);
 		}
