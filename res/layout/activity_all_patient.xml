@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/all_patient_lable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="18sp"
+        android:text="圈子内的所有病人，长按踢出圈子。" />
+    
     <ListView
         android:id="@+id/all_patient"
         android:layout_width="match_parent"
