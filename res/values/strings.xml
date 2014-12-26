@@ -46,5 +46,6 @@
     <string name="etc">等</string>
     <string name="person">人</string>
     <string name="and">和</string>
+    <string name="title_activity_detail">帖子详情</string>
 
 </resources>

@@ -29,7 +29,7 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 	private ArrayList<BBSDetail> list;
 	private Context context;
 	private BBSFilter filter;
-	private buttonViewHolder holder;
+	private buttonViewHolder holder, collectHolder;
 	
 	
 	private buttonViewHolder holder1;
@@ -65,12 +65,12 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 			convertView = LayoutInflater.from(context).inflate(R.layout.bbs_detail_item, null);
 		}
 		BBSDetail post = list.get(position);
-		//TextView title =(TextView)convertView.findViewById(R.id.bbs_detail_item_title);
+		TextView title =(TextView)convertView.findViewById(R.id.bbs_detail_item_title);
 		TextView content = (TextView)convertView.findViewById(R.id.bbs_detail_item_content);
 		TextView time = (TextView)convertView.findViewById(R.id.bbs_detail_item_time);
 		TextView author = (TextView)convertView.findViewById(R.id.bbs_detail_item_author);
 		
-		//title.setText(post.title);
+		title.setText(post.title);
 		content.setText(post.content);
 		time.setText(post.time);
 		author.setText(post.author);
@@ -78,7 +78,8 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 		holder = new buttonViewHolder();
 		holder.delete = (Button)convertView.findViewById(R.id.bbs_detail_item_delete);
 		holder.delete.setOnClickListener(new ButtonListner(position));
-
+		
+	
 		if(!context1.isLocalUser()){
 			holder.delete.setVisibility(View.INVISIBLE);
 		}

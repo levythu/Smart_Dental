@@ -97,7 +97,7 @@
         </activity>
         <activity
             android:name=".BBSDetailActivity"
-            android:label="bbs_detail_activity" >
+            android:label="@string/title_activity_detail" >
         </activity>
         <activity
             android:name=".MyTestActivity"
