@@ -32,7 +32,10 @@
         android:id="@+id/post_reply_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发表评论" />
+        android:text="发表评论" 
+        android:layout_below="@+id/listView1"/>
     
+   
+        
 
 </LinearLayout>

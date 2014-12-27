@@ -8,9 +8,13 @@ import java.util.ArrayList;
 
 import com.edu.thss.smartdental.RemoteDB.CommentDBUtil;
 import com.edu.thss.smartdental.model.CommentElement;
+import com.edu.thss.smartdental.InputActivity;
+import com.edu.thss.smartdental.LoginActivity;
+import com.edu.thss.smartdental.PostReplyActivity;
 import com.edu.thss.smartdental.R;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.LoginFilter.UsernameFilterGeneric;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +32,7 @@ public class CommentAdapter extends BaseAdapter {
 	private CommentDBUtil commentDB;
 	private class buttonViewHolder {
 		Button delete;
+		Button reply;
 	}
 	public CommentAdapter(ArrayList<CommentElement> list, Context context, String username) {
 		// TODO Auto-generated constructor stub
@@ -73,20 +78,22 @@ public class CommentAdapter extends BaseAdapter {
 		
 		holder = new buttonViewHolder();
 		holder.delete = (Button)convertView.findViewById(R.id.comment_item_delete);
+		holder.reply = (Button)convertView.findViewById(R.id.comment_item_reply);
 		/*if (author.equals(this.username)) {
 			holder.delete.setVisibility(View.VISIBLE);
 		}
 		else {
 			holder.delete.setVisibility(View.INVISIBLE);
 		}*/
-		holder.delete.setOnClickListener(new ButtonListener(position));
+		holder.delete.setOnClickListener(new DeleteButtonListener(position));
+		holder.reply.setOnClickListener(new ReplyButtonListener(position));
 		return convertView;
 	}
 
-	class ButtonListener implements OnClickListener {
+	class DeleteButtonListener implements OnClickListener {
 		private int itemPosition;
 
-		public ButtonListener(int position) {
+		public DeleteButtonListener(int position) {
 			this.itemPosition = position;
 		}
 		
@@ -103,4 +110,32 @@ public class CommentAdapter extends BaseAdapter {
 		}
 		
 	}
+	class ReplyButtonListener implements OnClickListener {
+		private int itemPosition;
+
+		public ReplyButtonListener(int position) {
+			this.itemPosition = position;
+		}
+		
+		@Override
+		public void onClick(View view) {
+			// TODO Auto-generated method stub
+			int viewId = view.getId();
+			if (viewId == holder.reply.getId()) {
+				int commentId = list.get(itemPosition).id;
+				
+				Intent intent = new Intent();
+				//context = context.getApplicationContext();
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.setClass(context, InputActivity.class);
+				//intent.putExtra("postId", post_id);
+				//intent.putExtra("username", preferences.getString("username", ""));
+				context.startActivity(intent);
+				//startActivity(intent);
+				//notifyDataSetChanged();
+			}
+		}
+		
+	}
+	
 }
