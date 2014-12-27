@@ -1,6 +1,7 @@
 package com.edu.thss.smartdental;
 
 import android.R.integer;
+import android.R.string;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -40,7 +41,9 @@ public class BBSDetailActivity extends Activity {
 	private Button post_reply_button;
 	private String post_id;
 	private SharedPreferences preferences = null;
-	private String author, time, content, title;
+	private String author, time, content, title, localUser;
+	
+
 
 	public static final int RESULT_CODE = 1; // ·µ»ØÂë
 
@@ -66,6 +69,9 @@ public class BBSDetailActivity extends Activity {
 		commentAdapter = new CommentAdapter(posts1, context,
 				preferences.getString("username", ""));
 		list1.setAdapter(commentAdapter);
+
+		SharedPreferences pre = getSharedPreferences("setting", MODE_PRIVATE);
+		localUser = pre.getString("username", "");
 	}
 
 	private void initPosts() {
@@ -117,8 +123,6 @@ public class BBSDetailActivity extends Activity {
 	};
 
 	public boolean isLocalUser(){
-		SharedPreferences pre = getSharedPreferences("setting", MODE_PRIVATE);
-		String localUser = pre.getString("username", "");
 		if(author.equals(localUser))
 			return true;
 		else {
@@ -126,9 +130,45 @@ public class BBSDetailActivity extends Activity {
 		}
 	}
 	
+	public boolean postCollected(){
+		PostDBUtil dbUtil = new PostDBUtil();
+		List<HashMap<String, String>> collectedList = dbUtil.selectcollectPostid(localUser);
+		
+		for(int i = 1; i < collectedList.size(); i++){
+			if(collectedList.get(i).get("postid").equals(post_id)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public String getPostId(){
 		return this.post_id;
 	}
 
-
+	public void collectPost(){
+		PostDBUtil dbUtil = new PostDBUtil();
+		dbUtil.collectpost(localUser,Integer.parseInt(post_id));
+		
+	}
+	public void cancelCollectPost(){
+		PostDBUtil dbUtil = new PostDBUtil();
+		dbUtil.deletecollectpost(localUser, Integer.parseInt(post_id));
+	}
+	
+	public boolean collected(String content){
+		if(content.equals(getString(R.string.collect))){
+			return false;
+		}
+		return true;
+	}
+	
+	public void changeState(Button button, boolean now_state) {
+		if(now_state == false){
+			button.setText(getString(R.string.cancellation));
+			return;
+		}
+		button.setText(getString(R.string.collect));
+	}
+	
 }
