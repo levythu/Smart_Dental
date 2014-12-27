@@ -24,6 +24,7 @@
     <string name="title_activity_reply">评论</string>
     <string name="title_activity_post_bbs">发帖</string>
     <string name="title_activity_all_patient">所有病人</string>
+    <string name="title_activity_patient_info">病人信息</string>
     <string name="admin_username">admin</string>
     <string name="admin_password">admin123</string>
     <string name="choose_circle">选择圈子</string>

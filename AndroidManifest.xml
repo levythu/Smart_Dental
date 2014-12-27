@@ -45,6 +45,11 @@
             android:launchMode="standard" >
         </activity>
         <activity
+            android:name=".PatientInfoActivity"
+            android:label="@string/title_activity_patient_info"
+            android:launchMode="standard" >
+        </activity>
+        <activity
             android:name=".InputActivity"
             android:theme="@style/input"
              >

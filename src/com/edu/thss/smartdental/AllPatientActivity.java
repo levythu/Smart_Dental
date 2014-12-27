@@ -8,6 +8,7 @@ import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
@@ -16,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.view.MenuItem;
 import android.view.View;
+import android.content.Intent;
 import com.edu.thss.smartdental.RemoteDB.UserDBUtil;
 
 
@@ -41,7 +43,8 @@ public class AllPatientActivity extends Activity {
 		}
 		allpatient = (ListView)findViewById(R.id.all_patient);
 		allpatient.setAdapter(new ArrayAdapter<String>(AllPatientActivity.this, android.R.layout.simple_list_item_1, data));
-		allpatient.setOnItemLongClickListener(patientListener);
+		allpatient.setOnItemClickListener(patientListener);
+		allpatient.setOnItemLongClickListener(patientLongListener);
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item){
@@ -53,7 +56,16 @@ public class AllPatientActivity extends Activity {
 		return true;
 	}
 	
-	OnItemLongClickListener patientListener = new OnItemLongClickListener() {
+	OnItemClickListener patientListener = new OnItemClickListener() {
+		public void onItemClick(AdapterView<?>adapterView, View view, int position, long id) {
+			Intent intent = new Intent();
+			intent.setClass(AllPatientActivity.this, PatientInfoActivity.class);
+			intent.putExtra("patient_id", Integer.parseInt((list.get(position + 1).get("userid"))));
+			startActivity(intent);
+		}
+	};
+	
+	OnItemLongClickListener patientLongListener = new OnItemLongClickListener() {
 		public boolean onItemLongClick(AdapterView<?>adapterView, View view, int position, long id) {
 			tPosition = position;
 			AlertDialog.Builder builder = new AlertDialog.Builder(AllPatientActivity.this);
