@@ -9,6 +9,8 @@ import com.edu.thss.smartdental.RemoteDB.PostDBUtil;
 import com.edu.thss.smartdental.model.BBSDetail;
 
 
+
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import android.view.LayoutInflater;
@@ -22,18 +24,18 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 public class BBSDetailAdapter extends BaseAdapter implements Filterable{
-	private class buttonViewHolder{
-		
-		Button delete; //
-	}
 	private ArrayList<BBSDetail> list;
 	private Context context;
 	private BBSFilter filter;
 	private buttonViewHolder holder;
 	
-	
 	private buttonViewHolder holder1;
 	BBSDetailActivity context1;
+	
+	private class buttonViewHolder{
+		Button delete; //
+		Button collect;
+	}
 	
 	public BBSDetailAdapter(ArrayList<BBSDetail> list, Context context, BBSDetailActivity context1){
 		this.list = list;
@@ -53,7 +55,6 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 		return list.get(arg0);
 	}
 
-
 	@Override
 	public long getItemId(int position) {
 		return position;
@@ -65,23 +66,33 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 			convertView = LayoutInflater.from(context).inflate(R.layout.bbs_detail_item, null);
 		}
 		BBSDetail post = list.get(position);
-		//TextView title =(TextView)convertView.findViewById(R.id.bbs_detail_item_title);
+		TextView title =(TextView)convertView.findViewById(R.id.bbs_detail_item_title);
 		TextView content = (TextView)convertView.findViewById(R.id.bbs_detail_item_content);
 		TextView time = (TextView)convertView.findViewById(R.id.bbs_detail_item_time);
 		TextView author = (TextView)convertView.findViewById(R.id.bbs_detail_item_author);
 		
-		//title.setText(post.title);
+		title.setText(post.title);
 		content.setText(post.content);
 		time.setText(post.time);
 		author.setText(post.author);
 		
 		holder = new buttonViewHolder();
 		holder.delete = (Button)convertView.findViewById(R.id.bbs_detail_item_delete);
-		holder.delete.setOnClickListener(new ButtonListner(position));
-
+		holder.delete.setOnClickListener(new deleteButtonListner(position));
+		
+		holder.collect = (Button)convertView.findViewById(R.id.bbs_detail_item_collect);
+		holder.collect.setOnClickListener(new collectButtonListner(holder.collect));
+		
+		//judge the delete button show or not
 		if(!context1.isLocalUser()){
 			holder.delete.setVisibility(View.INVISIBLE);
 		}
+		
+		//judge the state of collect button
+		if(context1.postCollected()){
+			context1.changeState(holder.collect, false);
+		}
+		
 		return convertView;
 	}
 
@@ -92,6 +103,7 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 		}
 		return filter;
 	}
+	
     public class BBSFilter extends Filter{
     	private ArrayList<BBSDetail> original;
     	public BBSFilter(ArrayList<BBSDetail> list){
@@ -132,9 +144,10 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 			
 		}
     }
-    class ButtonListner implements OnClickListener{
+    
+    class deleteButtonListner implements OnClickListener{
 		private int itemPosition;
-		public ButtonListner(int pos){
+		public deleteButtonListner(int pos){
 			this.itemPosition = pos;
 		}
 
@@ -151,13 +164,29 @@ public class BBSDetailAdapter extends BaseAdapter implements Filterable{
 				notifyDataSetChanged();
 				
 				context1.finish();
-				//jump page to BBSInTabView
-				//Intent intent = new Intent();
-                //intent.setClass(context,BBSDetailActivity.class);
                 
 			}
 			
 		}
+    }
+    
+    class collectButtonListner implements OnClickListener{
+    	Button button;
+    	public collectButtonListner(Button but){
+    		this.button = but;
+    	}
+    	
+    	@Override
+    	public void onClick(View v){
+    		if(!context1.collected(button.getText().toString())){				// to collect
+    			context1.collectPost();
+    			context1.changeState(button, false);
+    		}
+    		else{												//  cancellation
+    			context1.cancelCollectPost();
+    			context1.changeState(button, true);
+    		}
+    	}
     }
 
 }
